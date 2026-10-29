@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>PatchWatch — SMB Security Directory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f6f7f5;
+        --surface: #ffffff;
+        --surface-2: #eef1ec;
+        --ink: #16211b;
+        --ink-2: #46534a;
+        --ink-3: #6b7a70;
+        --line: #d9dfd8;
+        --accent: #1d6b4f;
+        --accent-ink: #ffffff;
+        --accent-soft: #e2efe8;
+        --red: #b3261e;
+        --red-soft: #fbe9e7;
+        --amber: #8a5a00;
+        --amber-soft: #fbf0d3;
+        --green: #1d6b4f;
+        --green-soft: #e2efe8;
+        --navy: #14202b;
+        --navy-ink: #eef3f1;
+        --navy-ink-2: #b8c6c0;
+        --radius: 10px;
+        --radius-lg: 14px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0e1411;
+          --surface: #18211c;
+          --surface-2: #1f2b24;
+          --ink: #e8efe9;
+          --ink-2: #b4c2b7;
+          --ink-3: #8a9a8e;
+          --line: #2c3a31;
+          --accent: #3fae82;
+          --accent-ink: #0c1712;
+          --accent-soft: #173527;
+          --red: #f0857d;
+          --red-soft: #3a1d1b;
+          --amber: #e8b64c;
+          --amber-soft: #3a2f14;
+          --green: #3fae82;
+          --green-soft: #173527;
+          --navy: #0a121a;
+          --navy-ink: #eef3f1;
+          --navy-ink-2: #9fb3ab;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+      }
+      .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .wrap { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+
+      /* ---------- Hero ---------- */
+      .hero {
+        background: var(--navy);
+        color: var(--navy-ink);
+        padding: 44px 0 0;
+      }
+      .hero .kicker {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+        color: var(--navy-ink-2);
+        margin: 0 0 14px;
+      }
+      .hero .kicker svg { flex: none; }
+      .hero h1 {
+        margin: 0 0 10px;
+        font-size: clamp(38px, 7vw, 56px);
+        line-height: 1.02; letter-spacing: -0.02em; font-weight: 700;
+      }
+      .hero .tagline {
+        margin: 0 0 8px;
+        font-size: clamp(17px, 2.6vw, 20px);
+        line-height: 1.45; max-width: 640px;
+        color: var(--navy-ink);
+      }
+      .hero .updated {
+        margin: 0 0 30px; font-size: 13.5px; color: var(--navy-ink-2);
+      }
+      .stats {
+        display: grid; grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid rgba(255,255,255,0.16);
+      }
+      .stat { padding: 20px 22px 24px 0; }
+      .stat + .stat { border-left: 1px solid rgba(255,255,255,0.16); padding-left: 22px; }
+      .stat .num {
+        display: block; font-size: clamp(26px, 4.5vw, 36px); font-weight: 700;
+        letter-spacing: -0.01em; line-height: 1.1;
+      }
+      .stat .lbl { display: block; margin-top: 5px; font-size: 13.5px; line-height: 1.4; color: var(--navy-ink-2); }
+      @media (max-width: 640px) {
+        .stats { grid-template-columns: 1fr; }
+        .stat { padding: 16px 0; }
+        .stat + .stat { border-left: none; border-top: 1px solid rgba(255,255,255,0.16); padding-left: 0; }
+      }
+
+      /* ---------- Sections ---------- */
+      main { padding: 36px 0 8px; }
+      section { margin-bottom: 40px; }
+      .sec-head { margin-bottom: 16px; }
+      .sec-head h2 {
+        margin: 0 0 4px; font-size: 24px; font-weight: 700; letter-spacing: -0.01em;
+      }
+      .sec-head p { margin: 0; color: var(--ink-2); font-size: 15px; max-width: 680px; }
+
+      /* ---------- Patch-first card ---------- */
+      .patch-first {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-top: 4px solid var(--red);
+        border-radius: var(--radius-lg);
+        padding: 24px 26px;
+      }
+      .patch-first .flag {
+        display: inline-block; margin: 0 0 10px;
+        background: var(--red-soft); color: var(--red);
+        font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+        padding: 4px 10px; border-radius: 999px;
+      }
+      .patch-first h3 { margin: 0 0 6px; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
+      .patch-first .lede { margin: 0 0 18px; color: var(--ink-2); font-size: 15.5px; }
+      .flaws { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+      @media (max-width: 640px) { .flaws { grid-template-columns: 1fr; } }
+      .flaw {
+        background: var(--surface-2); border-radius: var(--radius);
+        padding: 16px 18px;
+      }
+      .flaw .cve { font-size: 15px; font-weight: 600; }
+      .flaw .cvss {
+        display: inline-block; margin-left: 8px; font-size: 12px; font-weight: 600;
+        background: var(--red); color: #fff; padding: 2px 8px; border-radius: 999px;
+        vertical-align: 2px;
+      }
+      .flaw h4 { margin: 6px 0 4px; font-size: 15.5px; font-weight: 600; }
+      .flaw p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+      .action-box {
+        background: var(--accent-soft); border-radius: var(--radius);
+        padding: 16px 18px; font-size: 15.5px;
+      }
+      .action-box strong { color: var(--accent); }
+
+      /* ---------- Tables ---------- */
+      .table-card {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius-lg); overflow: hidden;
+      }
+      table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+      thead th {
+        text-align: left; font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+        text-transform: uppercase; color: var(--ink-3);
+        padding: 12px 16px; border-bottom: 1px solid var(--line);
+        background: var(--surface-2);
+      }
+      tbody td { padding: 11px 16px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+      tbody tr:last-child td { border-bottom: none; }
+      td.product { font-weight: 600; }
+      td.cve { white-space: nowrap; font-size: 13.5px; }
+      td.date { white-space: nowrap; color: var(--ink-2); }
+      .chip {
+        display: inline-block; white-space: nowrap;
+        font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px;
+      }
+      .chip-red { background: var(--red-soft); color: var(--red); }
+      .chip-amber { background: var(--amber-soft); color: var(--amber); }
+      .chip-green { background: var(--green-soft); color: var(--green); }
+      .chip-neutral { background: var(--surface-2); color: var(--ink-2); }
+      .table-note { margin: 12px 2px 0; font-size: 14px; color: var(--ink-2); }
+      .who-cares {
+        margin-top: 16px; background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius-lg); padding: 18px 22px;
+      }
+      .who-cares h3 { margin: 0 0 10px; font-size: 15px; font-weight: 700; }
+      .who-cares ul { margin: 0; padding: 0; list-style: none; }
+      .who-cares li { padding: 5px 0; font-size: 14.5px; color: var(--ink-2); }
+      .who-cares li strong { color: var(--ink); font-weight: 600; }
+      @media (max-width: 640px) {
+        thead { display: none; }
+        table, tbody, tr, td { display: block; width: 100%; }
+        tbody tr { padding: 12px 0; border-bottom: 1px solid var(--line); }
+        tbody tr:last-child { border-bottom: none; }
+        tbody td { border-bottom: none; padding: 2px 16px; }
+        td.cve, td.date { white-space: normal; }
+        td.date::before { content: attr(data-label) ": "; font-weight: 600; color: var(--ink-3); font-size: 12.5px; }
+        td.status { padding-top: 6px; }
+      }
+
+      /* ---------- EOL watch ---------- */
+      .eol-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      @media (max-width: 680px) { .eol-list { grid-template-columns: 1fr; } }
+      .eol {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius-lg); padding: 18px 20px;
+      }
+      .eol .top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+      .eol h3 { margin: 0; font-size: 16.5px; font-weight: 600; line-height: 1.3; }
+      .eol .when { margin: 4px 0 0; font-size: 13.5px; color: var(--ink-3); }
+      .eol p.note { margin: 10px 0 0; font-size: 14.5px; color: var(--ink-2); }
+
+      /* ---------- Directory ---------- */
+      .dir-tools { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+      .dir-tools input[type="search"] {
+        flex: 1 1 260px; padding: 11px 14px; font: inherit; font-size: 15px;
+        background: var(--surface); color: var(--ink);
+        border: 1px solid var(--line); border-radius: var(--radius);
+      }
+      .dir-tools input[type="search"]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+      .cat-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+      .cat-btn {
+        font: inherit; font-size: 13.5px; font-weight: 500; cursor: pointer;
+        padding: 6px 13px; border-radius: 999px;
+        background: var(--surface); color: var(--ink-2); border: 1px solid var(--line);
+      }
+      .cat-btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+      .dir-group { margin-bottom: 26px; }
+      .dir-group h3 {
+        margin: 0 0 10px; font-size: 13px; font-weight: 700;
+        letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3);
+      }
+      .dir-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+      .tool {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius); padding: 16px 18px;
+      }
+      .tool h4 { margin: 0 0 4px; font-size: 15.5px; font-weight: 600; }
+      .tool p { margin: 0; font-size: 14px; color: var(--ink-2); }
+      .dir-empty { display: none; padding: 28px 0; color: var(--ink-2); font-size: 15px; }
+      .dir-note { margin-top: 4px; font-size: 13.5px; color: var(--ink-3); }
+
+      /* ---------- Newsletter / sponsor ---------- */
+      .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      @media (max-width: 680px) { .two-col { grid-template-columns: 1fr; } }
+      .promo { border-radius: var(--radius-lg); padding: 24px 26px; }
+      .promo h3 { margin: 0 0 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.01em; }
+      .promo p { margin: 0 0 14px; font-size: 15px; }
+      .promo .pill {
+        display: inline-block; font-size: 12.5px; font-weight: 600;
+        padding: 4px 11px; border-radius: 999px;
+      }
+      .promo-news { background: var(--accent-soft); }
+      .promo-news p { color: var(--ink-2); }
+      .promo-news .pill { background: var(--accent); color: var(--accent-ink); }
+      .promo-sponsor { background: var(--surface); border: 1px dashed var(--ink-3); }
+      .promo-sponsor p { color: var(--ink-2); }
+      .promo-sponsor .pill { background: var(--surface-2); color: var(--ink-2); }
+
+      /* ---------- Footer ---------- */
+      footer {
+        border-top: 1px solid var(--line); margin-top: 16px;
+        padding: 26px 0 40px; color: var(--ink-2); font-size: 13.5px;
+      }
+      footer p { margin: 0 0 8px; max-width: 720px; }
+      footer .sources strong { color: var(--ink); font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <!-- ================= HERO ================= -->
+    <header class="hero">
+      <div class="wrap">
+        <p class="kicker">
+          <svg width="16" height="18" viewBox="0 0 16 18" fill="none" aria-hidden="true">
+            <path d="M8 0.8 15 3.2v5c0 4.4-2.9 7.5-7 8.9C3.9 15.7 1 12.6 1 8.2v-5L8 0.8Z" fill="#3fae82"/>
+            <path d="M5.2 9.1 7.2 11.1 10.9 6.9" stroke="#0a121a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          SMB Security Directory
+        </p>
+        <h1>PatchWatch</h1>
+        <p class="tagline">Patch deadlines, actively exploited vulnerabilities, and end-of-life dates for small businesses — in plain English.</p>
+        <p class="updated">Data as of October 28, 2026</p>
+        <div class="stats">
+          <div class="stat">
+            <span class="num">1,760</span>
+            <span class="lbl">known exploited vulnerabilities in CISA's catalog — flaws attackers are already using</span>
+          </div>
+          <div class="stat">
+            <span class="num">1,413</span>
+            <span class="lbl">fixes in October 2026's Patch Tuesday — Microsoft's largest monthly release ever</span>
+          </div>
+          <div class="stat">
+            <span class="num">Nov 10, 2026</span>
+            <span class="lbl">next Patch Tuesday — Microsoft's monthly update day, always the second Tuesday</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <!-- ================= PATCH THIS FIRST ================= -->
+      <section aria-labelledby="patch-first-h">
+        <div class="sec-head">
+          <h2 id="patch-first-h">Patch this first</h2>
+          <p>The one update that matters most right now, and why.</p>
+        </div>
+        <article class="patch-first">
+          <p class="flag">October 2026 Patch Tuesday · Released Oct 13</p>
+          <h3>Microsoft's biggest update release ever: 1,413 fixes, about 78 of them Critical</h3>
+          <p class="lede">Two of those fixes stand out. One flaw is already being used by attackers. Another was publicly disclosed before the fix shipped — which means attackers knew about it first.</p>
+          <div class="flaws">
+            <div class="flaw">
+              <span class="cve mono">CVE-2026-96951</span><span class="cvss">CVSS 8.8</span>
+              <h4>Windows Shell — "Mark of the Web" bypass · already exploited</h4>
+              <p>Windows normally warns you before opening a file downloaded from the internet. This flaw strips that warning away, so a booby-trapped download can open silently. CISA gave federal agencies until <strong>October 16</strong> to fix it — treat that as your deadline too.</p>
+            </div>
+            <div class="flaw">
+              <span class="cve mono">CVE-2026-108398</span><span class="cvss">CVSS 8.8</span>
+              <h4>.NET / Windows Defender Application Control bypass · publicly disclosed</h4>
+              <p>Application Control is the Windows feature that only lets approved programs run. This flaw lets an attacker get around it, so unapproved software can slip past a control many businesses rely on to keep PCs locked down.</p>
+            </div>
+          </div>
+          <div class="action-box">
+            <strong>What to do:</strong> install the October Windows updates on every PC and server now — don't wait for the weekend. If you use an IT provider, ask them to confirm the October cumulative update is deployed across your machines.
+          </div>
+        </article>
+      </section>
+
+      <!-- ================= ACTIVELY EXPLOITED ================= -->
+      <section aria-labelledby="kev-h">
+        <div class="sec-head">
+          <h2 id="kev-h">Actively exploited</h2>
+          <p>The newest entries in CISA's Known Exploited Vulnerabilities (KEV) catalog — flaws confirmed to be in use by attackers right now. If you run one of these products, patching it jumps the queue.</p>
+        </div>
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">CVE</th>
+                <th scope="col">Added</th>
+                <th scope="col">Federal due date</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="product">Adobe Commerce and Magento</td>
+                <td class="cve mono">CVE-2026-48356</td>
+                <td class="date" data-label="Added">Oct 27, 2026</td>
+                <td class="date" data-label="Federal due date">Nov 10, 2026</td>
+                <td class="status"></td>
+              </tr>
+              <tr>
+                <td class="product">Google Brotli</td>
+                <td class="cve mono">CVE-2026-111497</td>
+                <td class="date" data-label="Added">Oct 27, 2026</td>
+                <td class="date" data-label="Federal due date">Nov 10, 2026</td>
+                <td class="status"></td>
+              </tr>
+              <tr>
+                <td class="product">PHP Group PHP</td>
+                <td class="cve mono">CVE-2026-109618</td>
+                <td class="date" data-label="Added">Oct 26, 2026</td>
+                <td class="date" data-label="Federal due date">Oct 29, 2026</td>
+                <td class="status"><span class="chip chip-red">Due this week</span></td>
+              </tr>
+              <tr>
+                <td class="product">PHP Group PHP</td>
+                <td class="cve mono">CVE-2026-109619</td>
+                <td class="date" data-label="Added">Oct 26, 2026</td>
+                <td class="date" data-label="Federal due date">Oct 29, 2026</td>
+                <td class="status"><span class="chip chip-red">Due this week</span></td>
+              </tr>
+              <tr>
+                <td class="product">Arista VeloCloud Orchestrator</td>
+                <td class="cve mono">CVE-2026-114625</td>
+                <td class="date" data-label="Added">Oct 23, 2026</td>
+                <td class="date" data-label="Federal due date">Oct 26, 2026</td>
+                <td class="status"><span class="chip chip-red">Deadline passed</span></td>
+              </tr>
+              <tr>
+                <td class="product">Collabora Collabora Online – Built-in CODE Server</td>
+                <td class="cve mono">CVE-2026-110447</td>
+                <td class="date" data-label="Added">Oct 23, 2026</td>
+                <td class="date" data-label="Federal due date">Oct 26, 2026</td>
+                <td class="status"><span class="chip chip-red">Deadline passed</span></td>
+              </tr>
+              <tr>
+                <td class="product">EG Secure Solutions SiteGuard Server Edition</td>
+                <td class="cve mono">CVE-2026-106931</td>
+                <td class="date" data-label="Added">Oct 20, 2026</td>
+                <td class="date" data-label="Federal due date">Oct 23, 2026</td>
+                <td class="status"><span class="chip chip-red">Deadline passed</span></td>
+              </tr>
+              <tr>
+                <td class="product">Plex Media Server</td>
+                <td class="cve mono">CVE-2026-96656</td>
+                <td class="date" data-label="Added">Oct 20, 2026</td>
+                <td class="date" data-label="Federal due date">Oct 23, 2026</td>
+                <td class="status"><span class="chip chip-red">Deadline passed</span></td>
+              </tr>
+              <tr>
+                <td class="product">Plex Media Server</td>
+                <td class="cve mono">CVE-2026-96655</td>
+                <td class="date" data-label="Added">Oct 20, 2026</td>
+                <td class="date" data-label="Federal due date">Nov 3, 2026</td>
+                <td class="status"><span class="chip chip-red">Due this week</span></td>
+              </tr>
+              <tr>
+                <td class="product">Plex Media Server</td>
+                <td class="cve mono">CVE-2026-96654</td>
+                <td class="date" data-label="Added">Oct 20, 2026</td>
+                <td class="date" data-label="Federal due date">Oct 23, 2026</td>
+                <td class="status"><span class="chip chip-red">Deadline passed</span></td>
+              </tr>
+              <tr>
+                <td class="product">Plex Media Server</td>
+                <td class="cve mono">CVE-2026-96652</td>
+                <td class="date" data-label="Added">Oct 20, 2026</td>
+                <td class="date" data-label="Federal due date">Nov 3, 2026</td>
+                <td class="status"><span class="chip chip-red">Due this week</span></td>
+              </tr>
+              <tr>
+                <td class="product">Siemens Software Center</td>
+                <td class="cve mono">CVE-2026-110936</td>
+                <td class="date" data-label="Added">Oct 20, 2026</td>
+                <td class="date" data-label="Federal due date">Nov 3, 2026</td>
+                <td class="status"><span class="chip chip-red">Due this week</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">Due dates are the deadlines CISA sets for US federal agencies. Nobody fines your business for missing one — PatchWatch uses them as an urgency yardstick for everyone: if the government has to fix it by Friday, it shouldn't sit in your queue for a month.</p>
+        <div class="who-cares">
+          <h3>Who should care about what</h3>
+          <ul>
+            <li><strong>Plex</strong> — anyone running a Plex media server at home or at the office.</li>
+            <li><strong>BeyondTrust</strong> — businesses whose IT provider uses it to remote into their machines for support.</li>
+            <li><strong>Atlassian</strong> — teams using Confluence or Jira.</li>
+            <li><strong>Cisco Secure Email Gateway</strong> — businesses whose email is filtered through Cisco.</li>
+            <li><strong>Ahsay</strong> — businesses backing up their data with Ahsay.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ================= END-OF-LIFE WATCH ================= -->
+      <section aria-labelledby="eol-h">
+        <div class="sec-head">
+          <h2 id="eol-h">End-of-life watch</h2>
+          <p>Software that has stopped — or is about to stop — getting security patches. Unsupported software doesn't break on day one; it just gets easier to attack every month after.</p>
+        </div>
+        <div class="eol-list">
+          <article class="eol">
+            <div class="top">
+              <div>
+                <h3>Windows 10 (version 22H2)</h3>
+                <p class="when">Support ended Oct 14, 2025</p>
+              </div>
+              <span class="chip chip-red">Ended</span>
+            </div>
+            <p class="note">No more security patches. Still common in small offices — plan the move to Windows 11.</p>
+          </article>
+          <article class="eol">
+            <div class="top">
+              <div>
+                <h3>Microsoft Office 2016 and 2019</h3>
+                <p class="when">Support ended Oct 14, 2025</p>
+              </div>
+              <span class="chip chip-red">Ended</span>
+            </div>
+            <p class="note">No more security patches for Word, Excel, and Outlook from these generations.</p>
+          </article>
+          <article class="eol">
+            <div class="top">
+              <div>
+                <h3>Windows 11, version 24H2 (Home/Pro)</h3>
+                <p class="when">Support ended Oct 13, 2026</p>
+              </div>
+              <span class="chip chip-amber">Just ended</span>
+            </div>
+            <p class="note">Just ended — update to version 25H2 to stay covered.</p>
+          </article>
+          <article class="eol">
+            <div class="top">
+              <div>
+                <h3>Microsoft Office 2021</h3>
+                <p class="when">Support ended Oct 13, 2026</p>
+              </div>
+              <span class="chip chip-amber">Just ended</span>
+            </div>
+            <p class="note">No more security patches — time to plan a move to a supported Office or Microsoft 365.</p>
+          </article>
+          <article class="eol">
+            <div class="top">
+              <div>
+                <h3>Windows Server 2022</h3>
+                <p class="when">Mainstream support ended Oct 13, 2026 · Extended support runs to Oct 14, 2031</p>
+              </div>
+              <span class="chip chip-amber">Mainstream ended</span>
+            </div>
+            <p class="note">Security patches continue under extended support until 2031, but new features and non-security fixes have stopped.</p>
+          </article>
+          <article class="eol">
+            <div class="top">
+              <div>
+                <h3>Windows 11, version 25H2 (Home/Pro)</h3>
+                <p class="when">Support ends Oct 12, 2027</p>
+              </div>
+              <span class="chip chip-green">Next up</span>
+            </div>
+            <p class="note">The current version to be on. About a year of coverage left — no action needed yet.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ================= TOOL DIRECTORY ================= -->
+      <section aria-labelledby="dir-h">
+        <div class="sec-head">
+          <h2 id="dir-h">Tool directory</h2>
+          <p>The categories of software that keep a small business patched and protected, and the established names in each. Descriptions only — no scores, no rankings.</p>
+        </div>
+        <div class="dir-tools">
+          <input type="search" id="dir-search" placeholder="Search tools — try “patch”, “backup”, “password”…" aria-label="Search the tool directory" />
+        </div>
+        <div class="cat-btns" role="group" aria-label="Filter by category">
+          <button type="button" class="cat-btn" data-cat="all" aria-pressed="true">All</button>
+          <button type="button" class="cat-btn" data-cat="Patch management" aria-pressed="false">Patch management</button>
+          <button type="button" class="cat-btn" data-cat="Endpoint protection" aria-pressed="false">Endpoint protection</button>
+          <button type="button" class="cat-btn" data-cat="Backup" aria-pressed="false">Backup</button>
+          <button type="button" class="cat-btn" data-cat="Password managers" aria-pressed="false">Password managers</button>
+          <button type="button" class="cat-btn" data-cat="Email security" aria-pressed="false">Email security</button>
+        </div>
+        <div id="dir-groups"></div>
+        <p class="dir-empty" id="dir-empty">No tools match that search. Try a product name or a category like “backup”.</p>
+        <p class="dir-note">Starter list — informational only. Featured and sponsored placements open at launch.</p>
+      </section>
+
+      <!-- ================= NEWSLETTER + SPONSOR ================= -->
+      <section aria-label="Newsletter and sponsorship">
+        <div class="two-col">
+          <div class="promo promo-news">
+            <h3>The Weekly SMB Security Brief</h3>
+            <p>One short email a week: what to patch, what's being exploited, what's expiring.</p>
+            <span class="pill">Signups open at launch</span>
+          </div>
+          <div class="promo promo-sponsor">
+            <h3>Sponsor PatchWatch</h3>
+            <p>Put your product in front of small-business owners and IT managers who patch for a living.</p>
+            <span class="pill">Placements open at launch</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <p class="sources"><strong>Data sources:</strong> CISA Known Exploited Vulnerabilities (KEV) catalog · Microsoft Security Update Guide · endoflife.date</p>
+        <p>Data as of October 28, 2026.</p>
+        <p>PatchWatch is informational only — not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+      </div>
+    </footer>
+
+    <script>
+      var TOOLS = [
+        { cat: "Patch management", name: "Microsoft Intune", desc: "Microsoft's cloud service for managing PCs and deploying updates." },
+        { cat: "Patch management", name: "PDQ Deploy & Inventory", desc: "Deploys software and patches across Windows fleets, popular with small IT teams." },
+        { cat: "Patch management", name: "Action1", desc: "Cloud patch management aimed at small and mid-size fleets." },
+        { cat: "Patch management", name: "Ivanti / Symantec IT Management Suite (Altiris)", desc: "Enterprise-grade patch and asset management." },
+        { cat: "Endpoint protection", name: "CrowdStrike Falcon", desc: "Cloud endpoint detection and response platform." },
+        { cat: "Endpoint protection", name: "Microsoft Defender for Business", desc: "Endpoint security built for small and mid-size businesses on Microsoft 365." },
+        { cat: "Endpoint protection", name: "SentinelOne", desc: "Endpoint protection with autonomous response features." },
+        { cat: "Backup", name: "Veeam", desc: "Backup for servers, PCs, and Microsoft 365 data." },
+        { cat: "Backup", name: "Acronis Cyber Protect", desc: "Backup combined with endpoint protection." },
+        { cat: "Backup", name: "Backblaze", desc: "Straightforward cloud backup for computers and servers." },
+        { cat: "Password managers", name: "1Password Business", desc: "Team password manager with admin controls." },
+        { cat: "Password managers", name: "Bitwarden", desc: "Open-source password manager with business plans." },
+        { cat: "Email security", name: "Microsoft Defender for Office 365", desc: "Phishing and malware filtering for Microsoft 365 mailboxes." },
+        { cat: "Email security", name: "Proofpoint Essentials", desc: "Email filtering packaged for small businesses." }
+      ];
+      var CATS = ["Patch management", "Endpoint protection", "Backup", "Password managers", "Email security"];
+      var activeCat = "all";
+      var query = "";
+
+      var groupsEl = document.getElementById("dir-groups");
+      var emptyEl = document.getElementById("dir-empty");
+
+      function render() {
+        groupsEl.innerHTML = "";
+        var anyVisible = false;
+        CATS.forEach(function (cat) {
+          if (activeCat !== "all" && activeCat !== cat) return;
+          var items = TOOLS.filter(function (t) {
+            if (t.cat !== cat) return false;
+            if (!query) return true;
+            var hay = (t.name + " " + t.desc + " " + t.cat).toLowerCase();
+            return hay.indexOf(query) !== -1;
+          });
+          if (!items.length) return;
+          anyVisible = true;
+          var group = document.createElement("div");
+          group.className = "dir-group";
+          var h = document.createElement("h3");
+          h.textContent = cat;
+          group.appendChild(h);
+          var grid = document.createElement("div");
+          grid.className = "dir-grid";
+          items.forEach(function (t) {
+            var card = document.createElement("div");
+            card.className = "tool";
+            var h4 = document.createElement("h4");
+            h4.textContent = t.name;
+            var p = document.createElement("p");
+            p.textContent = t.desc;
+            card.appendChild(h4);
+            card.appendChild(p);
+            grid.appendChild(card);
+          });
+          group.appendChild(grid);
+          groupsEl.appendChild(group);
+        });
+        emptyEl.style.display = anyVisible ? "none" : "block";
+      }
+
+      document.getElementById("dir-search").addEventListener("input", function (e) {
+        query = e.target.value.trim().toLowerCase();
+        render();
+      });
+      var btns = document.querySelectorAll(".cat-btn");
+      btns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          activeCat = btn.getAttribute("data-cat");
+          btns.forEach(function (b) { b.setAttribute("aria-pressed", b === btn ? "true" : "false"); });
+          render();
+        });
+      });
+      render();
+    </script>
+  </body>
+</html>
