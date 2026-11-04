@@ -261,6 +261,22 @@
       .promo-news { background: var(--accent-soft); }
       .promo-news p { color: var(--ink-2); }
       .promo-news .pill { background: var(--accent); color: var(--accent-ink); }
+      .sub-row { display: flex; flex-wrap: wrap; gap: 8px; }
+      .sub-row input[type="email"] {
+        flex: 1 1 200px; padding: 11px 14px; font: inherit; font-size: 15px;
+        background: var(--surface); color: var(--ink);
+        border: 1px solid var(--line); border-radius: var(--radius);
+      }
+      .sub-row input[type="email"]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+      .sub-row button {
+        font: inherit; font-size: 15px; font-weight: 600; cursor: pointer;
+        padding: 11px 18px; border-radius: var(--radius);
+        background: var(--accent); border: 1px solid var(--accent); color: var(--accent-ink);
+      }
+      .sub-row button:disabled { opacity: 0.6; cursor: default; }
+      .sub-status { margin: 10px 0 0; font-size: 13.5px; color: var(--ink-2); }
+      .sub-status:empty { display: none; }
+      .hp { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
       .promo-sponsor { background: var(--surface); border: 1px dashed var(--ink-3); }
       .promo-sponsor p { color: var(--ink-2); }
       .promo-sponsor .pill { background: var(--surface-2); color: var(--ink-2); }
@@ -590,7 +606,16 @@
           <div class="promo promo-news">
             <h3>The Weekly SMB Security Brief</h3>
             <p>One short email a week: what to patch, what's being exploited, what's expiring.</p>
-            <span class="pill">Signups open at launch</span>
+            <form id="subscribe-form" method="post" action="/api/subscribe">
+              <div class="sub-row">
+                <input type="email" id="subscribe-email" name="email" required placeholder="you@company.com" aria-label="Email address" autocomplete="email" />
+                <button type="submit" id="subscribe-btn">Subscribe</button>
+              </div>
+              <div class="hp" aria-hidden="true">
+                <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+              </div>
+              <p class="sub-status" id="subscribe-status" role="status" aria-live="polite"></p>
+            </form>
           </div>
           <div class="promo promo-sponsor">
             <h3>Sponsor PatchWatch</h3>
@@ -684,6 +709,38 @@
         });
       });
       render();
+
+      var subForm = document.getElementById("subscribe-form");
+      var subEmail = document.getElementById("subscribe-email");
+      var subBtn = document.getElementById("subscribe-btn");
+      var subStatus = document.getElementById("subscribe-status");
+      subForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        subBtn.disabled = true;
+        subStatus.textContent = "";
+        var payload = {
+          email: subEmail.value,
+          website: subForm.elements["website"].value
+        };
+        fetch("/api/subscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        }).then(function (res) {
+          return res.json().catch(function () { return {}; }).then(function (data) {
+            if (res.ok) {
+              subStatus.textContent = "You are in. Check your inbox for a welcome email.";
+              subEmail.value = "";
+            } else {
+              subStatus.textContent = data.error || data.message || "Something went wrong. Please try again.";
+            }
+          });
+        }).catch(function () {
+          subStatus.textContent = "Something went wrong. Please try again.";
+        }).then(function () {
+          subBtn.disabled = false;
+        });
+      });
     </script>
   </body>
 </html>
