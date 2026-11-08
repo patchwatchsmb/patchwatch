@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="color-scheme" content="light" />
+<meta name="color-scheme" content="light dark" />
 <link rel="icon" href="data:," />
 <title>Sponsor PatchWatch</title>
 <style>
@@ -379,6 +379,27 @@
     header.hero p{font-size:17px}
     .founding, .panel, .test-card{padding:22px 20px}
     .site-line nav{display:none}
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root{
+      --navy:#e8efe9;
+      --navy-2:#c3d2c7;
+      --muted:#93a89a;
+      --line:#2c3a31;
+      --bg:#0e1411;
+      --card:#18211c;
+      --accent:#3fae82;
+      --accent-dark:#5cc79c;
+      --accent-soft:#173527;
+    }
+    .progress-box{background:#101713}
+    .progress-track{background:#2c3a31}
+    .badge-pending{background:#3fae82; color:#0c1712}
+    .num{background:#3fae82; color:#0c1712}
+    .btn.secondary{background:transparent; border-color:#3a4a3f}
+    .steps li{border-top-color:#223028}
+    .card.featured{box-shadow:0 8px 28px rgba(0,0,0,0.45)}
   }
 </style>
 </head>
