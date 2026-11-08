@@ -279,7 +279,14 @@
       .hp { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
       .promo-sponsor { background: var(--surface); border: 1px dashed var(--ink-3); }
       .promo-sponsor p { color: var(--ink-2); }
-      .promo-sponsor .pill { background: var(--surface-2); color: var(--ink-2); }
+      .sponsor-link {
+        display: inline-block; font-size: 14px; font-weight: 600;
+        padding: 9px 16px; border-radius: 999px; text-decoration: none;
+        background: var(--accent); color: var(--accent-ink);
+        border: 1px solid var(--accent);
+      }
+      .sponsor-link:hover { text-decoration: underline; }
+      .sponsor-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
       /* ---------- Footer ---------- */
       footer {
@@ -620,7 +627,7 @@
           <div class="promo promo-sponsor">
             <h3>Sponsor PatchWatch</h3>
             <p>Put your product in front of small-business owners and IT managers who patch for a living.</p>
-            <span class="pill">Placements open at launch</span>
+            <a class="sponsor-link" href="sponsor.html">See sponsor options</a>
           </div>
         </div>
       </section>
