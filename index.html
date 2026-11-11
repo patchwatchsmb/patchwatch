@@ -310,18 +310,18 @@
         </p>
         <h1>PatchWatch</h1>
         <p class="tagline">Patch deadlines, actively exploited vulnerabilities, and end-of-life dates for small businesses, in plain English.</p>
-        <p class="updated">Data as of November 10, 2026 · Last checked November 10, 2026 · Information is current</p>
+        <p class="updated">Data as of November 11, 2026 · Last checked November 11, 2026 · Information is current</p>
         <div class="stats">
           <div class="stat">
-            <span class="num">1,773</span>
+            <span class="num">1,779</span>
             <span class="lbl">known exploited vulnerabilities in CISA's catalog, flaws attackers are already using</span>
           </div>
           <div class="stat">
-            <span class="num">1,413</span>
-            <span class="lbl">fixes in October 2026's Patch Tuesday, Microsoft's largest monthly release ever</span>
+            <span class="num">1,093</span>
+            <span class="lbl">fixes in November 2026's Patch Tuesday, with 63 rated Critical and 1 exploited zero-day</span>
           </div>
           <div class="stat">
-            <span class="num">Nov 10, 2026</span>
+            <span class="num">Dec 8, 2026</span>
             <span class="lbl">next Patch Tuesday, Microsoft's monthly update day, always the second Tuesday</span>
           </div>
         </div>
@@ -336,23 +336,23 @@
           <p>The one update that matters most right now, and why.</p>
         </div>
         <article class="patch-first">
-          <p class="flag">October 2026 Patch Tuesday · Released Oct 13</p>
-          <h3>Microsoft's biggest update release ever: 1,413 fixes, about 78 of them Critical</h3>
-          <p class="lede">Two of those fixes stand out. One flaw is already being used by attackers. Another was publicly disclosed before the fix shipped, which means attackers knew about it first.</p>
+          <p class="flag">November 2026 Patch Tuesday · Released Nov 10</p>
+          <h3>November Patch Tuesday: 1,093 fixes, 63 of them Critical, and 1 exploited zero-day</h3>
+          <p class="lede">The exploited flaw is in Microsoft Outlook, and attackers are already using it in the wild. The release also patches critical flaws in Exchange Server and SharePoint Server. Next Patch Tuesday is December 8, 2026.</p>
           <div class="flaws">
             <div class="flaw">
-              <span class="cve mono">CVE-2026-96951</span><span class="cvss">CVSS 8.8</span>
-              <h4>Windows Shell: "Mark of the Web" bypass · already exploited</h4>
-              <p>Windows normally warns you before opening a file downloaded from the internet. This flaw strips that warning away, so a booby-trapped download can open silently. CISA gave federal agencies until <strong>October 16</strong> to fix it. Treat that as your deadline too.</p>
+              <span class="cve mono">CVE-2026-124194</span><span class="cvss">CVSS 6.5</span>
+              <h4>Microsoft Outlook zero-day · already exploited</h4>
+              <p>This Microsoft Outlook flaw is already exploited in the wild, which makes it the first fix to apply from the November release. CISA gave federal agencies until <strong>November 24, 2026</strong> to fix it. Treat that as your deadline too.</p>
             </div>
             <div class="flaw">
-              <span class="cve mono">CVE-2026-108398</span><span class="cvss">CVSS 8.8</span>
-              <h4>.NET / Windows Defender Application Control bypass · publicly disclosed</h4>
-              <p>Application Control is the Windows feature that only lets approved programs run. This flaw lets an attacker get around it, so unapproved software can slip past a control many businesses rely on to keep PCs locked down.</p>
+              <span class="cve mono">CVE-2026-118207</span><span class="cvss">CVSS 8.8</span>
+              <h4>Exchange Server remote code execution · Critical</h4>
+              <p>A critical remote code execution flaw in Exchange Server, CVE-2026-118207 (CVSS 8.8). The same release also fixes a SharePoint Server privilege escalation, CVE-2026-120002 (CVSS 9.9). If you run Exchange or SharePoint on premises, patch both in this cycle.</p>
             </div>
           </div>
           <div class="action-box">
-            <strong>What to do:</strong> install the October Windows updates on every PC and server now, don't wait for the weekend. If you use an IT provider, ask them to confirm the October cumulative update is deployed across your machines.
+            <strong>What to do:</strong> install the November Windows updates on every PC and server now, don't wait for the weekend. If you use an IT provider, ask them to confirm the November cumulative update is deployed across your machines, and that Outlook, Exchange Server, and SharePoint Server are covered.
           </div>
         </article>
       </section>
@@ -375,6 +375,48 @@
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td class="product">Microsoft Office</td>
+                <td class="cve mono">CVE-2026-124194</td>
+                <td class="date" data-label="Added">Nov 10, 2026</td>
+                <td class="date" data-label="Federal due date">Nov 24, 2026</td>
+                <td class="status"></td>
+              </tr>
+              <tr>
+                <td class="product">Openwave Messaging Webtop Media Transcoder</td>
+                <td class="cve mono">CVE-2026-111793</td>
+                <td class="date" data-label="Added">Nov 10, 2026</td>
+                <td class="date" data-label="Federal due date">Nov 24, 2026</td>
+                <td class="status"></td>
+              </tr>
+              <tr>
+                <td class="product">Cisco BroadWorks</td>
+                <td class="cve mono">CVE-2026-20320</td>
+                <td class="date" data-label="Added">Nov 10, 2026</td>
+                <td class="date" data-label="Federal due date">Nov 24, 2026</td>
+                <td class="status"></td>
+              </tr>
+              <tr>
+                <td class="product">Barracuda Networks Multiple Products</td>
+                <td class="cve mono">CVE-2026-111560</td>
+                <td class="date" data-label="Added">Nov 10, 2026</td>
+                <td class="date" data-label="Federal due date">Nov 13, 2026</td>
+                <td class="status"><span class="chip chip-red">Due this week</span></td>
+              </tr>
+              <tr>
+                <td class="product">Barracuda Email Security Gateway (ESG)</td>
+                <td class="cve mono">CVE-2026-116606</td>
+                <td class="date" data-label="Added">Nov 10, 2026</td>
+                <td class="date" data-label="Federal due date">Nov 13, 2026</td>
+                <td class="status"><span class="chip chip-red">Due this week</span></td>
+              </tr>
+              <tr>
+                <td class="product">Google Chromium</td>
+                <td class="cve mono">CVE-2026-125350</td>
+                <td class="date" data-label="Added">Nov 10, 2026</td>
+                <td class="date" data-label="Federal due date">Nov 24, 2026</td>
+                <td class="status"></td>
+              </tr>
               <tr>
                 <td class="product">GPUStack</td>
                 <td class="cve mono">CVE-2026-102895</td>
@@ -416,48 +458,6 @@
                 <td class="date" data-label="Added">Nov 4, 2026</td>
                 <td class="date" data-label="Federal due date">Nov 18, 2026</td>
                 <td class="status"></td>
-              </tr>
-              <tr>
-                <td class="product">WordPress WordPress Core</td>
-                <td class="cve mono">CVE-2026-119977</td>
-                <td class="date" data-label="Added">Nov 3, 2026</td>
-                <td class="date" data-label="Federal due date">Nov 6, 2026</td>
-                <td class="status"><span class="chip chip-red">Deadline passed</span></td>
-              </tr>
-              <tr>
-                <td class="product">Ivanti Connect Secure</td>
-                <td class="cve mono">CVE-2026-118527</td>
-                <td class="date" data-label="Added">Oct 30, 2026</td>
-                <td class="date" data-label="Federal due date">Nov 13, 2026</td>
-                <td class="status"><span class="chip chip-red">Due this week</span></td>
-              </tr>
-              <tr>
-                <td class="product">Ivanti Connect Secure</td>
-                <td class="cve mono">CVE-2026-111357</td>
-                <td class="date" data-label="Added">Oct 30, 2026</td>
-                <td class="date" data-label="Federal due date">Nov 2, 2026</td>
-                <td class="status"><span class="chip chip-red">Deadline passed</span></td>
-              </tr>
-              <tr>
-                <td class="product">GitLab Community Edition and Enterprise Edition</td>
-                <td class="cve mono">CVE-2026-97229</td>
-                <td class="date" data-label="Added">Oct 29, 2026</td>
-                <td class="date" data-label="Federal due date">Nov 1, 2026</td>
-                <td class="status"><span class="chip chip-red">Deadline passed</span></td>
-              </tr>
-              <tr>
-                <td class="product">Cisco Secure Firewall ASA Software and Cisco Secure FTD Software</td>
-                <td class="cve mono">CVE-2026-76418</td>
-                <td class="date" data-label="Added">Oct 29, 2026</td>
-                <td class="date" data-label="Federal due date">Nov 1, 2026</td>
-                <td class="status"><span class="chip chip-red">Deadline passed</span></td>
-              </tr>
-              <tr>
-                <td class="product">Broadcom VMware ESX</td>
-                <td class="cve mono">CVE-2026-41709</td>
-                <td class="date" data-label="Added">Oct 28, 2026</td>
-                <td class="date" data-label="Federal due date">Nov 11, 2026</td>
-                <td class="status"><span class="chip chip-red">Due this week</span></td>
               </tr>
             </tbody>
           </table>
@@ -636,7 +636,7 @@
     <footer>
       <div class="wrap">
         <p class="sources"><strong>Data sources:</strong> CISA Known Exploited Vulnerabilities (KEV) catalog · Microsoft Security Update Guide · endoflife.date</p>
-        <p>Data as of November 10, 2026. Last checked November 10, 2026. Information is current, checked daily against the CISA KEV catalog.</p>
+        <p>Data as of November 11, 2026. Last checked November 11, 2026. Information is current, checked daily against the CISA KEV catalog.</p>
         <p>PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
       </div>
     </footer>
@@ -749,9 +749,5 @@
         });
       });
     </script>
-    <script>
-      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
   </body>
 </html>
