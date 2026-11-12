@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>PatchWatch: November 2026 Security Updates</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+<style>
+      :root {
+        --bg: #f6f7f5;
+        --surface: #ffffff;
+        --surface-2: #eef1ec;
+        --ink: #16211b;
+        --ink-2: #46534a;
+        --ink-3: #6b7a70;
+        --line: #d9dfd8;
+        --accent: #1d6b4f;
+        --accent-ink: #ffffff;
+        --accent-soft: #e2efe8;
+        --red: #b3261e;
+        --red-soft: #fbe9e7;
+        --amber: #8a5a00;
+        --amber-soft: #fbf0d3;
+        --green: #1d6b4f;
+        --green-soft: #e2efe8;
+        --navy: #14202b;
+        --navy-ink: #eef3f1;
+        --navy-ink-2: #b8c6c0;
+        --radius: 10px;
+        --radius-lg: 14px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0e1411;
+          --surface: #18211c;
+          --surface-2: #1f2b24;
+          --ink: #e8efe9;
+          --ink-2: #b4c2b7;
+          --ink-3: #8a9a8e;
+          --line: #2c3a31;
+          --accent: #3fae82;
+          --accent-ink: #0c1712;
+          --accent-soft: #173527;
+          --red: #f0857d;
+          --red-soft: #3a1d1b;
+          --amber: #e8b64c;
+          --amber-soft: #3a2f14;
+          --green: #3fae82;
+          --green-soft: #173527;
+          --navy: #0a121a;
+          --navy-ink: #eef3f1;
+          --navy-ink-2: #9fb3ab;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+      }
+      .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .wrap { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+
+      /* ---------- Hero ---------- */
+      .hero {
+        background: var(--navy);
+        color: var(--navy-ink);
+        padding: 44px 0 0;
+      }
+      .hero .kicker {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+        color: var(--navy-ink-2);
+        margin: 0 0 14px;
+      }
+      .hero .kicker svg { flex: none; }
+      .hero h1 {
+        margin: 0 0 10px;
+        font-size: clamp(38px, 7vw, 56px);
+        line-height: 1.02; letter-spacing: -0.02em; font-weight: 700;
+      }
+      .hero .tagline {
+        margin: 0 0 8px;
+        font-size: clamp(17px, 2.6vw, 20px);
+        line-height: 1.45; max-width: 640px;
+        color: var(--navy-ink);
+      }
+      .hero .updated {
+        margin: 0 0 30px; font-size: 13.5px; color: var(--navy-ink-2);
+      }
+      .stats {
+        display: grid; grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid rgba(255,255,255,0.16);
+      }
+      .stat { padding: 20px 22px 24px 0; }
+      .stat + .stat { border-left: 1px solid rgba(255,255,255,0.16); padding-left: 22px; }
+      .stat .num {
+        display: block; font-size: clamp(26px, 4.5vw, 36px); font-weight: 700;
+        letter-spacing: -0.01em; line-height: 1.1;
+      }
+      .stat .lbl { display: block; margin-top: 5px; font-size: 13.5px; line-height: 1.4; color: var(--navy-ink-2); }
+      @media (max-width: 640px) {
+        .stats { grid-template-columns: 1fr; }
+        .stat { padding: 16px 0; }
+        .stat + .stat { border-left: none; border-top: 1px solid rgba(255,255,255,0.16); padding-left: 0; }
+      }
+
+      /* ---------- Sections ---------- */
+      main { padding: 36px 0 8px; }
+      section { margin-bottom: 40px; }
+      .sec-head { margin-bottom: 16px; }
+      .sec-head h2 {
+        margin: 0 0 4px; font-size: 24px; font-weight: 700; letter-spacing: -0.01em;
+      }
+      .sec-head p { margin: 0; color: var(--ink-2); font-size: 15px; max-width: 680px; }
+
+      /* ---------- Patch-first card ---------- */
+      .patch-first {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-top: 4px solid var(--red);
+        border-radius: var(--radius-lg);
+        padding: 24px 26px;
+      }
+      .patch-first .flag {
+        display: inline-block; margin: 0 0 10px;
+        background: var(--red-soft); color: var(--red);
+        font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+        padding: 4px 10px; border-radius: 999px;
+      }
+      .patch-first h3 { margin: 0 0 6px; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
+      .patch-first .lede { margin: 0 0 18px; color: var(--ink-2); font-size: 15.5px; }
+      .flaws { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+      @media (max-width: 640px) { .flaws { grid-template-columns: 1fr; } }
+      .flaw {
+        background: var(--surface-2); border-radius: var(--radius);
+        padding: 16px 18px;
+      }
+      .flaw .cve { font-size: 15px; font-weight: 600; }
+      .flaw .cvss {
+        display: inline-block; margin-left: 8px; font-size: 12px; font-weight: 600;
+        background: var(--red); color: #fff; padding: 2px 8px; border-radius: 999px;
+        vertical-align: 2px;
+      }
+      .flaw h4 { margin: 6px 0 4px; font-size: 15.5px; font-weight: 600; }
+      .flaw p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+      .action-box {
+        background: var(--accent-soft); border-radius: var(--radius);
+        padding: 16px 18px; font-size: 15.5px;
+      }
+      .action-box strong { color: var(--accent); }
+
+      /* ---------- Tables ---------- */
+      .table-card {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius-lg); overflow: hidden;
+      }
+      table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+      thead th {
+        text-align: left; font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+        text-transform: uppercase; color: var(--ink-3);
+        padding: 12px 16px; border-bottom: 1px solid var(--line);
+        background: var(--surface-2);
+      }
+      tbody td { padding: 11px 16px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+      tbody tr:last-child td { border-bottom: none; }
+      td.product { font-weight: 600; }
+      td.cve { white-space: nowrap; font-size: 13.5px; }
+      td.date { white-space: nowrap; color: var(--ink-2); }
+      .chip {
+        display: inline-block; white-space: nowrap;
+        font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px;
+      }
+      .chip-red { background: var(--red-soft); color: var(--red); }
+      .chip-amber { background: var(--amber-soft); color: var(--amber); }
+      .chip-green { background: var(--green-soft); color: var(--green); }
+      .chip-neutral { background: var(--surface-2); color: var(--ink-2); }
+      .table-note { margin: 12px 2px 0; font-size: 14px; color: var(--ink-2); }
+      .who-cares {
+        margin-top: 16px; background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius-lg); padding: 18px 22px;
+      }
+      .who-cares h3 { margin: 0 0 10px; font-size: 15px; font-weight: 700; }
+      .who-cares ul { margin: 0; padding: 0; list-style: none; }
+      .who-cares li { padding: 5px 0; font-size: 14.5px; color: var(--ink-2); }
+      .who-cares li strong { color: var(--ink); font-weight: 600; }
+      @media (max-width: 640px) {
+        thead { display: none; }
+        table, tbody, tr, td { display: block; width: 100%; }
+        tbody tr { padding: 12px 0; border-bottom: 1px solid var(--line); }
+        tbody tr:last-child { border-bottom: none; }
+        tbody td { border-bottom: none; padding: 2px 16px; }
+        td.cve, td.date { white-space: normal; }
+        td.date::before { content: attr(data-label) ": "; font-weight: 600; color: var(--ink-3); font-size: 12.5px; }
+        td.status { padding-top: 6px; }
+      }
+
+      /* ---------- EOL watch ---------- */
+      .eol-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      @media (max-width: 680px) { .eol-list { grid-template-columns: 1fr; } }
+      .eol {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius-lg); padding: 18px 20px;
+      }
+      .eol .top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+      .eol h3 { margin: 0; font-size: 16.5px; font-weight: 600; line-height: 1.3; }
+      .eol .when { margin: 4px 0 0; font-size: 13.5px; color: var(--ink-3); }
+      .eol p.note { margin: 10px 0 0; font-size: 14.5px; color: var(--ink-2); }
+
+      /* ---------- Directory ---------- */
+      .dir-tools { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+      .dir-tools input[type="search"] {
+        flex: 1 1 260px; padding: 11px 14px; font: inherit; font-size: 15px;
+        background: var(--surface); color: var(--ink);
+        border: 1px solid var(--line); border-radius: var(--radius);
+      }
+      .dir-tools input[type="search"]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+      .cat-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+      .cat-btn {
+        font: inherit; font-size: 13.5px; font-weight: 500; cursor: pointer;
+        padding: 6px 13px; border-radius: 999px;
+        background: var(--surface); color: var(--ink-2); border: 1px solid var(--line);
+      }
+      .cat-btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+      .dir-group { margin-bottom: 26px; }
+      .dir-group h3 {
+        margin: 0 0 10px; font-size: 13px; font-weight: 700;
+        letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3);
+      }
+      .dir-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+      .tool {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius); padding: 16px 18px;
+      }
+      .tool h4 { margin: 0 0 4px; font-size: 15.5px; font-weight: 600; }
+      .tool p { margin: 0; font-size: 14px; color: var(--ink-2); }
+      .dir-empty { display: none; padding: 28px 0; color: var(--ink-2); font-size: 15px; }
+      .dir-note { margin-top: 4px; font-size: 13.5px; color: var(--ink-3); }
+
+      /* ---------- Newsletter / sponsor ---------- */
+      .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      @media (max-width: 680px) { .two-col { grid-template-columns: 1fr; } }
+      .promo { border-radius: var(--radius-lg); padding: 24px 26px; }
+      .promo h3 { margin: 0 0 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.01em; }
+      .promo p { margin: 0 0 14px; font-size: 15px; }
+      .promo .pill {
+        display: inline-block; font-size: 12.5px; font-weight: 600;
+        padding: 4px 11px; border-radius: 999px;
+      }
+      .promo-news { background: var(--accent-soft); }
+      .promo-news p { color: var(--ink-2); }
+      .promo-news .pill { background: var(--accent); color: var(--accent-ink); }
+      .sub-row { display: flex; flex-wrap: wrap; gap: 8px; }
+      .sub-row input[type="email"] {
+        flex: 1 1 200px; padding: 11px 14px; font: inherit; font-size: 15px;
+        background: var(--surface); color: var(--ink);
+        border: 1px solid var(--line); border-radius: var(--radius);
+      }
+      .sub-row input[type="email"]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+      .sub-row button {
+        font: inherit; font-size: 15px; font-weight: 600; cursor: pointer;
+        padding: 11px 18px; border-radius: var(--radius);
+        background: var(--accent); border: 1px solid var(--accent); color: var(--accent-ink);
+      }
+      .sub-row button:disabled { opacity: 0.6; cursor: default; }
+      .sub-status { margin: 10px 0 0; font-size: 13.5px; color: var(--ink-2); }
+      .sub-status:empty { display: none; }
+      .hp { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+      .promo-sponsor { background: var(--surface); border: 1px dashed var(--ink-3); }
+      .promo-sponsor p { color: var(--ink-2); }
+      .sponsor-link {
+        display: inline-block; font-size: 14px; font-weight: 600;
+        padding: 9px 16px; border-radius: 999px; text-decoration: none;
+        background: var(--accent); color: var(--accent-ink);
+        border: 1px solid var(--accent);
+      }
+      .sponsor-link:hover { text-decoration: underline; }
+      .sponsor-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+      /* ---------- Footer ---------- */
+      footer {
+        border-top: 1px solid var(--line); margin-top: 16px;
+        padding: 26px 0 40px; color: var(--ink-2); font-size: 13.5px;
+      }
+      footer p { margin: 0 0 8px; max-width: 720px; }
+      footer .sources strong { color: var(--ink); font-weight: 600; }
+
+      /* ---------- Brief page additions ---------- */
+      .draft-banner {
+        position: sticky; top: 0; z-index: 50;
+        background: #b3261e; color: #ffffff;
+        text-align: center; font-size: 13px; font-weight: 600;
+        padding: 8px 14px; letter-spacing: 0.02em;
+      }
+      .brief-card {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 14px;
+      }
+      .brief-card .cve { font-size: 15px; font-weight: 600; }
+      .brief-card h3 { margin: 6px 0 4px; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+      .brief-card p { margin: 0 0 8px; font-size: 15px; color: var(--ink-2); }
+      .brief-card p:last-child { margin-bottom: 0; }
+      .brief-card .do { color: var(--ink); }
+      .brief-card .do strong { color: var(--accent); }
+      .status-open { border-left: 4px solid var(--red); }
+      .status-mit { border-left: 4px solid var(--amber); }
+      .status-fix { border-left: 4px solid var(--green); }
+      .src-list { margin: 0; padding-left: 18px; font-size: 14.5px; color: var(--ink-2); }
+      .src-list li { padding: 2px 0; }
+      a { color: var(--accent); }
+    </style>
+  </head>
+  <body>
+
+    <header class="hero">
+      <div class="wrap">
+        <p class="kicker">
+          <svg width="16" height="18" viewBox="0 0 16 18" fill="none" aria-hidden="true">
+            <path d="M8 0.8 15 3.2v5c0 4.4-2.9 7.5-7 8.9C3.9 15.7 1 12.6 1 8.2v-5L8 0.8Z" fill="#3fae82"/>
+            <path d="M5.2 9.1 7.2 11.1 10.9 6.9" stroke="#0a121a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Patch Tuesday Brief
+        </p>
+        <h1>November 2026 Security Updates</h1>
+        <p class="tagline">What Microsoft and Adobe actually released on November 10, the handful of fixes that matter, and what the updates are known to break.</p>
+        <p class="updated">Brief published November 10, 2026 · Breakage watch updated November 11, 2026</p>
+        <div class="stats">
+          <div class="stat">
+            <span class="num">1,094</span>
+            <span class="lbl">fixes in Microsoft's November release, the second huge month in a row after October's record 1,413</span>
+          </div>
+          <div class="stat">
+            <span class="num">1</span>
+            <span class="lbl">bug already being exploited this month, in Microsoft Outlook, and it is the one to patch first</span>
+          </div>
+          <div class="stat">
+            <span class="num">110</span>
+            <span class="lbl">fixes from Adobe across nine products, none known to be exploited yet</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section aria-labelledby="glance-h">
+        <div class="sec-head">
+          <h2 id="glance-h">The release at a glance</h2>
+          <p>Every Patch Tuesday ships hundreds of fixes. This table is the whole month on one screen: who released what, how bad the worst bug is, and whether attackers are already using any of it.</p>
+        </div>
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Release</th>
+                <th scope="col">Fixes</th>
+                <th scope="col">Worst severity</th>
+                <th scope="col">Exploited?</th>
+                <th scope="col">PatchWatch take</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="product">Microsoft, all products</td>
+                <td class="date">1,094 CVEs, 64 Critical</td>
+                <td class="date">Critical, top CVSS 9.8</td>
+                <td class="status"><span class="chip chip-red">Yes, 1 bug</span></td>
+                <td class="date">Patch the Outlook bug first, then servers</td>
+              </tr>
+              <tr>
+                <td class="product">Adobe Connect</td>
+                <td class="date">24 CVEs</td>
+                <td class="date">Critical, top CVSS 10.0</td>
+                <td class="status"><span class="chip chip-green">No</span></td>
+                <td class="date">Biggest Adobe bulletin; patch soon if you run Connect</td>
+              </tr>
+              <tr>
+                <td class="product">Adobe, other eight products</td>
+                <td class="date">86 CVEs</td>
+                <td class="date">High</td>
+                <td class="status"><span class="chip chip-green">No</span></td>
+                <td class="date">Routine: let the apps auto update</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">Microsoft's release carries 1,094 CVEs by our count from the Security Update Guide; the Zero Day Initiative counted about 1,090 in its November 2026 review of the same release. Either way, it is the second month in a row above every previous year.</p>
+      </section>
+
+      <section aria-labelledby="matter-h">
+        <div class="sec-head">
+          <h2 id="matter-h">The ones that matter</h2>
+          <p>Out of 1,094 Microsoft fixes, these are the ones a small business or its IT provider should care about this month, worst first.</p>
+        </div>
+
+        <article class="brief-card status-open">
+          <span class="cve mono">CVE-2026-124194</span><span class="cvss" style="display:inline-block;margin-left:8px;font-size:12px;font-weight:600;background:var(--red);color:#fff;padding:2px 8px;border-radius:999px;vertical-align:2px;">CVSS 6.5</span>
+          <h3>Microsoft Outlook flaw, already being exploited</h3>
+          <p>The score looks modest, but this is the one bug attackers are using right now. A booby trapped message file makes Outlook quietly connect to an attacker controlled location and hand over a credential hash, which the attacker can then use to log in as that user. CISA added it to the Known Exploited Vulnerabilities catalog on release day and gave federal agencies until <strong>November 24, 2026</strong> to patch.</p>
+          <p class="do"><strong>What to do:</strong> push the November Office and Outlook updates first, ahead of everything else this month.</p>
+        </article>
+
+        <article class="brief-card">
+          <span class="cve mono">CVE-2026-116928</span><span class="cvss" style="display:inline-block;margin-left:8px;font-size:12px;font-weight:600;background:var(--red);color:#fff;padding:2px 8px;border-radius:999px;vertical-align:2px;">CVSS 9.8</span>
+          <h3>Windows Search flaw reached through Exchange mail</h3>
+          <p>An attacker emails a specially crafted attachment, the mail server indexes it automatically, and code runs on the server. Nobody has to open anything. It is the most severe server bug this month, worse than the fixes written specifically for Exchange.</p>
+          <p class="do"><strong>What to do:</strong> if you run your own Exchange server, patch it this week, not at month end.</p>
+        </article>
+
+        <article class="brief-card">
+          <span class="cve mono">CVE-2026-119958</span>
+          <h3>Windows LDAP flaw, dangerous on domain controllers</h3>
+          <p>An unauthenticated attacker can send crafted LDAP calls over the network and run code in the LDAP service, with no user interaction. On a domain controller, the server that decides who can log in to everything, that is about as bad as it gets.</p>
+          <p class="do"><strong>What to do:</strong> domain controllers go near the top of the patch order, right after the Outlook fix.</p>
+        </article>
+
+        <article class="brief-card">
+          <span class="cve mono">CVE-2026-118207</span>
+          <h3>Exchange Server remote code execution</h3>
+          <p>One of nine Exchange fixes this month, rated Critical, delivered in update KB5133453. On premises Exchange is a favorite attacker target because it faces the internet and holds every mailbox.</p>
+          <p class="do"><strong>What to do:</strong> patch Exchange this week. If web mail or mail flow has been flaky since the October updates, check the breakage section below.</p>
+        </article>
+
+        <article class="brief-card">
+          <span class="cve mono">CVE-2026-96092</span>
+          <h3>Windows DNS Server flaw on Server 2025</h3>
+          <p>Part of a small set of DNS fixes this month that researchers class as wormable: unauthenticated, over the network, no user interaction. DNS servers are easy to forget because they just sit there working.</p>
+          <p class="do"><strong>What to do:</strong> include your DNS servers in the first patch wave, especially Server 2025.</p>
+        </article>
+
+        <article class="brief-card">
+          <span class="cve mono">CVE-2026-119952</span>
+          <h3>Windows Schannel flaw, exploitation rated more likely</h3>
+          <p>Schannel is the part of Windows that handles secure connections. Microsoft rates this one Exploitation More Likely, one of only a few Critical fixes carrying that label this month, even though the attack is rated complex.</p>
+          <p class="do"><strong>What to do:</strong> it rides in the normal Windows cumulative update, so no special handling, just do not defer the November updates.</p>
+        </article>
+        <p class="table-note">That is the highlights cut. Want every fix, not just these six? <a href="patch-tuesday-nov-2026-cve-list.html">See the CVE list</a>: every CVE in the November release in one searchable table.</p>
+      </section>
+
+      <section aria-labelledby="kb-h">
+        <div class="sec-head">
+          <h2 id="kb-h">The update packages</h2>
+          <p>The November cumulative update for each Windows version, so you can confirm your machines pulled the right one.</p>
+        </div>
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Update</th>
+                <th scope="col">Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="product">Windows 11, versions 24H2, 25H2, 26H2</td>
+                <td class="cve mono">KB5132061</td>
+                <td class="date">Main November cumulative</td>
+              </tr>
+              <tr>
+                <td class="product">Windows 11, version 23H2</td>
+                <td class="cve mono">KB5131087</td>
+                <td class="date">Build 22631.7711. Final update for 23H2 Enterprise and Education; plan the move to 25H2</td>
+              </tr>
+              <tr>
+                <td class="product">Windows Server 2025</td>
+                <td class="cve mono">KB5131080</td>
+                <td class="date">Hotpatch variant KB5131077</td>
+              </tr>
+              <tr>
+                <td class="product">Windows Server 2022</td>
+                <td class="cve mono">KB5131090</td>
+                <td class="date"></td>
+              </tr>
+              <tr>
+                <td class="product">Windows Server 2019</td>
+                <td class="cve mono">KB5131085</td>
+                <td class="date"></td>
+              </tr>
+              <tr>
+                <td class="product">Windows Server 2016</td>
+                <td class="cve mono">KB5131291</td>
+                <td class="date">Server 2016 support ends January 12, 2027</td>
+              </tr>
+              <tr>
+                <td class="product">Exchange Server</td>
+                <td class="cve mono">KB5133453</td>
+                <td class="date">Carries the Exchange fixes above</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="break-h">
+        <div class="sec-head">
+          <h2 id="break-h">Update breakage watch</h2>
+          <p>What recent updates are known to break, checked daily against Microsoft's release health pages and credible admin reports. Confirmed items only, with the workaround where one exists.</p>
+        </div>
+
+        <article class="brief-card status-open">
+          <h3>November update KB5132061 can fail to install</h3>
+          <p><strong>Affects:</strong> Windows 11 24H2, 25H2, and 26H2 after KB5132061. Install fails with 0x800f0993, 0x800f0989, or 0x80070306. Reported the same day by Neowin, Windows Latest, Windows Report, and The Register. Microsoft has not acknowledged it yet.</p>
+          <p class="do"><strong>What to do:</strong> hold mass rollout until Microsoft acknowledges it. A workaround reported by a single user, disable Windows Sandbox, reboot, and retry, is unconfirmed, and others report failures regardless of Sandbox status. DISM or a manual .msu download are reported as alternates.</p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>November updates crash Sage 50 US when opening a transaction window</h3>
+          <p><strong>Affects:</strong> Sage 50 US 2026 and 2021 on Windows 10 and Windows 11 after KB5132061 (Win 11), KB5132059 (Win 11 26H1), or KB5131096 (Win 10). Sage confirmed it on their Community Hub: the app crashes when opening a transaction window after the November update, and removing the update fixes it. They are investigating with Microsoft.</p>
+          <p class="do"><strong>What to do:</strong> hold the November update on Sage machines, or uninstall the November update temporarily if it already crashed.</p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>October updates can break office Wi-Fi and wired network logins</h3>
+          <p><strong>Affects:</strong> Windows 11 24H2, 25H2, and 26H2 after KB5127648. The October update turned on a stricter sign in rule (NTLMv1 enforcement). Networks that log users in with the older MS-CHAPv2 method, common for office Wi-Fi, can start refusing connections. Home Wi-Fi with a plain password is not affected. Microsoft confirms the change is intentional hardening, so no fix is coming.</p>
+          <p class="do"><strong>What to do:</strong> if office Wi-Fi breaks after the October update, your IT provider can roll the setting back to audit mode, or better, move the network to certificate based sign in (EAP-TLS).</p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>October Server updates can stall on premises Exchange</h3>
+          <p><strong>Affects:</strong> Exchange 2016, 2019, and Subscription Edition on Server 2016 to 2025 after the October 13 updates. Sign ins to web mail can fail, mail can sit in the Outbox, and mailbox database copies can stall, starting about a day after a restart. Microsoft confirms the cause: a new limit on a lookup service Exchange leans on.</p>
+          <p class="do"><strong>What to do:</strong> fixed in the November Server updates. The registry workaround is no longer needed once those are installed.</p>
+        </article>
+
+        <article class="brief-card status-mit">
+          <h3>Some USB audio devices stopped working after the September and October updates</h3>
+          <p><strong>Affects:</strong> USB Audio Class 1.0 devices (some headsets, docks, and conference gear) on Windows 10, Windows 11, and Server. The device fails to start and shows error Code 10.</p>
+          <p class="do"><strong>What to do:</strong> fixed in KB5132061 and KB5131096. Install the November update; the 2 channel mode workaround is no longer needed.</p>
+        </article>
+
+        <article class="brief-card status-fix">
+          <h3>Always On VPN connection bug: fix is in the November updates</h3>
+          <p><strong>Affects:</strong> Always On VPN on Windows 11 24H2 and later, broken by the September updates and stuck on Connecting.</p>
+          <p class="do"><strong>What to do:</strong> fixed on all branches in KB5132061. Install the November update, then the single protocol pinning workaround can be reverted.</p>
+        </article>
+
+        <article class="brief-card status-fix">
+          <h3>Fixed in the November cumulative: Smart App Control and Remote Desktop</h3>
+          <p><strong>Affects:</strong> Smart App Control toggle grayed out, fixed for 24H2 in KB5132061; Remote Desktop failures for non-admin users (0xC000000D), fixed in KB5132061.</p>
+          <p class="do"><strong>What to do:</strong> install the November update. No workaround needed after that.</p>
+        </article>
+
+        <p class="table-note">Watch item, not confirmed breakage: KB5132061 tightens PowerShell script signature validation, so signed scripts with invalid UTF-8 may now fail validation. November cycle breakage is now confirmed, two new issues above, so this section is no longer waiting on first reports.</p>
+      </section>
+
+      <section aria-labelledby="know-h">
+        <div class="sec-head">
+          <h2 id="know-h">Worth knowing</h2>
+          <p>Notable fixes and campaigns that sit outside the exploited list but can still bite a small shop.</p>
+        </div>
+        <article class="brief-card">
+          <span class="cve mono">CVE-2026-83844</span>
+          <h3>Microsoft Paint flaw with a patching gotcha</h3>
+          <p>A serious flaw in the Paint app bundled with Windows, disclosed October 13. It is not being exploited and CISA has not listed it, but the fix only ships through the Microsoft Store, never through Windows Update. Shops that block the Store, or never open it, will stay unpatched without noticing.</p>
+          <p class="do"><strong>What to do:</strong> make sure Store apps are set to update, or push the Paint update through your management tool.</p>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <p class="sources"><strong>Data sources:</strong> Microsoft Security Update Guide and release health pages · CISA Known Exploited Vulnerabilities (KEV) catalog · Zero Day Initiative, The November 2026 Security Update Review · Adobe security bulletins</p>
+        <p>Prepared November 10, 2026; breakage watch updated November 11, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+      </div>
+    </footer>
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
