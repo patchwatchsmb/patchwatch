@@ -334,7 +334,7 @@
         </p>
         <h1>November 2026 Security Updates</h1>
         <p class="tagline">What Microsoft and Adobe actually released on November 10, the handful of fixes that matter, and what the updates are known to break.</p>
-        <p class="updated">Brief published November 10, 2026 · Breakage watch updated November 11, 2026</p>
+        <p class="updated">Brief published November 10, 2026 · Breakage watch updated November 12, 2026</p>
         <div class="stats">
           <div class="stat">
             <span class="num">1,094</span>
@@ -510,14 +510,26 @@
 
         <article class="brief-card status-open">
           <h3>November update KB5132061 can fail to install</h3>
-          <p><strong>Affects:</strong> Windows 11 24H2, 25H2, and 26H2 after KB5132061. Install fails with 0x800f0993, 0x800f0989, or 0x80070306. Reported the same day by Neowin, Windows Latest, Windows Report, and The Register. Microsoft has not acknowledged it yet.</p>
-          <p class="do"><strong>What to do:</strong> hold mass rollout until Microsoft acknowledges it. A workaround reported by a single user, disable Windows Sandbox, reboot, and retry, is unconfirmed, and others report failures regardless of Sandbox status. DISM or a manual .msu download are reported as alternates.</p>
+          <p><strong>Affects:</strong> Windows 11 24H2, 25H2, and 26H2 after KB5132061. Install fails with 0x800f0993, 0x800f0989, or 0x80070306. Microsoft confirmed it as a known issue on November 11. Only machines that installed the October preview KB5127936 are affected. An automatic repair is rolling out through Windows Update, expected done by Friday morning, November 13, with no user action needed, and the update then installs automatically.</p>
+          <p class="do"><strong>What to do:</strong> if the install fails, wait for the automatic repair. If it still fails after 48 hours, contact Microsoft Support. DISM or a manual .msu download are reported as alternates.</p>
         </article>
 
         <article class="brief-card status-open">
           <h3>November updates crash Sage 50 US when opening a transaction window</h3>
-          <p><strong>Affects:</strong> Sage 50 US 2026 and 2021 on Windows 10 and Windows 11 after KB5132061 (Win 11), KB5132059 (Win 11 26H1), or KB5131096 (Win 10). Sage confirmed it on their Community Hub: the app crashes when opening a transaction window after the November update, and removing the update fixes it. They are investigating with Microsoft.</p>
-          <p class="do"><strong>What to do:</strong> hold the November update on Sage machines, or uninstall the November update temporarily if it already crashed.</p>
+          <p><strong>Affects:</strong> Sage 50 US 2026 and 2021 on Windows 10 and Windows 11 after KB5132061 (Win 11), KB5132059 (Win 11 26H1), or KB5131096 (Win 10). Sage confirmed it on their Community Hub: the app crashes when opening a transaction window after the November update, and removing the update fixes it. They are investigating with Microsoft. For hosted Sage 50, removing the update may not fix it; Sage support told a hosted user to wait for a Sage and Microsoft fix. Some users also report the update reinstalling itself after removal, so pause updates after uninstalling.</p>
+          <p class="do"><strong>What to do:</strong> hold the November update on Sage machines, or uninstall it temporarily if it already crashed, then pause updates. Hosted Sage 50 users should wait for the Sage and Microsoft fix.</p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>Activation commands fail after the November updates</h3>
+          <p><strong>Affects:</strong> Windows 11 23H2 after KB5131087, Windows 10 after KB5131096, Windows Server 2025 after KB5131080, Windows Server 2022 after KB5131090, and Windows Server 2019 and Windows 10 LTSC 2019 after KB5131085. The activation commands slmgr.vbs /skms-domain and /ipk fail with error 0x80041008. Machines that are already activated stay activated.</p>
+          <p class="do"><strong>What to do:</strong> there is no workaround yet except contacting Microsoft Support for Business. Microsoft expects a resolution in the coming days. Do not re-image or re-activate machines in bulk until it lands.</p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>SQL Server linked server connections may stay open</h3>
+          <p><strong>Affects:</strong> SQL Server on server devices after the October 13, 2026 updates and later updates. Linked server queries to external databases, with Oracle and PostgreSQL named, may leave connections open instead of closing them.</p>
+          <p class="do"><strong>What to do:</strong> a mitigation is available through Microsoft Support for Business, and an out-of-band update is expected in the next few days. Deploy with this in mind if you run SQL Server linked servers.</p>
         </article>
 
         <article class="brief-card status-open">
@@ -550,7 +562,7 @@
           <p class="do"><strong>What to do:</strong> install the November update. No workaround needed after that.</p>
         </article>
 
-        <p class="table-note">Watch item, not confirmed breakage: KB5132061 tightens PowerShell script signature validation, so signed scripts with invalid UTF-8 may now fail validation. November cycle breakage is now confirmed, two new issues above, so this section is no longer waiting on first reports.</p>
+        <p class="table-note">Watch item, not confirmed breakage: KB5132061 tightens PowerShell script signature validation, so signed scripts with invalid UTF-8 may now fail validation. The November cycle now has four confirmed breakage issues above.</p>
       </section>
 
       <section aria-labelledby="know-h">
@@ -570,7 +582,7 @@
     <footer>
       <div class="wrap">
         <p class="sources"><strong>Data sources:</strong> Microsoft Security Update Guide and release health pages · CISA Known Exploited Vulnerabilities (KEV) catalog · Zero Day Initiative, The November 2026 Security Update Review · Adobe security bulletins</p>
-        <p>Prepared November 10, 2026; breakage watch updated November 11, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+        <p>Prepared November 10, 2026; breakage watch updated November 12, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
       </div>
     </footer>
     <script>
