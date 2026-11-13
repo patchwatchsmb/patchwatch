@@ -401,9 +401,28 @@
     .steps li{border-top-color:#223028}
     .card.featured{box-shadow:0 8px 28px rgba(0,0,0,0.45)}
   }
-</style>
+
+      /* ===== Site nav ===== */
+      .site-nav { background: #0a121a; border-bottom: 1px solid rgba(238, 243, 241, 0.10); }
+      .site-nav .wrap { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 28px; padding-top: 10px; padding-bottom: 10px; }
+      .site-nav a { color: #b8c6c0; text-decoration: none; font-size: 14.5px; font-weight: 500; letter-spacing: 0.01em; padding: 2px 0; }
+      .site-nav a.nav-home { display: inline-flex; align-items: center; gap: 6px; }
+      .site-nav a:hover, .site-nav a:focus-visible { color: #3fae82; }
+  </style>
 </head>
 <body>
+  <!-- ================= SITE NAV ================= -->
+  <nav class="site-nav" aria-label="Site">
+    <div class="wrap">
+      <a class="nav-home" href="index.html"><svg width="15" height="15" viewBox="0 0 16 16" fill="#3fae82" aria-hidden="true"><path d="M8 1.2 15 7.6h-2.1V14a.9.9 0 0 1-.9.9h-2.8V10.6H6.8v4.3H4A.9.9 0 0 1 3.1 14V7.6H1Z"/></svg>Home</a>
+      <a href="patch-tuesday-nov-2026-brief.html">Patch Tuesday Brief</a>
+      <a href="patch-tuesday-nov-2026-cve-list.html">Full CVE List</a>
+      <a href="index.html#kev-h">Actively Exploited</a>
+      <a href="index.html#eol-h">EOL Watch</a>
+      <a href="index.html#dir-h">Directory</a>
+      <a href="sponsor.html">Sponsor</a>
+    </div>
+  </nav>
   <div class="wrap">
     <div class="site-line">
       <a class="brand" href="/">Patch<b>Watch</b> SMB</a>
