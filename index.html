@@ -60,7 +60,7 @@
         }
       }
       * { box-sizing: border-box; }
-      html { -webkit-text-size-adjust: 100%; }
+      html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
       body {
         margin: 0;
         background: var(--bg);
@@ -303,9 +303,27 @@
       .hero-logo-h1 img { height: 68px; width: auto; max-width: 100%; display: block; margin: 0; flex: none; }
       .hero-logo-h1 .wordmark-smb { font-size: 0.58em; color: #3fae82; letter-spacing: -0.01em; margin-left: 10px; }
       .hero-discover { text-align: center; margin: 0 0 24px; font-size: 15px; font-weight: 600; letter-spacing: 0.04em; color: var(--navy-ink-2); }
+    
+      /* ===== Site nav (preview draft) ===== */
+      .site-nav { background: #0a121a; border-bottom: 1px solid rgba(238, 243, 241, 0.10); }
+      .site-nav .wrap { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 28px; padding-top: 10px; padding-bottom: 10px; }
+      .site-nav a { color: var(--navy-ink-2); text-decoration: none; font-size: 14.5px; font-weight: 500; letter-spacing: 0.01em; padding: 2px 0; }
+      .site-nav a:hover, .site-nav a:focus-visible { color: #3fae82; }
+      #patch-first-h, #kev-h, #eol-h, #dir-h { scroll-margin-top: 16px; }
     </style>
   </head>
   <body>
+    <!-- ================= SITE NAV ================= -->
+    <nav class="site-nav" aria-label="Site">
+      <div class="wrap">
+        <a href="patch-tuesday-nov-2026-brief.html">Patch Tuesday Brief</a>
+        <a href="patch-tuesday-nov-2026-cve-list.html">Full CVE List</a>
+        <a href="#kev-h">Actively Exploited</a>
+        <a href="#eol-h">EOL Watch</a>
+        <a href="#dir-h">Directory</a>
+        <a href="sponsor.html">Sponsor</a>
+      </div>
+    </nav>
     
     <!-- ================= HERO ================= -->
     <header class="hero">
