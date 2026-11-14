@@ -353,7 +353,7 @@
         </p>
         <h1>November 2026 Security Updates</h1>
         <p class="tagline">What Microsoft and Adobe actually released on November 10, the handful of fixes that matter, and what the updates are known to break.</p>
-        <p class="updated">Brief published November 10, 2026 · Breakage watch updated November 12, 2026</p>
+        <p class="updated">Brief published November 10, 2026 · Breakage watch updated November 14, 2026</p>
         <div class="stats">
           <div class="stat">
             <span class="num">1,094</span>
@@ -552,6 +552,12 @@
         </article>
 
         <article class="brief-card status-open">
+          <h3>Printing can fail after the November updates</h3>
+          <p><strong>Affects:</strong> Windows 10 and later, and Windows Server 2016 and later, after the November 2026 security updates. Printing can fail for documents containing images rendered with zero height or width at the selected print resolution. Confirmed in Word via GDI; other apps may be affected. The images can be invisible ones, such as watermarks or layout anchors from document-generation tools, so the user does not need to have added a picture. Microsoft is investigating (alert WI1549472; BleepingComputer and The Register, Nov 12-13).</p>
+          <p class="do"><strong>What to do:</strong> no fix and no workaround yet. If printing fails after the November updates, check whether the document contains hidden or placeholder images, and watch for a Microsoft fix.</p>
+        </article>
+
+        <article class="brief-card status-open">
           <h3>October updates can break office Wi-Fi and wired network logins</h3>
           <p><strong>Affects:</strong> Windows 11 24H2, 25H2, and 26H2 after KB5127648. The October update turned on a stricter sign in rule (NTLMv1 enforcement). Networks that log users in with the older MS-CHAPv2 method, common for office Wi-Fi, can start refusing connections. Home Wi-Fi with a plain password is not affected. Microsoft confirms the change is intentional hardening, so no fix is coming.</p>
           <p class="do"><strong>What to do:</strong> if office Wi-Fi breaks after the October update, your IT provider can roll the setting back to audit mode, or better, move the network to certificate based sign in (EAP-TLS).</p>
@@ -581,7 +587,7 @@
           <p class="do"><strong>What to do:</strong> install the November update. No workaround needed after that.</p>
         </article>
 
-        <p class="table-note">Watch item, not confirmed breakage: KB5132061 tightens PowerShell script signature validation, so signed scripts with invalid UTF-8 may now fail validation. The November cycle now has four confirmed breakage issues above.</p>
+        <p class="table-note">Watch item, not confirmed breakage: KB5132061 tightens PowerShell script signature validation, so signed scripts with invalid UTF-8 may now fail validation. The November cycle now has five confirmed breakage issues above.</p>
       </section>
 
       <section aria-labelledby="know-h">
@@ -601,7 +607,7 @@
     <footer>
       <div class="wrap">
         <p class="sources"><strong>Data sources:</strong> Microsoft Security Update Guide and release health pages · CISA Known Exploited Vulnerabilities (KEV) catalog · Zero Day Initiative, The November 2026 Security Update Review · Adobe security bulletins</p>
-        <p>Prepared November 10, 2026; breakage watch updated November 12, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+        <p>Prepared November 10, 2026; breakage watch updated November 14, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
       </div>
     </footer>
     <script>
