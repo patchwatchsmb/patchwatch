@@ -79,10 +79,10 @@
         padding: 44px 0 0;
       }
       .hero .kicker {
-        display: inline-flex; align-items: center; gap: 8px;
+        display: flex; justify-content: center; align-items: center; gap: 8px;
         font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
         color: var(--navy-ink-2);
-        margin: 0 0 14px;
+        margin: 0 0 28px;
       }
       .hero .kicker svg { flex: none; }
       .hero h1 {
@@ -91,7 +91,7 @@
         line-height: 1.02; letter-spacing: -0.02em; font-weight: 700;
       }
       .hero .tagline {
-        margin: 0 0 8px;
+        margin: 0 0 8px; text-align: left;
         font-size: clamp(17px, 2.6vw, 20px);
         line-height: 1.45; max-width: 640px;
         color: var(--navy-ink);
@@ -305,6 +305,11 @@
       .site-nav a.nav-home { display: inline-flex; align-items: center; gap: 6px; }
       .site-nav a:hover, .site-nav a:focus-visible { color: #3fae82; }
       #patch-first-h, #kev-h, #eol-h, #dir-h { scroll-margin-top: 16px; }
+      /* ---------- Hero logo ---------- */
+      .hero-logo-h1 { display: flex; align-items: center; justify-content: center; gap: 18px; margin: 0 0 8px; }
+      .hero-logo-h1 img { height: 68px; width: auto; max-width: 100%; display: block; margin: 0; flex: none; }
+      .hero-logo-h1 .wordmark-smb { font-size: 0.58em; color: #3fae82; letter-spacing: -0.01em; margin-left: 10px; }
+      .hero-discover { text-align: center; margin: 0 0 24px; font-size: 15px; font-weight: 600; letter-spacing: 0.04em; color: var(--navy-ink-2); }
     </style>
   </head>
   <body>
