@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>PatchWatch: What Got Hacked This Week</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+<style>
+      :root {
+        --bg: #f6f7f5;
+        --surface: #ffffff;
+        --surface-2: #eef1ec;
+        --ink: #16211b;
+        --ink-2: #46534a;
+        --ink-3: #6b7a70;
+        --line: #d9dfd8;
+        --accent: #1d6b4f;
+        --accent-ink: #ffffff;
+        --accent-soft: #e2efe8;
+        --red: #b3261e;
+        --red-soft: #fbe9e7;
+        --amber: #8a5a00;
+        --amber-soft: #fbf0d3;
+        --green: #1d6b4f;
+        --green-soft: #e2efe8;
+        --navy: #14202b;
+        --navy-ink: #eef3f1;
+        --navy-ink-2: #b8c6c0;
+        --radius: 10px;
+        --radius-lg: 14px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0e1411;
+          --surface: #18211c;
+          --surface-2: #1f2b24;
+          --ink: #e8efe9;
+          --ink-2: #b4c2b7;
+          --ink-3: #8a9a8e;
+          --line: #2c3a31;
+          --accent: #3fae82;
+          --accent-ink: #0c1712;
+          --accent-soft: #173527;
+          --red: #f0857d;
+          --red-soft: #3a1d1b;
+          --amber: #e8b64c;
+          --amber-soft: #3a2f14;
+          --green: #3fae82;
+          --green-soft: #173527;
+          --navy: #0a121a;
+          --navy-ink: #eef3f1;
+          --navy-ink-2: #9fb3ab;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+      }
+      .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .wrap { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+
+      /* ---------- Hero ---------- */
+      .hero {
+        background: var(--navy);
+        color: var(--navy-ink);
+        padding: 44px 0 0;
+      }
+      .hero .kicker {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+        color: var(--navy-ink-2);
+        margin: 0 0 14px;
+      }
+      .hero .kicker svg { flex: none; }
+      .hero h1 {
+        margin: 0 0 10px;
+        font-size: clamp(38px, 7vw, 56px);
+        line-height: 1.02; letter-spacing: -0.02em; font-weight: 700;
+      }
+      .hero .tagline {
+        margin: 0 0 8px;
+        font-size: clamp(17px, 2.6vw, 20px);
+        line-height: 1.45; max-width: 640px;
+        color: var(--navy-ink);
+      }
+      .hero .updated {
+        margin: 0 0 30px; font-size: 13.5px; color: var(--navy-ink-2);
+      }
+      .stats {
+        display: grid; grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid rgba(255,255,255,0.16);
+      }
+      .stat { padding: 20px 22px 24px 0; }
+      .stat + .stat { border-left: 1px solid rgba(255,255,255,0.16); padding-left: 22px; }
+      .stat .num {
+        display: block; font-size: clamp(26px, 4.5vw, 36px); font-weight: 700;
+        letter-spacing: -0.01em; line-height: 1.1;
+      }
+      .stat .lbl { display: block; margin-top: 5px; font-size: 13.5px; line-height: 1.4; color: var(--navy-ink-2); }
+      @media (max-width: 640px) {
+        .stats { grid-template-columns: 1fr; }
+        .stat { padding: 16px 0; }
+        .stat + .stat { border-left: none; border-top: 1px solid rgba(255,255,255,0.16); padding-left: 0; }
+      }
+
+      /* ---------- Sections ---------- */
+      main { padding: 36px 0 8px; }
+      section { margin-bottom: 40px; }
+      .sec-head { margin-bottom: 16px; }
+      .sec-head h2 {
+        margin: 0 0 4px; font-size: 24px; font-weight: 700; letter-spacing: -0.01em;
+      }
+      .sec-head p { margin: 0; color: var(--ink-2); font-size: 15px; max-width: 680px; }
+
+      /* ---------- Patch-first card ---------- */
+      .patch-first {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-top: 4px solid var(--red);
+        border-radius: var(--radius-lg);
+        padding: 24px 26px;
+      }
+      .patch-first .flag {
+        display: inline-block; margin: 0 0 10px;
+        background: var(--red-soft); color: var(--red);
+        font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+        padding: 4px 10px; border-radius: 999px;
+      }
+      .patch-first h3 { margin: 0 0 6px; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
+      .patch-first .lede { margin: 0 0 18px; color: var(--ink-2); font-size: 15.5px; }
+      .flaws { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+      @media (max-width: 640px) { .flaws { grid-template-columns: 1fr; } }
+      .flaw {
+        background: var(--surface-2); border-radius: var(--radius);
+        padding: 16px 18px;
+      }
+      .flaw .cve { font-size: 15px; font-weight: 600; }
+      .flaw .cvss {
+        display: inline-block; margin-left: 8px; font-size: 12px; font-weight: 600;
+        background: var(--red); color: #fff; padding: 2px 8px; border-radius: 999px;
+        vertical-align: 2px;
+      }
+      .flaw h4 { margin: 6px 0 4px; font-size: 15.5px; font-weight: 600; }
+      .flaw p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+      .action-box {
+        background: var(--accent-soft); border-radius: var(--radius);
+        padding: 16px 18px; font-size: 15.5px;
+      }
+      .action-box strong { color: var(--accent); }
+
+      /* ---------- Tables ---------- */
+      .table-card {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius-lg); overflow: hidden;
+      }
+      table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+      thead th {
+        text-align: left; font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+        text-transform: uppercase; color: var(--ink-3);
+        padding: 12px 16px; border-bottom: 1px solid var(--line);
+        background: var(--surface-2);
+      }
+      tbody td { padding: 11px 16px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+      tbody tr:last-child td { border-bottom: none; }
+      td.product { font-weight: 600; }
+      td.cve { white-space: nowrap; font-size: 13.5px; }
+      td.date { white-space: nowrap; color: var(--ink-2); }
+      .chip {
+        display: inline-block; white-space: nowrap;
+        font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 999px;
+      }
+      .chip-red { background: var(--red-soft); color: var(--red); }
+      .chip-amber { background: var(--amber-soft); color: var(--amber); }
+      .chip-green { background: var(--green-soft); color: var(--green); }
+      .chip-neutral { background: var(--surface-2); color: var(--ink-2); }
+      .table-note { margin: 12px 2px 0; font-size: 14px; color: var(--ink-2); }
+      .who-cares {
+        margin-top: 16px; background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius-lg); padding: 18px 22px;
+      }
+      .who-cares h3 { margin: 0 0 10px; font-size: 15px; font-weight: 700; }
+      .who-cares ul { margin: 0; padding: 0; list-style: none; }
+      .who-cares li { padding: 5px 0; font-size: 14.5px; color: var(--ink-2); }
+      .who-cares li strong { color: var(--ink); font-weight: 600; }
+      @media (max-width: 640px) {
+        thead { display: none; }
+        table, tbody, tr, td { display: block; width: 100%; }
+        tbody tr { padding: 12px 0; border-bottom: 1px solid var(--line); }
+        tbody tr:last-child { border-bottom: none; }
+        tbody td { border-bottom: none; padding: 2px 16px; }
+        td.cve, td.date { white-space: normal; }
+        td.date::before { content: attr(data-label) ": "; font-weight: 600; color: var(--ink-3); font-size: 12.5px; }
+        td.status { padding-top: 6px; }
+      }
+
+      /* ---------- EOL watch ---------- */
+      .eol-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      @media (max-width: 680px) { .eol-list { grid-template-columns: 1fr; } }
+      .eol {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius-lg); padding: 18px 20px;
+      }
+      .eol .top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+      .eol h3 { margin: 0; font-size: 16.5px; font-weight: 600; line-height: 1.3; }
+      .eol .when { margin: 4px 0 0; font-size: 13.5px; color: var(--ink-3); }
+      .eol p.note { margin: 10px 0 0; font-size: 14.5px; color: var(--ink-2); }
+
+      /* ---------- Directory ---------- */
+      .dir-tools { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+      .dir-tools input[type="search"] {
+        flex: 1 1 260px; padding: 11px 14px; font: inherit; font-size: 15px;
+        background: var(--surface); color: var(--ink);
+        border: 1px solid var(--line); border-radius: var(--radius);
+      }
+      .dir-tools input[type="search"]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+      .cat-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+      .cat-btn {
+        font: inherit; font-size: 13.5px; font-weight: 500; cursor: pointer;
+        padding: 6px 13px; border-radius: 999px;
+        background: var(--surface); color: var(--ink-2); border: 1px solid var(--line);
+      }
+      .cat-btn[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+      .dir-group { margin-bottom: 26px; }
+      .dir-group h3 {
+        margin: 0 0 10px; font-size: 13px; font-weight: 700;
+        letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3);
+      }
+      .dir-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+      .tool {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius); padding: 16px 18px;
+      }
+      .tool h4 { margin: 0 0 4px; font-size: 15.5px; font-weight: 600; }
+      .tool p { margin: 0; font-size: 14px; color: var(--ink-2); }
+      .dir-empty { display: none; padding: 28px 0; color: var(--ink-2); font-size: 15px; }
+      .dir-note { margin-top: 4px; font-size: 13.5px; color: var(--ink-3); }
+
+      /* ---------- Newsletter / sponsor ---------- */
+      .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      @media (max-width: 680px) { .two-col { grid-template-columns: 1fr; } }
+      .promo { border-radius: var(--radius-lg); padding: 24px 26px; }
+      .promo h3 { margin: 0 0 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.01em; }
+      .promo p { margin: 0 0 14px; font-size: 15px; }
+      .promo .pill {
+        display: inline-block; font-size: 12.5px; font-weight: 600;
+        padding: 4px 11px; border-radius: 999px;
+      }
+      .promo-news { background: var(--accent-soft); }
+      .promo-news p { color: var(--ink-2); }
+      .promo-news .pill { background: var(--accent); color: var(--accent-ink); }
+      .sub-row { display: flex; flex-wrap: wrap; gap: 8px; }
+      .sub-row input[type="email"] {
+        flex: 1 1 200px; padding: 11px 14px; font: inherit; font-size: 15px;
+        background: var(--surface); color: var(--ink);
+        border: 1px solid var(--line); border-radius: var(--radius);
+      }
+      .sub-row input[type="email"]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+      .sub-row button {
+        font: inherit; font-size: 15px; font-weight: 600; cursor: pointer;
+        padding: 11px 18px; border-radius: var(--radius);
+        background: var(--accent); border: 1px solid var(--accent); color: var(--accent-ink);
+      }
+      .sub-row button:disabled { opacity: 0.6; cursor: default; }
+      .sub-status { margin: 10px 0 0; font-size: 13.5px; color: var(--ink-2); }
+      .sub-status:empty { display: none; }
+      .hp { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+      .promo-sponsor { background: var(--surface); border: 1px dashed var(--ink-3); }
+      .promo-sponsor p { color: var(--ink-2); }
+      .sponsor-link {
+        display: inline-block; font-size: 14px; font-weight: 600;
+        padding: 9px 16px; border-radius: 999px; text-decoration: none;
+        background: var(--accent); color: var(--accent-ink);
+        border: 1px solid var(--accent);
+      }
+      .sponsor-link:hover { text-decoration: underline; }
+      .sponsor-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+      /* ---------- Footer ---------- */
+      footer {
+        border-top: 1px solid var(--line); margin-top: 16px;
+        padding: 26px 0 40px; color: var(--ink-2); font-size: 13.5px;
+      }
+      footer p { margin: 0 0 8px; max-width: 720px; }
+      footer .sources strong { color: var(--ink); font-weight: 600; }
+
+      /* ---------- Brief page additions ---------- */
+      .draft-banner {
+        position: sticky; top: 0; z-index: 50;
+        background: #b3261e; color: #ffffff;
+        text-align: center; font-size: 13px; font-weight: 600;
+        padding: 8px 14px; letter-spacing: 0.02em;
+      }
+      .brief-card {
+        background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 14px;
+      }
+      .brief-card .cve { font-size: 15px; font-weight: 600; }
+      .brief-card h3 { margin: 6px 0 4px; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+      .brief-card p { margin: 0 0 8px; font-size: 15px; color: var(--ink-2); }
+      .brief-card p:last-child { margin-bottom: 0; }
+      .brief-card .do { color: var(--ink); }
+      .brief-card .do strong { color: var(--accent); }
+      .status-open { border-left: 4px solid var(--red); }
+      .status-mit { border-left: 4px solid var(--amber); }
+      .status-fix { border-left: 4px solid var(--green); }
+      .src-list { margin: 0; padding-left: 18px; font-size: 14.5px; color: var(--ink-2); }
+      .src-list li { padding: 2px 0; }
+      a { color: var(--accent); }
+    
+      /* ===== Site nav ===== */
+      .site-nav { background: #0a121a; border-bottom: 1px solid rgba(238, 243, 241, 0.10); }
+      .site-nav .wrap { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 28px; padding-top: 10px; padding-bottom: 10px; }
+      .site-nav a { color: var(--navy-ink-2); text-decoration: none; font-size: 14.5px; font-weight: 500; letter-spacing: 0.01em; padding: 2px 0; }
+      .site-nav a.nav-home { display: inline-flex; align-items: center; gap: 6px; }
+      .site-nav a:hover, .site-nav a:focus-visible { color: #3fae82; }
+    </style>
+  </head>
+  <body>
+    <!-- ================= SITE NAV ================= -->
+    <nav class="site-nav" aria-label="Site">
+      <div class="wrap">
+        <a class="nav-home" href="index.html"><svg width="15" height="15" viewBox="0 0 16 16" fill="#3fae82" aria-hidden="true"><path d="M8 1.2 15 7.6h-2.1V14a.9.9 0 0 1-.9.9h-2.8V10.6H6.8v4.3H4A.9.9 0 0 1 3.1 14V7.6H1Z"/></svg>Home</a>
+        <a href="patch-tuesday-nov-2026-brief.html">Patch Tuesday Brief</a>
+        <a href="patch-tuesday-nov-2026-cve-list.html">Full CVE List</a>
+        <a href="what-got-hacked-this-week.html">What Got Hacked</a>
+        <a href="index.html#kev-h">Actively Exploited</a>
+        <a href="index.html#eol-h">EOL Watch</a>
+        <a href="index.html#dir-h">Directory</a>
+        <a href="sponsor.html">Sponsor</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="wrap">
+        <p class="kicker">
+          <svg width="16" height="18" viewBox="0 0 16 18" fill="none" aria-hidden="true">
+            <path d="M8 0.8 15 3.2v5c0 4.4-2.9 7.5-7 8.9C3.9 15.7 1 12.6 1 8.2v-5L8 0.8Z" fill="#3fae82"/>
+            <path d="M5.2 9.1 7.2 11.1 10.9 6.9" stroke="#0a121a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Security News
+        </p>
+        <h1>What got hacked this week</h1>
+        <p class="tagline">Breaches and malware campaigns that hit small businesses and the tools they rely on, in plain English.</p>
+        <p class="updated">Week of November 9, 2026 · Updated November 14, 2026</p>
+        <div class="stats">
+          <div class="stat">
+            <span class="num">5</span>
+            <span class="lbl">stories small businesses should know about this week</span>
+          </div>
+          <div class="stat">
+            <span class="num">48</span>
+            <span class="lbl">organizations hit through hijacked MSP remote access tools in the ScreenConnect campaign</span>
+          </div>
+          <div class="stat">
+            <span class="num">6.4M</span>
+            <span class="lbl">stolen logins identified in the Operation Endgame takedown, and those passwords still work until changed</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section aria-labelledby="hacked-h">
+        <div class="sec-head">
+          <h2 id="hacked-h">This week</h2>
+          <p>Week of November 9, 2026. Details change fast, so check the source link on any story before you act on it.</p>
+        </div>
+
+        <article class="brief-card status-open">
+          <h3>Attackers hijacked MSPs' ScreenConnect tools to plant rogue remote access</h3>
+          <p>Attackers broke into at least six managed service providers' cloud-hosted ScreenConnect environments starting Wednesday, November 11, and used the tool's own Run Command feature to install rogue ScreenConnect clients on at least 288 endpoints across 48 organizations. The rogue clients report to attacker-controlled servers, so the access survives even if the MSP resets passwords. ConnectWise confirmed the unauthorized access and disabled five third-party extensions as a precaution. Researchers also found a worm-like toolkit called SCKit that tries to spread to technicians' computers when they connect to an infected machine.</p>
+          <p class="do"><strong>Why it matters:</strong> most small shops get IT support through an MSP, so an attack on the MSP lands directly on the small business. If your shop uses an MSP, ask them whether they use ScreenConnect and whether they have checked for rogue clients.</p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/active-screenconnect-attacks-breach-msps-impact-dozens-of-organizations/">BleepingComputer</a> · <a href="https://www.bleepingcomputer.com/news/security/new-worm-like-sckit-malware-targets-msps-in-screenconnect-attacks/">BleepingComputer on SCKit</a></p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>Hijacked GitHub accounts planted a credential stealer in 1,800+ repositories</h3>
+          <p>Starting Tuesday, November 10, an attacker used 4,837 hijacked GitHub accounts to plant a secret-stealing script in repositories those accounts could write to. The stealer ran in at least 1,806 repositories and harvested GitHub Actions secrets, cloud credentials, and AI provider keys, and it can plant persistence in AWS and Azure that survives a normal secret rotation. The tell is a probe pull request titled "docs: dependency audit notes" from a branch called "wfx-docs".</p>
+          <p class="do"><strong>Why it matters:</strong> small dev shops and MSPs that build or manage code on GitHub could have cloud credentials stolen without knowing it. If your shop uses GitHub Actions, check for that pull request title and rotate any secrets and cloud keys the affected repos could reach.</p>
+          <p>Sources: <a href="https://thehackernews.com/2026/11/4837-hijacked-github-accounts-ran-ci.html">The Hacker News</a> · <a href="https://safeguard.sh/resources/blog/wfx-ci-secret-stealer-4837-hijacked-github-accounts-what-to-check-and-rotate">Safeguard</a></p>
+        </article>
+
+        <article class="brief-card">
+          <h3>A breach at Notion's AI vendor exposed Notion AI chat transcripts</h3>
+          <p>Notion says a breach at its AI vendor Fireworks AI exposed Notion AI chat transcripts. Attackers broke into Fireworks AI, which ran some of Notion's AI models, and reached transcripts Notion had sent to Fireworks for a usage feature called Insights. Notion says fewer than 1% of workspaces are affected, most transcripts carry no name or workspace label, and affected customers have been contacted directly. Notion has cut off Fireworks, disabled Insights, and revoked API keys it found inside the exposed chats.</p>
+          <p class="do"><strong>Why it matters:</strong> lots of small businesses run their docs and notes in Notion, and anything pasted into an AI chat, like a password or API key, could have been exposed. If Notion contacted you, rotate anything you pasted into Notion AI, and treat AI chats as a place never to paste secrets.</p>
+          <p>Sources: <a href="https://www.notion.com/en-us/security/advisories/security-incident-involving-a-third-party-ai-vendor">Notion security advisory</a> · <a href="https://aicyberbrief.com/article/notion-fireworks-ai-breach-exposed-notion-ai-chat-transcripts-from-under-1-of-workspaces">AI Cyber Brief</a></p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>A new N-central zero-day was exploited within hours, hitting 21 servers, most already fully patched</h3>
+          <p>A researcher published a proof of concept early on November 12 for a new N-central exploit chain, and attackers used it within hours to compromise at least 21 production N-central servers and plant Monero miners on them. 19 of the 21 were already running the latest Hotfix 2, so patching alone does not stop it. The attack needs the Legacy API enabled and exposed to the internet, and there was no fix released as of November 13.</p>
+          <p class="do"><strong>Why it matters:</strong> lots of small shops are managed through an MSP that runs N-central, so a hit on the MSP server is a hit on the management platform itself. If your shop uses an MSP, ask them whether the Legacy API is disabled on any internet-facing N-central server.</p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/new-n-able-4everable2shell-zero-day-exploited-hours-after-poc-released/">BleepingComputer</a> · <a href="https://socradar.io/blog/4everable2shell-at-a-glance/">SOCRadar</a></p>
+        </article>
+
+        <article class="brief-card">
+          <h3>Police seized malware servers holding 6.4 million stolen logins, but the passwords still work until changed</h3>
+          <p>Europol announced on November 12 and the US Justice Department on November 13 that police in nine countries seized 235 servers and 257 domains behind Gootloader, CastleRAT and StealC. Investigators identified about 6.4 million stolen logins belonging to more than 40,000 victims. Seizing the servers does not invalidate the stolen passwords, they still work until they are changed.</p>
+          <p class="do"><strong>Why it matters:</strong> if any staff logins were in that pile, criminals who copied them before the takedown can still use them. Check Have I Been Pwned, reset any reused passwords, and make sure MFA is on.</p>
+          <p>Source: <a href="https://thehackernews.com/2026/11/operation-endgame-takes-down-gootloader.html">The Hacker News</a></p>
+        </article>
+
+        <p class="table-note">New stories are checked daily. Nothing is posted here without review first.</p>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <p class="sources"><strong>Data sources:</strong> BleepingComputer · The Hacker News · Notion security advisories · SOCRadar · Safeguard · CISA</p>
+        <p>Prepared November 14, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+      </div>
+    </footer>
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
