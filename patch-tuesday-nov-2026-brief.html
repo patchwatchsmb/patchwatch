@@ -335,6 +335,7 @@
         <a class="nav-home" href="index.html"><svg width="15" height="15" viewBox="0 0 16 16" fill="#3fae82" aria-hidden="true"><path d="M8 1.2 15 7.6h-2.1V14a.9.9 0 0 1-.9.9h-2.8V10.6H6.8v4.3H4A.9.9 0 0 1 3.1 14V7.6H1Z"/></svg>Home</a>
         <a href="patch-tuesday-nov-2026-brief.html">Patch Tuesday Brief</a>
         <a href="patch-tuesday-nov-2026-cve-list.html">Full CVE List</a>
+        <a href="what-got-hacked-this-week.html">What Got Hacked</a>
         <a href="index.html#kev-h">Actively Exploited</a>
         <a href="index.html#eol-h">EOL Watch</a>
         <a href="index.html#dir-h">Directory</a>
@@ -529,20 +530,23 @@
 
         <article class="brief-card status-open">
           <h3>November update KB5132061 can fail to install</h3>
-          <p><strong>Affects:</strong> Windows 11 24H2, 25H2, and 26H2 after KB5132061. Install fails with 0x800f0993, 0x800f0989, or 0x80070306. Microsoft confirmed it as a known issue on November 11. Only machines that installed the October preview KB5127936 are affected. An automatic repair is rolling out through Windows Update, expected done by Friday morning, November 13, with no user action needed, and the update then installs automatically.</p>
-          <p class="do"><strong>What to do:</strong> if the install fails, wait for the automatic repair. If it still fails after 48 hours, contact Microsoft Support. DISM or a manual .msu download are reported as alternates.</p>
+          <p><strong>Affects:</strong> Windows 11 24H2, 25H2, and 26H2 after KB5132061. Install fails with 0x800f0993, 0x800f0989, or 0x80070306. Microsoft confirmed it as a known issue on November 11. Only machines that installed the October preview KB5127936 are affected.</p>
+          <p>Microsoft rolled out an automatic repair through Windows Update. That repair window closed Friday, November 13 at 10 AM PT. A machine that still fails to install after that window is past the automatic fix.</p>
+          <p class="do"><strong>What to do:</strong> if the install still fails, contact Microsoft Support. DISM or a manual .msu download are reported as alternates.</p>
         </article>
 
         <article class="brief-card status-open">
           <h3>November updates crash Sage 50 US when opening a transaction window</h3>
-          <p><strong>Affects:</strong> Sage 50 US 2026 and 2021 on Windows 10 and Windows 11 after KB5132061 (Win 11), KB5132059 (Win 11 26H1), or KB5131096 (Win 10). Sage confirmed it on their Community Hub: the app crashes when opening a transaction window after the November update, and removing the update fixes it. They are investigating with Microsoft. For hosted Sage 50, removing the update may not fix it; Sage support told a hosted user to wait for a Sage and Microsoft fix. Some users also report the update reinstalling itself after removal, so pause updates after uninstalling.</p>
-          <p class="do"><strong>What to do:</strong> hold the November update on Sage machines, or uninstall it temporarily if it already crashed, then pause updates. Hosted Sage 50 users should wait for the Sage and Microsoft fix.</p>
+          <p><strong>Affects:</strong> Sage 50 US 2026 and 2021 on Windows 10 and Windows 11, and Windows Server 2016 through 2025, after KB5132061 (Win 11), KB5132059 (Win 11 26H1), KB5131096 (Win 10), KB5131087 (Win 11 23H2), or the Server KBs KB5131077, KB5131079, KB5131080, KB5131090, KB5131085, KB5131291, and KB5131083.</p>
+          <p>Sage has now published an official KB article on the crash: the app crashes when opening a transaction window after the November update, and removing the update fixes it. There is still no fix for desktop. Sage recommends pausing Windows updates at least through November 30, 2026, and says a patch is being developed for Sage 50 2026.2. Sage 50 Cloud (hosted) has a fix in place, so Cloud users should log out and back in. Two wrinkles from the Sage KB: some machines report that KB5132061 is required by the computer and cannot be uninstalled, and those need a System Recovery rollback instead of a plain uninstall. Uninstalling the update can sometimes break printing, and reinstalling the printer fixes that. Do not uninstall or reinstall Sage 50 itself. Source: <a href="https://us-kb.sage.com/portal/app/portlets/results/viewsolution.jsp?solutionid=261111142308050">Sage KB article</a>.</p>
+          <p class="do"><strong>What to do:</strong> hold the November update on Sage machines, or uninstall it temporarily if it already crashed, then pause updates at least through November 30. If the update cannot be uninstalled, roll back with System Recovery. If printing breaks after the uninstall, reinstall the printer. Sage 50 Cloud users should log out and back in to pick up the Cloud fix.</p>
         </article>
 
-        <article class="brief-card status-open">
-          <h3>Activation commands fail after the November updates</h3>
-          <p><strong>Affects:</strong> Windows 11 23H2 after KB5131087, Windows 10 after KB5131096, Windows Server 2025 after KB5131080, Windows Server 2022 after KB5131090, and Windows Server 2019 and Windows 10 LTSC 2019 after KB5131085. The activation commands slmgr.vbs /skms-domain and /ipk fail with error 0x80041008. Machines that are already activated stay activated.</p>
-          <p class="do"><strong>What to do:</strong> there is no workaround yet except contacting Microsoft Support for Business. Microsoft expects a resolution in the coming days. Do not re-image or re-activate machines in bulk until it lands.</p>
+        <article class="brief-card status-fix">
+          <h3>Activation commands failed after the November updates (fixed)</h3>
+          <p><strong>Affects:</strong> Windows 11 23H2 after KB5131087, Windows 10 after KB5131096, Windows Server 2025 after KB5131080, Windows Server 2022 after KB5131090, and Windows Server 2019 and Windows 10 LTSC 2019 after KB5131085. The activation commands slmgr.vbs /skms-domain and /ipk failed with error 0x80041008. Machines that were already activated stayed activated.</p>
+          <p>Microsoft released optional out-of-band cumulative updates on November 13 fixing it: KB5136483 (Windows 11 23H2) and KB5136489 (Server 2025), plus packages for Windows 10 21H2/22H2 and Server 2019/2022. They are cumulative, so they also carry the November security content. Source: Microsoft Message Center MC1551898, via Neowin Nov 13.</p>
+          <p class="do"><strong>What to do:</strong> pull the fix from the Microsoft Update Catalog, it does not sync to WSUS or Configuration Manager, and deploy it by hand through your management tool. Windows 11 23H2 also shows it under Windows Update, Optional updates. Do not wait for WSUS to deliver it, it will not arrive that way.</p>
         </article>
 
         <article class="brief-card status-open">
