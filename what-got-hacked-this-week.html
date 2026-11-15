@@ -354,10 +354,10 @@
         </p>
         <h1>What got hacked this week</h1>
         <p class="tagline">Breaches and malware campaigns that hit small businesses and the tools they rely on, in plain English.</p>
-        <p class="updated">Week of November 9, 2026 · Updated November 14, 2026</p>
+        <p class="updated">Week of November 9, 2026 · Updated November 15, 2026</p>
         <div class="stats">
           <div class="stat">
-            <span class="num">5</span>
+            <span class="num">6</span>
             <span class="lbl">stories small businesses should know about this week</span>
           </div>
           <div class="stat">
@@ -414,6 +414,13 @@
           <p>Source: <a href="https://thehackernews.com/2026/11/operation-endgame-takes-down-gootloader.html">The Hacker News</a></p>
         </article>
 
+        <article class="brief-card status-open">
+          <h3>Cursor breach: stolen Fireworks AI key let attackers push a trojanized Claude Code extension</h3>
+          <p>Cursor, the AI code editor, confirmed a breach that let attackers push trojanized copies of Anthropic's Claude Code extension through its marketplace on October 29. The bad versions (2.1.312 and 2.1.313) were live for about 11 hours and may have reached up to 5,000 developers, and they tried to install a persistent SSH backdoor. The break-in started with an access key Cursor had issued to AI vendor Fireworks AI, which was exposed in Fireworks' own breach. The same Fireworks incident also exposed Notion AI transcripts and Uber driver license data.</p>
+          <p class="do"><strong>Why it matters:</strong> a lot of small dev shops and solo builders use Cursor and AI coding tools, so a poisoned update from a trusted marketplace is exactly the kind of thing that slips past a small team. Anyone who updated the Claude Code extension in Cursor on October 29 should follow Cursor's remediation steps and rotate any API keys that may have sat in old coding session traces. One vendor's leaked key can cascade into several products at once.</p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/cursor-confirms-security-breach-led-to-malicious-claude-code-extension/">BleepingComputer</a> · <a href="http://thehackernews.com/2026/11/stolen-fireworks-ai-key-led-to-cursor.html">The Hacker News</a></p>
+        </article>
+
         <p class="table-note">New stories are checked daily. Nothing is posted here without review first.</p>
       </section>
     </main>
@@ -421,7 +428,7 @@
     <footer>
       <div class="wrap">
         <p class="sources"><strong>Data sources:</strong> BleepingComputer · The Hacker News · Notion security advisories · SOCRadar · Safeguard · CISA</p>
-        <p>Prepared November 14, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+        <p>Prepared November 14, 2026; updated November 15, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
       </div>
     </footer>
     <script>
