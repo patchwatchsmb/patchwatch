@@ -354,10 +354,10 @@
         </p>
         <h1>What got hacked this week</h1>
         <p class="tagline">Breaches and malware campaigns that hit small businesses and the tools they rely on, in plain English.</p>
-        <p class="updated">Week of November 9, 2026 · Updated November 16, 2026</p>
+        <p class="updated">Week of November 9, 2026 · Updated November 17, 2026</p>
         <div class="stats">
           <div class="stat">
-            <span class="num">7</span>
+            <span class="num">9</span>
             <span class="lbl">stories small businesses should know about this week</span>
           </div>
           <div class="stat">
@@ -382,8 +382,9 @@
         <article class="brief-card status-open">
           <h3>Attackers hijacked MSPs' ScreenConnect tools to plant rogue remote access</h3>
           <p>Attackers broke into at least six managed service providers' cloud-hosted ScreenConnect environments starting Wednesday, November 11, and used the tool's own Run Command feature to install rogue ScreenConnect clients on at least 288 endpoints across 48 organizations. The rogue clients report to attacker-controlled servers, so the access survives even if the MSP resets passwords. ConnectWise confirmed the unauthorized access and disabled five third-party extensions as a precaution. Researchers also found a worm-like toolkit called SCKit that tries to spread to technicians' computers when they connect to an infected machine.</p>
+          <p>Update, November 17: ConnectWise said its investigation is complete, but attacks continue against on-premises systems where the extensions are still enabled and ScreenConnect is not updated. Technician clients must be on version 26.6.5 or later, which fixes a critical flaw, CVE-2026-84869, that the toolkit uses to spread to technicians' computers. Huntress saw another spike on November 13 affecting 205 hosts across 41 organizations.</p>
           <p class="do"><strong>Why it matters:</strong> most small shops get IT support through an MSP, so an attack on the MSP lands directly on the small business. If your shop uses an MSP, ask them whether they use ScreenConnect and whether they have checked for rogue clients.</p>
-          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/active-screenconnect-attacks-breach-msps-impact-dozens-of-organizations/">BleepingComputer</a> · <a href="https://www.bleepingcomputer.com/news/security/new-worm-like-sckit-malware-targets-msps-in-screenconnect-attacks/">BleepingComputer on SCKit</a></p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/active-screenconnect-attacks-breach-msps-impact-dozens-of-organizations/">BleepingComputer</a> · <a href="https://www.bleepingcomputer.com/news/security/new-worm-like-sckit-malware-targets-msps-in-screenconnect-attacks/">BleepingComputer on SCKit</a> · <a href="https://thehackernews.com/2026/11/connectwise-warns-screenconnect-attacks.html">The Hacker News</a></p>
         </article>
 
         <article class="brief-card status-open">
@@ -403,8 +404,9 @@
         <article class="brief-card status-open">
           <h3>A new N-central zero-day was exploited within hours, hitting 21 servers, most already fully patched</h3>
           <p>A researcher published a proof of concept early on November 12 for a new N-central exploit chain, and attackers used it within hours to compromise at least 21 production N-central servers and plant Monero miners on them. 19 of the 21 were already running the latest Hotfix 2, so patching alone does not stop it. The attack needs the Legacy API enabled and exposed to the internet, and there was no fix released as of November 13.</p>
+          <p>Update, November 17: N-able released Hotfix 3 on November 16, a critical update that permanently blocks the Legacy API and patches 17 more flaws. Hosted servers are already updated. On-premises customers should install Hotfix 3 now and upgrade all Agents and Probes.</p>
           <p class="do"><strong>Why it matters:</strong> lots of small shops are managed through an MSP that runs N-central, so a hit on the MSP server is a hit on the management platform itself. If your shop uses an MSP, ask them whether the Legacy API is disabled on any internet-facing N-central server.</p>
-          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/new-n-able-4everable2shell-zero-day-exploited-hours-after-poc-released/">BleepingComputer</a> · <a href="https://socradar.io/blog/4everable2shell-at-a-glance/">SOCRadar</a></p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/new-n-able-4everable2shell-zero-day-exploited-hours-after-poc-released/">BleepingComputer</a> · <a href="https://socradar.io/blog/4everable2shell-at-a-glance/">SOCRadar</a> · <a href="https://www.securityweek.com/n-able-kills-legacy-apis-patches-17-n-central-zero-days/">SecurityWeek</a></p>
         </article>
 
         <article class="brief-card">
@@ -417,8 +419,9 @@
         <article class="brief-card status-open">
           <h3>Cursor breach: stolen Fireworks AI key let attackers push a trojanized Claude Code extension</h3>
           <p>Cursor, the AI code editor, confirmed a breach that let attackers push trojanized copies of Anthropic's Claude Code extension through its marketplace on October 29. The bad versions (2.1.312 and 2.1.313) were live for about 11 hours and may have reached up to 5,000 developers, and they tried to install a persistent SSH backdoor. The break-in started with an access key Cursor had issued to AI vendor Fireworks AI, which was exposed in Fireworks' own breach. The same Fireworks incident also exposed Notion AI transcripts and Uber driver license data.</p>
+          <p>Update, November 17: Uber has since confirmed the same Fireworks breach exposed driver license images and details for 149,346 drivers, and it began notifying them on November 10.</p>
           <p class="do"><strong>Why it matters:</strong> a lot of small dev shops and solo builders use Cursor and AI coding tools, so a poisoned update from a trusted marketplace is exactly the kind of thing that slips past a small team. Anyone who updated the Claude Code extension in Cursor on October 29 should follow Cursor's remediation steps and rotate any API keys that may have sat in old coding session traces. One vendor's leaked key can cascade into several products at once.</p>
-          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/cursor-confirms-security-breach-led-to-malicious-claude-code-extension/">BleepingComputer</a> · <a href="http://thehackernews.com/2026/11/stolen-fireworks-ai-key-led-to-cursor.html">The Hacker News</a></p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/cursor-confirms-security-breach-led-to-malicious-claude-code-extension/">BleepingComputer</a> · <a href="http://thehackernews.com/2026/11/stolen-fireworks-ai-key-led-to-cursor.html">The Hacker News</a> · <a href="https://techcrunch.com/2026/11/16/uber-confirms-hackers-stole-thousands-of-drivers-license-information-in-data-breach/">TechCrunch on the Uber driver data</a></p>
         </article>
 
         <article class="brief-card status-open">
@@ -428,6 +431,20 @@
           <p>Sources: <a href="https://thehackernews.com/2026/11/retadup-worm-resurfaces-7-years-after.html">The Hacker News</a> · <a href="https://www.kaspersky.com/blog/retadup-worm-resurrected-brings-coffeeloader-infections/56677/">Kaspersky</a> · <a href="https://gbhackers.com/coffeeloader-malware-attack/">GBHackers</a></p>
         </article>
 
+        <article class="brief-card status-open">
+          <h3>Optimizely supply chain attack put card-stealing code on 178 organizations' websites</h3>
+          <p>On Monday, November 16, attackers exploited a flaw in Optimizely's Web Experimentation account signup flow and injected malicious JavaScript into customer projects. The poisoned scripts loaded on the websites of 178 organizations, including Zoom, CNN, BBC, Fox News, Salesforce and GitLab, and served visitors code that stole payment card details entered in forms, swapped cryptocurrency wallet addresses, and tried to load exploit kits on iPhones and iPads. Security researcher Scott Helme of Report URI found 188 infected scripts after checking 1,611. Optimizely confirmed the attack, removed the injected code, blocked the vulnerable path and notified affected customers, and by late Monday nearly all infected scripts were clean.</p>
+          <p class="do"><strong>Why it matters:</strong> small businesses load third-party scripts on their own websites too, for analytics, chat, booking and A/B testing, and a compromise at the script provider hits every site that loads it. If your site uses Optimizely or any third-party script, ask your web provider whether your scripts were affected, and check card statements and any crypto payments made on Monday.</p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/optimizely-supply-chain-attack-delivers-malware-to-cnn-fox-news-bbc-salesforce-sites/">BleepingComputer</a></p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>Unpatched camera software let cryptominers into 13 organizations</h3>
+          <p>Attackers used GeoVision camera management software to break into Windows machines at 13 organizations and install XMRig cryptocurrency miners, security firm Huntress warned. Most of the intrusions happened between November 8 and 10. The affected machines ran an old build of GV-VMS, version 17.4.8.0 from April 2024, which is exposed to unauthenticated remote code execution flaws in its WebCam Server, while GeoVision has published fixed releases that close those flaws. The loader the attackers installed can also fetch other payloads, so the same foothold could be used for worse.</p>
+          <p class="do"><strong>Why it matters:</strong> small shops run IP cameras with software installed by a security integrator, and that server often sits outside the normal patch cycle. If your shop has cameras, find out who manages the camera software and whether it is on a supported, patched release, and make sure its web interface is not exposed to the internet.</p>
+          <p>Sources: <a href="https://www.helpnetsecurity.com/2026/11/16/geovision-camera-software-vulnerabilities/">Help Net Security</a> · <a href="https://www.esecurityplanet.com/threats/news-geovision-camera-software-xmrig-attacks/">eSecurity Planet</a></p>
+        </article>
+
         <p class="table-note">New stories are added as they break.</p>
       </section>
     </main>
@@ -435,7 +452,7 @@
     <footer>
       <div class="wrap">
         <p class="sources"><strong>Data sources:</strong> BleepingComputer · The Hacker News · Notion security advisories · SOCRadar · Safeguard · CISA</p>
-        <p>Prepared November 14, 2026; updated November 16, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+        <p>Prepared November 14, 2026; updated November 17, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
       </div>
     </footer>
     <script>
