@@ -354,7 +354,7 @@
         </p>
         <h1>November 2026 Security Updates</h1>
         <p class="tagline">What Microsoft and Adobe actually released on November 10, the handful of fixes that matter, and what the updates are known to break.</p>
-        <p class="updated">Brief published November 10, 2026 · Breakage watch updated November 14, 2026</p>
+        <p class="updated">Brief published November 10, 2026 · Breakage watch updated November 17, 2026</p>
         <div class="stats">
           <div class="stat">
             <span class="num">1,094</span>
@@ -528,10 +528,10 @@
           <p>What recent updates are known to break, checked daily against Microsoft's release health pages and credible admin reports. Confirmed items only, with the workaround where one exists.</p>
         </div>
 
-        <article class="brief-card status-open">
-          <h3>November update KB5132061 can fail to install</h3>
-          <p><strong>Affects:</strong> Windows 11 24H2, 25H2, and 26H2 after KB5132061. Install fails with 0x800f0993, 0x800f0989, or 0x80070306. Microsoft confirmed it as a known issue on November 11. Only machines that installed the October preview KB5127936 are affected.</p>
-          <p>Microsoft rolled out an automatic repair through Windows Update. That repair window closed Friday, November 13 at 10 AM PT. A machine that still fails to install after that window is past the automatic fix.</p>
+        <article class="brief-card status-fix">
+          <h3>November update KB5132061 install failure (resolved)</h3>
+          <p><strong>Affects:</strong> Windows 11 24H2, 25H2, and 26H2 after KB5132061. Install failed with 0x800f0993, 0x800f0989, or 0x80070306. Microsoft confirmed it as a known issue on November 11. Only machines that installed the October preview KB5127936 were affected.</p>
+          <p>Microsoft marked the issue resolved on November 16. The automatic repair ran on affected devices through Windows Update, no new package was needed. A machine that still fails to install after that repair is past the automatic fix.</p>
           <p class="do"><strong>What to do:</strong> if the install still fails, contact Microsoft Support. DISM or a manual .msu download are reported as alternates.</p>
         </article>
 
@@ -559,6 +559,12 @@
           <h3>Printing can fail after the November updates</h3>
           <p><strong>Affects:</strong> Windows 10 and later, and Windows Server 2016 and later, after the November 2026 security updates. Printing can fail for documents containing images rendered with zero height or width at the selected print resolution. Confirmed in Word via GDI; other apps may be affected. The images can be invisible ones, such as watermarks or layout anchors from document-generation tools, so the user does not need to have added a picture. Microsoft is investigating (alert WI1549472; BleepingComputer and The Register, Nov 12-13).</p>
           <p class="do"><strong>What to do:</strong> no fix and no workaround yet. If printing fails after the November updates, check whether the document contains hidden or placeholder images, and watch for a Microsoft fix.</p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>Hotpatch KB5132043 can stop the Print Spooler</h3>
+          <p><strong>Affects:</strong> Windows 11 24H2, 25H2, and 26H2 after the November hotpatch KB5132043. The Print Spooler service stops, installed printers show as "Not connected", and nothing prints, including Print to PDF. Reinstalling printer drivers does not help. Uninstalling KB5132043 and restarting restores printing. Microsoft has not listed it as a known issue yet (Neowin, Nov 17; Microsoft Q&amp;A threads).</p>
+          <p class="do"><strong>What to do:</strong> hold KB5132043 on machines that print, or uninstall it temporarily if printing already broke, then pause updates until Microsoft acknowledges it. This is separate from the zero size image printing issue above, which hits documents rather than the spooler itself.</p>
         </article>
 
         <article class="brief-card status-open">
@@ -591,7 +597,7 @@
           <p class="do"><strong>What to do:</strong> install the November update. No workaround needed after that.</p>
         </article>
 
-        <p class="table-note">Watch item, not confirmed breakage: KB5132061 tightens PowerShell script signature validation, so signed scripts with invalid UTF-8 may now fail validation. The November cycle now has five confirmed breakage issues above.</p>
+        <p class="table-note">Watch item, not confirmed breakage: KB5132061 tightens PowerShell script signature validation, so signed scripts with invalid UTF-8 may now fail validation. The November cycle now has six confirmed breakage issues above.</p>
       </section>
 
       <section aria-labelledby="know-h">
@@ -611,7 +617,7 @@
     <footer>
       <div class="wrap">
         <p class="sources"><strong>Data sources:</strong> Microsoft Security Update Guide and release health pages · CISA Known Exploited Vulnerabilities (KEV) catalog · Zero Day Initiative, The November 2026 Security Update Review · Adobe security bulletins</p>
-        <p>Prepared November 10, 2026; breakage watch updated November 14, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+        <p>Prepared November 10, 2026; breakage watch updated November 17, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
       </div>
     </footer>
     <script>
