@@ -300,6 +300,12 @@
       footer .sources strong { color: var(--ink); font-weight: 600; }
     /* ---------- Hero logo ---------- */
       .hero-logo-h1 { display: flex; align-items: center; justify-content: center; gap: 18px; margin: 0 0 8px; }
+      .hero-logo-h1::before { content: ""; height: 68px; width: auto; aspect-ratio: 809 / 628; flex: none; }
+      @media (max-width: 640px) {
+        .hero-logo-h1 { flex-direction: column; gap: 12px; }
+        .hero-logo-h1::before { display: none; }
+        .hero-logo-h1 img { order: -1; }
+      }
       .hero-logo-h1 img { height: 68px; width: auto; max-width: 100%; display: block; margin: 0; flex: none; }
       .hero-logo-h1 .wordmark-smb { font-size: 0.58em; color: #3fae82; letter-spacing: -0.01em; margin-left: 10px; }
       .hero-discover { text-align: center; margin: 0 0 24px; font-size: 15px; font-weight: 600; letter-spacing: 0.04em; color: var(--navy-ink-2); }
