@@ -354,10 +354,10 @@
         </p>
         <h1>What got hacked this week</h1>
         <p class="tagline">Breaches and malware campaigns that hit small businesses and the tools they rely on, in plain English.</p>
-        <p class="updated">Week of November 9, 2026 · Updated November 17, 2026</p>
+        <p class="updated">Week of November 9, 2026 · Updated November 18, 2026</p>
         <div class="stats">
           <div class="stat">
-            <span class="num">9</span>
+            <span class="num">11</span>
             <span class="lbl">stories small businesses should know about this week</span>
           </div>
           <div class="stat">
@@ -434,6 +434,7 @@
         <article class="brief-card status-open">
           <h3>Optimizely supply chain attack put card-stealing code on 178 organizations' websites</h3>
           <p>On Monday, November 16, attackers exploited a flaw in Optimizely's Web Experimentation account signup flow and injected malicious JavaScript into customer projects. The poisoned scripts loaded on the websites of 178 organizations, including Zoom, CNN, BBC, Fox News, Salesforce and GitLab, and served visitors code that stole payment card details entered in forms, swapped cryptocurrency wallet addresses, and tried to load exploit kits on iPhones and iPads. Security researcher Scott Helme of Report URI found 188 infected scripts after checking 1,611. Optimizely confirmed the attack, removed the injected code, blocked the vulnerable path and notified affected customers, and by late Monday nearly all infected scripts were clean.</p>
+          <p>Update, November 18: Optimizely has published an initial findings report on the attack. Helme found the injected payload was rebuilt 26 times during the day, and the code also stole cookies and browser screenshots, not just card details and crypto wallet addresses.</p>
           <p class="do"><strong>Why it matters:</strong> small businesses load third-party scripts on their own websites too, for analytics, chat, booking and A/B testing, and a compromise at the script provider hits every site that loads it. If your site uses Optimizely or any third-party script, ask your web provider whether your scripts were affected, and check card statements and any crypto payments made on Monday.</p>
           <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/optimizely-supply-chain-attack-delivers-malware-to-cnn-fox-news-bbc-salesforce-sites/">BleepingComputer</a></p>
         </article>
@@ -445,6 +446,20 @@
           <p>Sources: <a href="https://www.helpnetsecurity.com/2026/11/16/geovision-camera-software-vulnerabilities/">Help Net Security</a> · <a href="https://www.esecurityplanet.com/threats/news-geovision-camera-software-xmrig-attacks/">eSecurity Planet</a></p>
         </article>
 
+        <article class="brief-card status-open">
+          <h3>Attackers slipped a credential stealer into Microsoft's agent-framework package on PyPI</h3>
+          <p>On Tuesday, November 17, attackers published two malicious versions of Microsoft's agent-framework package to PyPI, versions 1.26.1 and 1.26.2, about 33 minutes apart. The package is Microsoft's Python toolkit for building AI agents and gets about 190,000 downloads a month. Both versions install a startup hook that runs a credential stealer every time Python starts, even if the code never imports the package. The stealer collects Azure and Azure DevOps credentials, GitHub Actions tokens, cloud identity tokens, and credential files such as .env files and .git-credentials, and sends them to an attacker-controlled webhook. PyPI removed both versions within about 45 minutes, and version 1.26.0 is the last clean release.</p>
+          <p class="do"><strong>Why it matters:</strong> small dev shops and MSPs that build with Python or run CI pipelines can have cloud credentials stolen by a routine package update. Anyone who installed agent-framework on November 17 should check for versions 1.26.1 or 1.26.2, pin to 1.26.0, rebuild the environment, and rotate every secret that environment could reach.</p>
+          <p>Sources: <a href="https://thehackernews.com/2026/11/attackers-compromise-microsofts-agent.html">The Hacker News</a> · <a href="https://www.wiz.io/blog/malicious-version-of-microsofts-agent-framework-published-to-pypi">Wiz</a></p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>Fake job offers are tricking developers into installing an infostealer</h3>
+          <p>Security firm Stormshield reported on November 16 on a large campaign it calls Trigram, which impersonates about 50 AI, blockchain and logistics brands to trick developers into running malware themselves. Stormshield links the campaign to North Korea-linked groups. The lures are fake job portals, fake conference invitations and fake package tracking pages. One trick shows a fake error, then swaps the clipboard so the command the victim pastes actually downloads the malware. The payload, called OverLord, steals browser passwords, cookies, crypto wallets, SSH keys and .env files on Windows, macOS and Linux. The campaign also used a forged commit in a GitHub repository and a fake VS Code and Cursor extension.</p>
+          <p class="do"><strong>Why it matters:</strong> small dev shops hire through the same job boards and use the same tools these lures imitate, and one developer pasting a command can hand over the shop's cloud keys and code credentials. Treat any setup step that asks you to paste a command from a website as a red flag, and never run a command copied from a job posting or conference invite.</p>
+          <p>Sources: <a href="https://thehackernews.com/2026/11/trigram-campaign-impersonates-about-50.html">The Hacker News</a> · <a href="https://dailysecurityreview.com/threat-actors/north-korea-linked-trigram-targets-web3-developers-with-clickfix/">Daily Security Review</a></p>
+        </article>
+
         <p class="table-note">New stories are added as they break.</p>
       </section>
     </main>
@@ -452,7 +467,7 @@
     <footer>
       <div class="wrap">
         <p class="sources"><strong>Data sources:</strong> BleepingComputer · The Hacker News · Notion security advisories · SOCRadar · Safeguard · CISA</p>
-        <p>Prepared November 14, 2026; updated November 17, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+        <p>Prepared November 14, 2026; updated November 18, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
       </div>
     </footer>
     <script>
