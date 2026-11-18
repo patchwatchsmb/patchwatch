@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Terms of Service | PatchWatch SMB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f6f7f5;
+        --surface: #ffffff;
+        --surface-2: #eef1ec;
+        --ink: #16211b;
+        --ink-2: #46534a;
+        --ink-3: #6b7a70;
+        --line: #d9dfd8;
+        --accent: #1d6b4f;
+        --accent-ink: #ffffff;
+        --accent-soft: #e2efe8;
+        --red: #b3261e;
+        --red-soft: #fbe9e7;
+        --amber: #8a5a00;
+        --amber-soft: #fbf0d3;
+        --green: #1d6b4f;
+        --green-soft: #e2efe8;
+        --navy: #14202b;
+        --navy-ink: #eef3f1;
+        --navy-ink-2: #b8c6c0;
+        --radius: 10px;
+        --radius-lg: 14px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0e1411;
+          --surface: #18211c;
+          --surface-2: #1f2b24;
+          --ink: #e8efe9;
+          --ink-2: #b4c2b7;
+          --ink-3: #8a9a8e;
+          --line: #2c3a31;
+          --accent: #3fae82;
+          --accent-ink: #0c1712;
+          --accent-soft: #173527;
+          --red: #f0857d;
+          --red-soft: #3a1d1b;
+          --amber: #e8b64c;
+          --amber-soft: #3a2f14;
+          --green: #3fae82;
+          --green-soft: #173527;
+          --navy: #0a121a;
+          --navy-ink: #eef3f1;
+          --navy-ink-2: #9fb3ab;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+      }
+      .mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+      .wrap { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+
+      /* ---------- Hero ---------- */
+      .hero {
+        background: var(--navy);
+        color: var(--navy-ink);
+        padding: 44px 0 36px;
+      }
+      .hero .kicker {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+        color: var(--navy-ink-2);
+        margin: 0 0 14px;
+      }
+      .hero .kicker svg { flex: none; }
+      .hero h1 {
+        margin: 0 0 10px;
+        font-size: clamp(38px, 7vw, 56px);
+        line-height: 1.02; letter-spacing: -0.02em; font-weight: 700;
+      }
+      .hero .tagline {
+        margin: 0;
+        font-size: clamp(17px, 2.6vw, 20px);
+        line-height: 1.45; max-width: 640px;
+        color: var(--navy-ink);
+      }
+      .hero .tagline a { color: var(--navy-ink); }
+
+      /* ---------- Policy body ---------- */
+      main { padding: 36px 0 8px; }
+      .policy { max-width: 720px; }
+      .policy .updated-line { margin: 0 0 8px; font-size: 13.5px; color: var(--ink-3); }
+      .policy h2 {
+        margin: 30px 0 8px; font-size: 20px; font-weight: 700; letter-spacing: -0.01em;
+      }
+      .policy h2:first-of-type { margin-top: 18px; }
+      .policy p { margin: 0 0 12px; }
+      .policy a { color: var(--accent); }
+
+      /* ---------- Footer ---------- */
+      footer {
+        border-top: 1px solid var(--line); margin-top: 16px;
+        padding: 26px 0 40px; color: var(--ink-2); font-size: 13.5px;
+      }
+      footer p { margin: 0 0 8px; max-width: 720px; }
+      footer .sources strong { color: var(--ink); font-weight: 600; }
+      footer a { color: var(--accent); }
+
+      /* ===== Site nav ===== */
+      .site-nav { background: #0a121a; border-bottom: 1px solid rgba(238, 243, 241, 0.10); }
+      .site-nav .wrap { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 28px; padding-top: 10px; padding-bottom: 10px; }
+      .site-nav a { color: var(--navy-ink-2); text-decoration: none; font-size: 14.5px; font-weight: 500; letter-spacing: 0.01em; padding: 2px 0; }
+      .site-nav a.nav-home { display: inline-flex; align-items: center; gap: 6px; }
+      .site-nav a:hover, .site-nav a:focus-visible { color: #3fae82; }
+    </style>
+  </head>
+  <body>
+    <!-- ================= SITE NAV ================= -->
+    <nav class="site-nav" aria-label="Site">
+      <div class="wrap">
+        <a class="nav-home" href="index.html"><svg width="15" height="15" viewBox="0 0 16 16" fill="#3fae82" aria-hidden="true"><path d="M8 1.2 15 7.6h-2.1V14a.9.9 0 0 1-.9.9h-2.8V10.6H6.8v4.3H4A.9.9 0 0 1 3.1 14V7.6H1Z"/></svg>Home</a>
+        <a href="patch-tuesday-nov-2026-brief.html">Patch Tuesday Brief</a>
+        <a href="patch-tuesday-nov-2026-cve-list.html">Full CVE List</a>
+        <a href="what-got-hacked-this-week.html">What Got Hacked</a>
+        <a href="index.html#kev-h">Actively Exploited</a>
+        <a href="index.html#eol-h">EOL Watch</a>
+        <a href="index.html#dir-h">Directory</a>
+        <a href="sponsor.html">Sponsor</a>
+      </div>
+    </nav>
+    <!-- ================= HERO ================= -->
+    <header class="hero">
+      <div class="wrap">
+        <p class="kicker">
+          <svg width="16" height="18" viewBox="0 0 16 18" fill="none" aria-hidden="true">
+            <path d="M8 0.8 15 3.2v5c0 4.4-2.9 7.5-7 8.9C3.9 15.7 1 12.6 1 8.2v-5L8 0.8Z" fill="#3fae82"/>
+            <path d="M5.2 9.1 7.2 11.1 10.9 6.9" stroke="#0a121a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          SMB Security Directory
+        </p>
+        <h1>Terms of Service</h1>
+        <p class="tagline">The terms for using this site and for sponsorships. Back to the <a href="index.html">PatchWatch home page</a>.</p>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <div class="policy">
+          <p class="updated-line">Last updated: November 17, 2026</p>
+
+          <h2>What PatchWatch is</h2>
+          <p>PatchWatch SMB is an informational directory for small businesses. It lists patch deadlines, actively exploited vulnerabilities, and end of life dates. The information is general only. It is not security advice for your specific business.</p>
+
+          <h2>Accuracy of the information</h2>
+          <p>The data on this site comes from public sources, including the CISA Known Exploited Vulnerabilities catalog, the Microsoft Security Update Guide, endoflife.date, and vendor disclosures. We check the data daily and correct errors when we find them, but we cannot guarantee that it is complete or free of errors. Always confirm a deadline or a fix with the vendor before you act on it. Patching decisions for your business stay with you and your IT provider.</p>
+
+          <h2>Using this site</h2>
+          <p>You may read and share links to this site freely. Do not misuse the site, try to disrupt it, or present its content as advice you gave. Vendor and product names on this site belong to their owners. Directory listings describe products; a listing is not an endorsement.</p>
+
+          <h2>Sponsorships</h2>
+          <p>Sponsorships are labeled as sponsorships. PatchWatch keeps full editorial control of the tracker, directory data, and brief; sponsorship buys placement, not coverage. A sponsored listing goes live within 3 business days of the day we receive your materials. Monthly reports show the page views, and clicks once click tracking is active, for your listing.</p>
+
+          <h2>Billing</h2>
+          <p>Monthly sponsorship tiers bill through Stripe. PatchWatch does not receive or store your card number. You can cancel anytime; cancellation takes effect at the end of the current billing period. The single issue test placement is a one time payment. Founding rates are locked for 12 months from the day you sign up. Standard rates after founding closes are $40 / $125 / $250 per month.</p>
+
+          <h2>Newsletter</h2>
+          <p>The Weekly SMB Security Brief is free. Signing up adds your email address to the mailing list, and every brief includes a way to unsubscribe.</p>
+
+          <h2>Liability</h2>
+          <p>This site is provided as is. To the extent the law allows, PatchWatch SMB is not liable for losses that come from relying on the information on this site.</p>
+
+          <h2>Governing law</h2>
+          <p>These terms are governed by the laws of the State of California.</p>
+
+          <h2>Changes to these terms</h2>
+          <p>If these terms change, we will update the date above and post the new version on this page.</p>
+
+          <h2>Contact</h2>
+          <p>Questions about these terms: <a href="mailto:hello@patchwatchsmb.com">hello@patchwatchsmb.com</a></p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <p class="sources"><strong>Data sources:</strong> CISA Known Exploited Vulnerabilities (KEV) catalog · Microsoft Security Update Guide · endoflife.date</p>
+        <p>PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+        <p><a href="index.html">PatchWatch home</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a></p>
+      </div>
+    </footer>
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>
