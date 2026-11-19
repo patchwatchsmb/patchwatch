@@ -354,10 +354,10 @@
         </p>
         <h1>What got hacked this week</h1>
         <p class="tagline">Breaches and malware campaigns that hit small businesses and the tools they rely on, in plain English.</p>
-        <p class="updated">Week of November 9, 2026 · Updated November 18, 2026</p>
+        <p class="updated">Week of November 9, 2026 · Updated November 19, 2026</p>
         <div class="stats">
           <div class="stat">
-            <span class="num">11</span>
+            <span class="num">12</span>
             <span class="lbl">stories small businesses should know about this week</span>
           </div>
           <div class="stat">
@@ -458,6 +458,13 @@
           <p>Security firm Stormshield reported on November 16 on a large campaign it calls Trigram, which impersonates about 50 AI, blockchain and logistics brands to trick developers into running malware themselves. Stormshield links the campaign to North Korea-linked groups. The lures are fake job portals, fake conference invitations and fake package tracking pages. One trick shows a fake error, then swaps the clipboard so the command the victim pastes actually downloads the malware. The payload, called OverLord, steals browser passwords, cookies, crypto wallets, SSH keys and .env files on Windows, macOS and Linux. The campaign also used a forged commit in a GitHub repository and a fake VS Code and Cursor extension.</p>
           <p class="do"><strong>Why it matters:</strong> small dev shops hire through the same job boards and use the same tools these lures imitate, and one developer pasting a command can hand over the shop's cloud keys and code credentials. Treat any setup step that asks you to paste a command from a website as a red flag, and never run a command copied from a job posting or conference invite.</p>
           <p>Sources: <a href="https://thehackernews.com/2026/11/trigram-campaign-impersonates-about-50.html">The Hacker News</a> · <a href="https://dailysecurityreview.com/threat-actors/north-korea-linked-trigram-targets-web3-developers-with-clickfix/">Daily Security Review</a></p>
+        </article>
+        <article class="brief-card status-open">
+          <h3>Critical Java flaw (Java4Shell) can hand attackers control of servers, and Java hides inside other products</h3>
+          <p>On November 17, CISA urged organizations to patch a critical flaw in Java right away. The flaw, CVE-2026-114938, nicknamed Java4Shell, sits in the fast Base64 decoder inside the Java virtual machine. Specially crafted input can crash the JVM and let an attacker run code without any login. Researchers have already shown it working against Jira, Jenkins, Confluence and Keycloak, tools small shops and MSPs run every day.</p>
+          <p>It affects Java 17 (from version 17.0.6 on), 21, 25 and 27, but only on servers with newer chips: Intel Xeon from Ice Lake on, and AMD Zen 4 and later. Standard Java 8 and 11 are not affected, and neither are ARM servers. The out-of-support lines (18 to 20, 22 to 24, 26) carry the same flaw and get no fix. Oracle and OpenJDK shipped fixes on November 17 (builds 17.0.21.1, 21.0.13.1, 25.0.5.1 and 27.0.1.1), and other Java builds, including Amazon Corretto, Azul Zulu and Eclipse Temurin, are shipping theirs on their own schedules. No attacks in the wild have been reported so far, and the flaw is not on CISA's actively exploited list.</p>
+          <p class="do"><strong>Why it matters:</strong> Java hides inside other products, appliances and containers, and bundled copies often never show up in a software inventory, so a shop can be exposed without knowing Java is even there. Check anything that might run Java, update to your vendor's fixed build, and if you cannot patch yet, starting the JVM with the -XX:UseAVX=2 flag turns off the vulnerable fast path.</p>
+          <p>Sources: <a href="https://www.cisa.gov/news-events/alerts/2026/11/17/critical-java-vulnerability-requires-immediate-patching">CISA</a> · <a href="https://securitylabs.datadoghq.com/articles/java4shell-remote-code-execution-in-openjdk-cve-2026-114938/">Datadog Security Labs</a></p>
         </article>
 
         <p class="table-note">New stories are added as they break.</p>
