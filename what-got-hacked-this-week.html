@@ -357,7 +357,7 @@
         <p class="updated">Week of November 9, 2026 · Updated November 19, 2026</p>
         <div class="stats">
           <div class="stat">
-            <span class="num">13</span>
+            <span class="num">14</span>
             <span class="lbl">stories small businesses should know about this week</span>
           </div>
           <div class="stat">
@@ -471,6 +471,14 @@
           <p>N-able disclosed on Wednesday, November 18, that unknown attackers got unauthorized access to one of the servers in its Mail Assure and SpamExperts Hosted Cloud, the email security service many MSPs and web hosts resell to small businesses. The company disabled the management portal, APIs, quarantine and logging across the Americas, Europe and Asia-Pacific while it investigates. Core mail flow and spam filtering kept running. N-able says it has found no evidence so far that customer data was compromised, including access to mailboxes, but the investigation is ongoing and it has not said how the attackers got in. The outage first appeared on November 16 and was first blamed on a platform configuration problem before N-able said it was a security incident. N-able says this incident is unrelated to the N-central zero-day attacks earlier in November.</p>
           <p class="do"><strong>Why it matters:</strong> lots of small shops get their email spam filtering through an MSP or web host that runs Mail Assure or SpamExperts behind the scenes, so a breach at that provider can leave their mail unguarded or unmanageable. If your shop's email filtering runs through an MSP, ask them whether they use Mail Assure or SpamExperts and whether any admin credentials or API keys need rotating.</p>
           <p>Sources: <a href="https://thehackernews.com/2026/11/n-able-confirms-hackers-accessed-cloud.html">The Hacker News</a> · <a href="https://cybersecuritynews.com/n-able-confirms-server-breach/">Cyber Security News</a></p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>Critical NGINX flaws (NGINX2Root) can hand attackers control of web servers, and a proof of concept is already public</h3>
+          <p>On November 18, F5 released out-of-band fixes for five critical remote code execution flaws in NGINX. Researchers call the set NGINX2Root, and F5 rates all five at CVSS v4 9.2. The headline flaw, CVE-2026-123007, is a memory corruption flaw in HTTP/2 flow control. It needs no login, has been present since NGINX 1.9.5 in 2015, and Rapid7 has published a public proof of concept. The other four are use-after-free flaws: CVE-2026-123633 in HTTP/2, CVE-2026-123634 in the DNS resolver, CVE-2026-121810 in HTTP/3, and CVE-2026-113425 in the mail proxy.</p>
+          <p>The fixes are in NGINX Open Source 1.30.7 (stable) and 1.31.9 (mainline), and in NGINX Plus builds 37.3.0.1 and 37.0.8.1. As of November 19, there is no confirmed exploitation in the wild, and none of the five flaws is in CISA's Known Exploited Vulnerabilities catalog.</p>
+          <p class="do"><strong>Why it matters:</strong> NGINX sits in front of a huge share of small business websites and apps, about 225 million sites in all, and the main flaw needs only HTTP/2 enabled and no login. If your website, web app, or hosting provider runs NGINX, ask whether it has been updated to a fixed build.</p>
+          <p>Sources: <a href="https://my.f5.com/manage/s/article/K000164058">F5 advisory</a> · <a href="https://nginx.org/en/security_advisories.html">NGINX security advisories</a> · <a href="https://www.theregister.com/security/2026/11/18/ai-found-more-critical-bugs-in-another-widely-used-technology-running-225m-websites/5310887">The Register</a></p>
         </article>
 
         <p class="table-note">New stories are added as they break.</p>
