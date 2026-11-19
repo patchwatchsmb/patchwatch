@@ -354,7 +354,7 @@
         </p>
         <h1>November 2026 Security Updates</h1>
         <p class="tagline">What Microsoft and Adobe actually released on November 10, the handful of fixes that matter, and what the updates are known to break.</p>
-        <p class="updated">Brief published November 10, 2026 · Breakage watch updated November 17, 2026</p>
+        <p class="updated">Brief published November 10, 2026 · Breakage watch updated November 19, 2026</p>
         <div class="stats">
           <div class="stat">
             <span class="num">1,094</span>
@@ -549,6 +549,13 @@
           <p class="do"><strong>What to do:</strong> pull the fix from the Microsoft Update Catalog, it does not sync to WSUS or Configuration Manager, and deploy it by hand through your management tool. Windows 11 23H2 also shows it under Windows Update, Optional updates. Do not wait for WSUS to deliver it, it will not arrive that way.</p>
         </article>
 
+        <article class="brief-card status-fix">
+          <h3>Citrix MCS image preparation fails to rearm Windows (fixed)</h3>
+          <p><strong>Affects:</strong> Citrix Machine Creation Services image preparation on master images running Windows Server 2019 after KB5131085, Server 2022 after KB5131090, or Server 2025 after KB5131080, and also Windows 11 23H2 after KB5131087 and Windows 10 22H2 after KB5131096. Image preparation fails at the Windows rearm step, so the updated master image cannot deploy. Windows 11 24H2, 25H2, and 26H2 after KB5132061 are not affected.</p>
+          <p>Citrix confirmed on November 17 (article CTX697347) that this is the same licensing change Microsoft made for CVE-2026-96300: the Software Licensing WMI provider rejects the client machine ID query that MCS image preparation makes before it rearms Windows, failing with error 0x80041008. It is not caused by Citrix, and no change in MCS will make the rearm succeed while the issue is present. Microsoft fixed it in the November 13 out-of-band updates: KB5136490 (Server 2019), KB5136487 (Server 2022), KB5136489 (Server 2025), KB5136483 (Windows 11 23H2), and KB5136493 (Windows 10 22H2). Source: <a href="https://support.citrix.com/external/article/CTX697347/mcs-image-preparation-fails-to-rearm-win.html">Citrix CTX697347</a>.</p>
+          <p class="do"><strong>What to do:</strong> install the matching November 13 out-of-band update on the master image, shut it down, take a new snapshot, and update the machine catalog, then confirm the catalog update completes without the rearm warning. Until then, keep using a pre-November snapshot. Pull the fix from the Microsoft Update Catalog, it does not sync to WSUS or Configuration Manager.</p>
+        </article>
+
         <article class="brief-card status-open">
           <h3>SQL Server linked server connections may stay open</h3>
           <p><strong>Affects:</strong> SQL Server on server devices after the October 13, 2026 updates and later updates. Linked server queries to external databases, with Oracle and PostgreSQL named, may leave connections open instead of closing them.</p>
@@ -597,7 +604,7 @@
           <p class="do"><strong>What to do:</strong> install the November update. No workaround needed after that.</p>
         </article>
 
-        <p class="table-note">Watch item, not confirmed breakage: KB5132061 tightens PowerShell script signature validation, so signed scripts with invalid UTF-8 may now fail validation. The November cycle now has six confirmed breakage issues above.</p>
+        <p class="table-note">Watch item, not confirmed breakage: KB5132061 tightens PowerShell script signature validation, so signed scripts with invalid UTF-8 may now fail validation. The November cycle now has seven confirmed breakage issues above.</p>
       </section>
 
       <section aria-labelledby="know-h">
@@ -617,7 +624,7 @@
     <footer>
       <div class="wrap">
         <p class="sources"><strong>Data sources:</strong> Microsoft Security Update Guide and release health pages · CISA Known Exploited Vulnerabilities (KEV) catalog · Zero Day Initiative, The November 2026 Security Update Review · Adobe security bulletins</p>
-        <p>Prepared November 10, 2026; breakage watch updated November 17, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+        <p>Prepared November 10, 2026; breakage watch updated November 19, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
       </div>
     </footer>
     <script>
