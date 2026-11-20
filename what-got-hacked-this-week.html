@@ -354,10 +354,10 @@
         </p>
         <h1>What got hacked this week</h1>
         <p class="tagline">Breaches and malware campaigns that hit small businesses and the tools they rely on, in plain English.</p>
-        <p class="updated">Week of November 9, 2026 · Updated November 19, 2026</p>
+        <p class="updated">Week of November 9, 2026 · Updated November 20, 2026</p>
         <div class="stats">
           <div class="stat">
-            <span class="num">14</span>
+            <span class="num">16</span>
             <span class="lbl">stories small businesses should know about this week</span>
           </div>
           <div class="stat">
@@ -469,8 +469,9 @@
         <article class="brief-card status-open">
           <h3>Hackers broke into N-able's email security cloud, knocking out spam filter controls</h3>
           <p>N-able disclosed on Wednesday, November 18, that unknown attackers got unauthorized access to one of the servers in its Mail Assure and SpamExperts Hosted Cloud, the email security service many MSPs and web hosts resell to small businesses. The company disabled the management portal, APIs, quarantine and logging across the Americas, Europe and Asia-Pacific while it investigates. Core mail flow and spam filtering kept running. N-able says it has found no evidence so far that customer data was compromised, including access to mailboxes, but the investigation is ongoing and it has not said how the attackers got in. The outage first appeared on November 16 and was first blamed on a platform configuration problem before N-able said it was a security incident. N-able says this incident is unrelated to the N-central zero-day attacks earlier in November.</p>
+          <p>Update, November 20: N-able now says the breach was isolated to a single web server, where the attacker may have reached credentials stored on the platform. N-able took the server offline, rotated its own platform credentials, revoked customer API tokens, invalidated OAuth tokens, and reset passwords for local users. The management portal and API are still disabled while N-able validates the fixes, and mail flow and spam filtering keep running.</p>
           <p class="do"><strong>Why it matters:</strong> lots of small shops get their email spam filtering through an MSP or web host that runs Mail Assure or SpamExperts behind the scenes, so a breach at that provider can leave their mail unguarded or unmanageable. If your shop's email filtering runs through an MSP, ask them whether they use Mail Assure or SpamExperts and whether any admin credentials or API keys need rotating.</p>
-          <p>Sources: <a href="https://thehackernews.com/2026/11/n-able-confirms-hackers-accessed-cloud.html">The Hacker News</a> · <a href="https://cybersecuritynews.com/n-able-confirms-server-breach/">Cyber Security News</a></p>
+          <p>Sources: <a href="https://thehackernews.com/2026/11/n-able-confirms-hackers-accessed-cloud.html">The Hacker News</a> · <a href="https://cybersecuritynews.com/n-able-confirms-server-breach/">Cyber Security News</a> · <a href="https://www.securityweek.com/n-able-blames-service-disruption-on-cyberattack/">SecurityWeek</a></p>
         </article>
 
         <article class="brief-card status-open">
@@ -481,6 +482,21 @@
           <p>Sources: <a href="https://my.f5.com/manage/s/article/K000164058">F5 advisory</a> · <a href="https://nginx.org/en/security_advisories.html">NGINX security advisories</a> · <a href="https://www.theregister.com/security/2026/11/18/ai-found-more-critical-bugs-in-another-widely-used-technology-running-225m-websites/5310887">The Register</a></p>
         </article>
 
+        <article class="brief-card status-open">
+          <h3>Seven critical PHP flaws can let attackers run code on web servers, and older PHP gets no fix</h3>
+          <p>On Thursday, November 19, the PHP project released fixes for 18 flaws, seven of them rated critical at CVSS 9.2. The worst, CVE-2026-129289, is a request smuggling flaw in PHP-FPM: an unauthenticated attacker can slip a second request into a reused backend connection and run their own PHP code on the server, with no login and no special setup. The other critical flaws sit in session handling and the PHP engine, and several can also lead to code execution. The fixes are in PHP 8.2.36, 8.3.37, 8.4.28, 8.5.13 and 8.6.0. None of the flaws is in CISA's actively exploited list, and no attacks in the wild have been reported.</p>
+          <p>The catch is that PHP 8.1 and older get no fix at all, and three of the new flaws trace back to gaps in the October PHP2Shell fixes. The November fix also turns session upload progress off by default, so sites that rely on it need to turn it back on after updating.</p>
+          <p class="do"><strong>Why it matters:</strong> a huge share of small business websites run on PHP, usually through WordPress on shared hosting, and the shop rarely controls the PHP version itself. If your site runs on PHP, ask your web host whether it has updated to a fixed build, and whether your site is still on PHP 8.1 or older, which will never get this fix.</p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/php-security-updates-fix-18-flaws-including-critical-rce-bugs/">BleepingComputer</a> · <a href="https://thehackernews.com/2026/11/php-fixes-7-critical-flaws-including.html">The Hacker News</a></p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>Hijacked GitHub accounts are scanning the web for unpatched Next.js sites and posting the stolen keys in public</h3>
+          <p>Researchers at OpenSourceMalware reported on November 18 on a campaign they call React2STEAL. Attackers are using 45 hijacked GitHub accounts to run automated scans from GitHub's own servers, looking for Next.js websites still open to React2Shell, a critical flaw scored 10.0, and a related Next.js bypass. When a scan finds a vulnerable site, it steals environment files, cloud credentials and AI provider keys, then commits the loot to a public GitHub repository where anyone can read it. Researchers found at least 1,281 victim hostnames across about 1,100 domains, and about 7.4 gigabytes of stolen data sitting in public repos. The campaign was still adding new results every 11 minutes when the research was published. The hijacked accounts overlap with the wfx credential-stealing campaign reported here on November 13.</p>
+          <p class="do"><strong>Why it matters:</strong> small dev shops and small businesses that run a Next.js site or build with GitHub Actions are the target here, and the stolen data includes Stripe keys and cloud credentials that can drain money or take over infrastructure. If your shop runs Next.js, make sure it is patched against React2Shell, and if a server was ever unpatched, rotate every secret that server could reach.</p>
+          <p>Sources: <a href="https://opensourcemalware.com/blog/react2steal-github-actions">OpenSourceMalware</a> · <a href="https://securityboulevard.com/2026/11/react2steal-hijacked-github-accounts-exploit-react2shell-and-publish-stolen-secrets/">Security Boulevard</a></p>
+        </article>
+
         <p class="table-note">New stories are added as they break.</p>
       </section>
     </main>
@@ -488,7 +504,7 @@
     <footer>
       <div class="wrap">
         <p class="sources"><strong>Data sources:</strong> BleepingComputer · The Hacker News · Notion security advisories · SOCRadar · Safeguard · CISA</p>
-        <p>Prepared November 14, 2026; updated November 19, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+        <p>Prepared November 14, 2026; updated November 20, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
       </div>
     </footer>
     <script>
