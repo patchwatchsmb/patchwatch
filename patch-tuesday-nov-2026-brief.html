@@ -354,7 +354,7 @@
         </p>
         <h1>November 2026 Security Updates</h1>
         <p class="tagline">What Microsoft and Adobe actually released on November 10, the handful of fixes that matter, and what the updates are known to break.</p>
-        <p class="updated">Brief published November 10, 2026 · Breakage watch updated November 20, 2026</p>
+        <p class="updated">Brief published November 10, 2026 · Breakage watch updated November 21, 2026</p>
         <div class="stats">
           <div class="stat">
             <span class="num">1,094</span>
@@ -535,11 +535,11 @@
           <p class="do"><strong>What to do:</strong> if the install still fails, contact Microsoft Support. DISM or a manual .msu download are reported as alternates.</p>
         </article>
 
-        <article class="brief-card status-open">
-          <h3>November updates crash Sage 50 US when opening a transaction window</h3>
+        <article class="brief-card status-fix">
+          <h3>November updates crash Sage 50 US when opening a transaction window (fixed)</h3>
           <p><strong>Affects:</strong> Sage 50 US 2026 and 2021 on Windows 10 and Windows 11, and Windows Server 2016 through 2025, after KB5132061 (Win 11), KB5132059 (Win 11 26H1), KB5131096 (Win 10), KB5131087 (Win 11 23H2), or the Server KBs KB5131077, KB5131079, KB5131080, KB5131090, KB5131085, KB5131291, and KB5131083.</p>
-          <p>Sage has now published an official KB article on the crash: the app crashes when opening a transaction window after the November update, and removing the update fixes it. There is still no fix for desktop. Sage recommends pausing Windows updates at least through November 30, 2026, and says a patch is being developed for Sage 50 2026.2. Sage 50 Cloud (hosted) has a fix in place, so Cloud users should log out and back in. Two wrinkles from the Sage KB: some machines report that KB5132061 is required by the computer and cannot be uninstalled, and those need a System Recovery rollback instead of a plain uninstall. Uninstalling the update can sometimes break printing, and reinstalling the printer fixes that. Do not uninstall or reinstall Sage 50 itself. Source: <a href="https://us-kb.sage.com/portal/app/portlets/results/viewsolution.jsp?solutionid=261111142308050">Sage KB article</a>.</p>
-          <p class="do"><strong>What to do:</strong> hold the November update on Sage machines, or uninstall it temporarily if it already crashed, then pause updates at least through November 30. If the update cannot be uninstalled, roll back with System Recovery. If printing breaks after the uninstall, reinstall the printer. Sage 50 Cloud users should log out and back in to pick up the Cloud fix.</p>
+          <p>Sage released a hotfix for Sage 50 US 2026.2 (build 33.2.00.0234) on November 20, and Microsoft's optional preview update KB5132057 for Windows 11 25H2 and 26H2, released November 19, also lists a fix for Sage 50 closing unexpectedly. Sage says Microsoft has acknowledged the issue and plans its own fix. The hotfix installs through Services, Check for Updates, Check Now, and it is a silent update, so close and reopen Sage 50 three times to make sure it downloads fully. If you use Quantum or Quantum Accountants Edition, stop the SmartPosting service first or the hotfix will fail. Older Sage 50 versions, and machines without an active Business Care plan, cannot get the hotfix and should keep delaying the Windows update until Microsoft ships its fix. Sage 50 Cloud (hosted) has a fix in place, so Cloud users should log out and back in. Do not uninstall or reinstall Sage 50 itself. Source: <a href="https://us-kb.sage.com/portal/app/portlets/results/viewsolution.jsp?solutionid=261111142308050">Sage KB article</a>, updated November 20, 2026; Microsoft KB5132057 release notes.</p>
+          <p class="do"><strong>What to do:</strong> install the Sage hotfix first through Check for Updates on Sage 50 2026.2, and close and reopen Sage 50 three times. You can then reinstall the November Windows update if you removed it. If the update cannot be uninstalled, roll back with System Recovery. If printing breaks after the uninstall, reinstall the printer. Sage 50 Cloud users should log out and back in to pick up the Cloud fix.</p>
         </article>
 
         <article class="brief-card status-fix">
@@ -565,7 +565,7 @@
         <article class="brief-card status-open">
           <h3>Printing can fail after the November updates</h3>
           <p><strong>Affects:</strong> Windows 10 and later, and Windows Server 2016 and later, after the November 2026 security updates. Printing can fail for documents containing images rendered with zero height or width at the selected print resolution. Confirmed in Word via GDI; other apps may be affected. The images can be invisible ones, such as watermarks or layout anchors from document-generation tools, so the user does not need to have added a picture. Microsoft is investigating (alert WI1549472; BleepingComputer and The Register, Nov 12-13).</p>
-          <p class="do"><strong>What to do:</strong> no fix and no workaround yet. If printing fails after the November updates, check whether the document contains hidden or placeholder images, and watch for a Microsoft fix.</p>
+          <p class="do"><strong>What to do:</strong> no permanent fix yet, but there is a workaround: remove zero size images from the document, such as a watermark, or export the document to PDF and print the PDF instead. Keep the security update installed, and watch for a Microsoft fix.</p>
         </article>
 
         <article class="brief-card status-open">
@@ -631,7 +631,7 @@
     <footer>
       <div class="wrap">
         <p class="sources"><strong>Data sources:</strong> Microsoft Security Update Guide and release health pages · CISA Known Exploited Vulnerabilities (KEV) catalog · Zero Day Initiative, The November 2026 Security Update Review · Adobe security bulletins</p>
-        <p>Prepared November 10, 2026; breakage watch updated November 20, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+        <p>Prepared November 10, 2026; breakage watch updated November 21, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
       </div>
     </footer>
     <script>
