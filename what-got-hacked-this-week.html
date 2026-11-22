@@ -354,10 +354,10 @@
         </p>
         <h1>What got hacked this week</h1>
         <p class="tagline">Breaches and malware campaigns that hit small businesses and the tools they rely on, in plain English.</p>
-        <p class="updated">Week of November 9, 2026 · Updated November 20, 2026</p>
+        <p class="updated">Week of November 9, 2026 · Updated November 22, 2026</p>
         <div class="stats">
           <div class="stat">
-            <span class="num">16</span>
+            <span class="num">20</span>
             <span class="lbl">stories small businesses should know about this week</span>
           </div>
           <div class="stat">
@@ -497,6 +497,34 @@
           <p>Sources: <a href="https://opensourcemalware.com/blog/react2steal-github-actions">OpenSourceMalware</a> · <a href="https://securityboulevard.com/2026/11/react2steal-hijacked-github-accounts-exploit-react2shell-and-publish-stolen-secrets/">Security Boulevard</a></p>
         </article>
 
+        <article class="brief-card status-open">
+          <h3>Microsoft says attackers exploited a flaw in Entra Connect Health and stole tenant data</h3>
+          <p>Microsoft told administrators on Friday, November 21, that attackers exploited a flaw in its Entra Connect Health service and got read-only access to tenant data. The exposed information included email addresses of tenant technical contacts and administrator accounts, plus tenant IDs, display names, domain names, license tiers and sync status. Microsoft says no passwords, password hashes, authentication tokens or valid cryptographic keys were exposed. It found the flaw on November 9, deployed a server-side fix on November 19, finished its investigation on November 20 and began notifying affected organizations. Microsoft has not said how many tenants were hit or when the attacks began.</p>
+          <p class="do"><strong>Why it matters:</strong> most small businesses run their email and identity on Microsoft 365, and Entra Connect Health watches the on-premises identity systems that sync into it. The stolen admin email addresses and tenant details are exactly what a targeted phishing email needs, so expect more convincing phishing aimed at your admins and make sure privileged accounts use phishing-resistant MFA.</p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/microsoft-entra-connect-health-flaw-exploited-to-steal-tenant-data/">BleepingComputer</a></p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>Rackspace cloud breach let hackers read customer Kubernetes secrets</h3>
+          <p>Rackspace warned customers on November 21 that hackers breached its Rackspace Spot cloud platform on November 17 using leaked credentials. The attackers acted as legitimate users in some customer organizations, created unauthorized pods in Kubernetes clusters, read Kubernetes Secrets and listed nodes and volumes. Kubernetes Secrets can hold passwords, tokens and API keys for databases and cloud services. Rackspace says it revoked affected tokens and sessions, removed the unauthorized pods and rotated keys, and told affected customers to reissue API tokens, replace refresh tokens and rotate every credential stored in their cluster Secrets. Service was fully restored on November 21 after an extended outage of the admin console.</p>
+          <p class="do"><strong>Why it matters:</strong> small dev shops and businesses that run containerized apps on a cloud platform trust the provider to guard their secrets. If your shop runs anything on Rackspace Spot, rotate the credentials the breach could have reached and check logs back to November 17.</p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/rackspace-spot-breach-let-hackers-access-customer-kubernetes-secrets/">BleepingComputer</a></p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>AI providers were quietly copying customer prompts for months, and OpenRouter just cut three of them off</h3>
+          <p>Security researchers at Dragos spent five months, July through November, sending about two million AI prompts laced with unique canary links and credentials to widely used AI services, then watching where those secrets surfaced. They found attackers actively stealing data from inside three AI inference providers, none of which knew it had been breached until the researchers told it. The planted prompts were processed alongside real customer requests, which were almost certainly copied too. On November 22, OpenRouter, the gateway that routes customer AI requests to third-party providers, said it removed three providers from its platform, stripped 125 endpoints of their Zero Data Retention status and notified affected customers. OpenRouter says it was not itself breached. One provider, Phala, said an attacker took control of an inference server and that requests sent to one DeepSeek model through it between October 21 and November 8 should be treated as exposed.</p>
+          <p class="do"><strong>Why it matters:</strong> small businesses and dev shops send AI prompts that often contain real secrets, customer data and internal details, and many picked providers that promised not to keep the data. If your shop uses AI tools through OpenRouter or a cheap inference provider, treat anything you sent as possibly read by a third party and rotate any secret that appeared in a prompt.</p>
+          <p>Sources: <a href="https://thehackernews.com/2026/11/openrouter-drops-3-providers-after.html">The Hacker News</a> · <a href="https://www.dragos.com/blog/ai-supply-chain-security-canary-tokens">Dragos</a></p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>Hackers stole credit card numbers and CVVs from software checkout provider Cleverbridge</h3>
+          <p>E-commerce platform Cleverbridge warned on November 22 that hackers breached its systems and copied customers' payment card data, including card numbers, expiration dates and CVV security codes. Cleverbridge handles checkout, payments and subscriptions for software and SaaS companies, including brands like Red Hat, SUSE, Tenable, Veeam, Jamf and Parallels. It detected unauthorized activity on November 4 and took systems offline the same day, then began notifying affected customers on November 20. It has not said how the attackers got in, how long they were inside or how many customers were affected. It says the incident was not ransomware, no other personal data such as names or billing details was copied, and it is working with TransUnion's Cyberscout on credit monitoring and fraud assistance for affected customers.</p>
+          <p class="do"><strong>Why it matters:</strong> small businesses buy a lot of their software through checkout providers like Cleverbridge, often without ever seeing the name. If you bought software online and a card you use for business purchases was charged through Cleverbridge, watch the statement for unauthorized charges and ask your card issuer about a replacement card.</p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/cleverbridge-warns-hackers-stole-credit-card-numbers-cvvs-in-data-breach/">BleepingComputer</a></p>
+        </article>
+
         <p class="table-note">New stories are added as they break.</p>
       </section>
     </main>
@@ -504,7 +532,7 @@
     <footer>
       <div class="wrap">
         <p class="sources"><strong>Data sources:</strong> BleepingComputer · The Hacker News · Notion security advisories · SOCRadar · Safeguard · CISA</p>
-        <p>Prepared November 14, 2026; updated November 20, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+        <p>Prepared November 14, 2026; updated November 22, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
       </div>
     </footer>
     <script>
