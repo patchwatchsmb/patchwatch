@@ -354,10 +354,10 @@
         </p>
         <h1>What got hacked this week</h1>
         <p class="tagline">Breaches and malware campaigns that hit small businesses and the tools they rely on, in plain English.</p>
-        <p class="updated">Week of November 9, 2026 · Updated November 22, 2026</p>
+        <p class="updated">Week of November 9, 2026 · Updated November 23, 2026</p>
         <div class="stats">
           <div class="stat">
-            <span class="num">20</span>
+            <span class="num">22</span>
             <span class="lbl">stories small businesses should know about this week</span>
           </div>
           <div class="stat">
@@ -378,6 +378,20 @@
           <h2 id="hacked-h">This week</h2>
           <p>Week of November 9, 2026. Details change fast, so check the source link on any story before you act on it.</p>
         </div>
+
+        <article class="brief-card status-open">
+          <h3>A critical flaw in a long-dead ASP.NET library is being exploited, and there will never be a patch</h3>
+          <p>Mandiant disclosed on November 18 that a legacy ASP.NET anti-CSRF library called Idunno.AntiCsrf has a critical deserialization flaw, CVE-2026-131914, scored CVSS 9.3. A remote attacker can run code on the web server with a single unauthenticated web request, no login needed, and Mandiant says active exploitation in the wild has been observed. The library was last released in December 2008 and the project is defunct, so no fix exists and none is coming. The only remediation is to remove the library from every application that loads it and replace it with a supported anti-CSRF mechanism. The flaw is not in CISA's actively exploited list.</p>
+          <p class="do"><strong>Why it matters:</strong> small businesses running older ASP.NET websites may still load this library without knowing it, since it sits quietly in the site's configuration. If your site runs on ASP.NET WebForms, check its Web.config files and application folders for Idunno.AntiCsrf and remove it. An unpatched flaw that can never be patched, and that attackers are already using, is exactly the kind of thing a routine scan will find.</p>
+          <p>Sources: <a href="https://thehackernews.com/2026/11/hackers-exploit-critical-aspnet-anti.html">The Hacker News</a> · <a href="https://github.com/mandiant/Vulnerability-Disclosures/blob/master/2026/MNDT-2026-0048.md">Mandiant advisory</a></p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>Hackers used GL.iNet's cloud service to plant malware on routers and remote-control KVM devices</h3>
+          <p>GL.iNet confirmed on November 20 that hackers exploited a flaw in its GoodCloud cloud remote management service to install custom malware on some customers' routers and KVM devices. GoodCloud lets owners manage routers remotely and control computers plugged into GL.iNet KVM devices, so an infected KVM can reach the computer attached to it. The malware includes root-level reverse shells that call back to attacker servers, plus a script that disguises itself as a system process, installs SSH keys for remote access, and survives reboots. GL.iNet says it fixed the cloud flaw and blocked the attack path on November 20, so no new devices can be infected that way, but the fix does not clean devices that are already infected. Owners must install the new security firmware for their exact model, even if the device looks clean, and check any computer attached to an infected KVM. GL.iNet has not said how many devices were hit or how the attackers got into its cloud service.</p>
+          <p class="do"><strong>Why it matters:</strong> GL.iNet travel routers are popular with remote workers and small shops that need a portable office network, and its KVM devices sit between an admin and the computers they manage. If your shop runs a GL.iNet router with GoodCloud turned on, or a GL.iNet KVM, install the security firmware now and check the device for a process disguised as crond -i /tmp/.log.</p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/hackers-exploit-glinet-cloud-flaw-to-infect-routers-kvm-devices/">BleepingComputer</a> · <a href="https://thehackernews.com/2026/11/hackers-exploited-glinet-cloud-flaw-to.html">The Hacker News</a> · <a href="https://forum.gl-inet.com/t/2026-11-20-gl-inet-security-notice-goodcloud-kvm-routers/73056">GL.iNet security notice</a></p>
+        </article>
 
         <article class="brief-card status-open">
           <h3>Hackers stole credit card numbers and CVVs from software checkout provider Cleverbridge</h3>
@@ -434,8 +448,9 @@
           <h3>Hackers broke into N-able's email security cloud, knocking out spam filter controls</h3>
           <p>N-able disclosed on Wednesday, November 18, that unknown attackers got unauthorized access to one of the servers in its Mail Assure and SpamExperts Hosted Cloud, the email security service many MSPs and web hosts resell to small businesses. The company disabled the management portal, APIs, quarantine and logging across the Americas, Europe and Asia-Pacific while it investigates. Core mail flow and spam filtering kept running. N-able says it has found no evidence so far that customer data was compromised, including access to mailboxes, but the investigation is ongoing and it has not said how the attackers got in. The outage first appeared on November 16 and was first blamed on a platform configuration problem before N-able said it was a security incident. N-able says this incident is unrelated to the N-central zero-day attacks earlier in November.</p>
           <p>Update, November 20: N-able now says the breach was isolated to a single web server, where the attacker may have reached credentials stored on the platform. N-able took the server offline, rotated its own platform credentials, revoked customer API tokens, invalidated OAuth tokens, and reset passwords for local users. The management portal and API are still disabled while N-able validates the fixes, and mail flow and spam filtering keep running.</p>
+          <p>Update, November 22: N-able has now disclosed the flaw behind the breach, a critical server-side request forgery vulnerability tracked as CVE-2026-134624 (CVSS 9.3), and says it has fixed it and restored the dashboard and APIs as of November 21. The company says it has found no evidence of exploitation beyond the single server, has brought in an outside forensics team, and will publish a formal root cause analysis within two weeks. Local Cloud operators should confirm their servers are on build 20261121.1943.</p>
           <p class="do"><strong>Why it matters:</strong> lots of small shops get their email spam filtering through an MSP or web host that runs Mail Assure or SpamExperts behind the scenes, so a breach at that provider can leave their mail unguarded or unmanageable. If your shop's email filtering runs through an MSP, ask them whether they use Mail Assure or SpamExperts and whether any admin credentials or API keys need rotating.</p>
-          <p>Sources: <a href="https://thehackernews.com/2026/11/n-able-confirms-hackers-accessed-cloud.html">The Hacker News</a> · <a href="https://cybersecuritynews.com/n-able-confirms-server-breach/">Cyber Security News</a> · <a href="https://www.securityweek.com/n-able-blames-service-disruption-on-cyberattack/">SecurityWeek</a></p>
+          <p>Sources: <a href="https://thehackernews.com/2026/11/n-able-confirms-hackers-accessed-cloud.html">The Hacker News</a> · <a href="https://cybersecuritynews.com/n-able-confirms-server-breach/">Cyber Security News</a> · <a href="https://www.securityweek.com/n-able-blames-service-disruption-on-cyberattack/">SecurityWeek</a> · <a href="https://www.n-able.com/blog/mail-assure-incident-update">N-able incident update</a></p>
         </article>
 
 <article class="brief-card status-open">
@@ -523,8 +538,9 @@
           <h3>Attackers hijacked MSPs' ScreenConnect tools to plant rogue remote access</h3>
           <p>Attackers broke into at least six managed service providers' cloud-hosted ScreenConnect environments starting Wednesday, November 11, and used the tool's own Run Command feature to install rogue ScreenConnect clients on at least 288 endpoints across 48 organizations. The rogue clients report to attacker-controlled servers, so the access survives even if the MSP resets passwords. ConnectWise confirmed the unauthorized access and disabled five third-party extensions as a precaution. Researchers also found a worm-like toolkit called SCKit that tries to spread to technicians' computers when they connect to an infected machine.</p>
           <p>Update, November 17: ConnectWise said its investigation is complete, but attacks continue against on-premises systems where the extensions are still enabled and ScreenConnect is not updated. Technician clients must be on version 26.6.5 or later, which fixes a critical flaw, CVE-2026-84869, that the toolkit uses to spread to technicians' computers. Huntress saw another spike on November 13 affecting 205 hosts across 41 organizations.</p>
+          <p>Update, November 23: Huntress has now detailed how the attacks work. Between October 20 and November 16, attackers sprayed at least 688,000 fake guest file-transfer requests across 42 MSP ScreenConnect servers, creating 2,408 unauthorized sessions since November 3. On November 12, one technician's workstation was fully compromised in about nine seconds after joining a blank-named session: a guest-pushed batch file downloaded an installer and started a rogue ScreenConnect client pointing at the attacker's own server. The flaw is CVE-2026-84869, fixed in client version 26.6.5.</p>
           <p class="do"><strong>Why it matters:</strong> most small shops get IT support through an MSP, so an attack on the MSP lands directly on the small business. If your shop uses an MSP, ask them whether they use ScreenConnect and whether they have checked for rogue clients.</p>
-          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/active-screenconnect-attacks-breach-msps-impact-dozens-of-organizations/">BleepingComputer</a> · <a href="https://www.bleepingcomputer.com/news/security/new-worm-like-sckit-malware-targets-msps-in-screenconnect-attacks/">BleepingComputer on SCKit</a> · <a href="https://thehackernews.com/2026/11/connectwise-warns-screenconnect-attacks.html">The Hacker News</a></p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/active-screenconnect-attacks-breach-msps-impact-dozens-of-organizations/">BleepingComputer</a> · <a href="https://www.bleepingcomputer.com/news/security/new-worm-like-sckit-malware-targets-msps-in-screenconnect-attacks/">BleepingComputer on SCKit</a> · <a href="https://thehackernews.com/2026/11/connectwise-warns-screenconnect-attacks.html">The Hacker News</a> · <a href="https://www.huntress.com/blog/cve-2026-84869-screenconnect-technician-exploitation">Huntress</a> · <a href="https://thehackernews.com/2026/11/hackers-exploit-critical-screenconnect.html">The Hacker News on the technician attacks</a></p>
         </article>
 
         <p class="table-note">New stories are added as they break.</p>
@@ -534,7 +550,7 @@
     <footer>
       <div class="wrap">
         <p class="sources"><strong>Data sources:</strong> BleepingComputer · The Hacker News · Notion security advisories · SOCRadar · Safeguard · CISA</p>
-        <p>Prepared November 14, 2026; updated November 22, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+        <p>Prepared November 14, 2026; updated November 23, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
       </div>
     </footer>
     <script>
