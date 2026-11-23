@@ -354,7 +354,7 @@
         </p>
         <h1>November 2026 Security Updates</h1>
         <p class="tagline">What Microsoft and Adobe actually released on November 10, the handful of fixes that matter, and what the updates are known to break.</p>
-        <p class="updated">Brief published November 10, 2026 · Breakage watch updated November 21, 2026</p>
+        <p class="updated">Brief published November 10, 2026 · Breakage watch updated November 23, 2026</p>
         <div class="stats">
           <div class="stat">
             <span class="num">1,094</span>
@@ -570,8 +570,8 @@
 
         <article class="brief-card status-open">
           <h3>Hotpatch KB5132043 can stop the Print Spooler</h3>
-          <p><strong>Affects:</strong> Windows 11 24H2, 25H2, and 26H2 after the November hotpatch KB5132043. The Print Spooler service stops, installed printers show as "Not connected", and nothing prints, including Print to PDF. Reinstalling printer drivers does not help. Uninstalling KB5132043 and restarting restores printing. Microsoft has not listed it as a known issue yet (Neowin, Nov 17; Microsoft Q&amp;A threads).</p>
-          <p class="do"><strong>What to do:</strong> hold KB5132043 on machines that print, or uninstall it temporarily if printing already broke, then pause updates until Microsoft acknowledges it. This is separate from the zero size image printing issue above, which hits documents rather than the spooler itself.</p>
+          <p><strong>Affects:</strong> Windows 11 24H2, 25H2, and 26H2 after the November hotpatch KB5132043. The Print Spooler service stops, installed printers show as "Not connected", and nothing prints, including Print to PDF. Reinstalling printer drivers does not help. Uninstalling KB5132043 and restarting restores printing. Microsoft confirmed in a service alert on November 20 (reported by BleepingComputer on November 23) that the hotpatch can stop the spooler on devices running Forcepoint DLP Endpoint Agent: the print option can be greyed out, or selecting a printer can error, because the spooler fails to start. Spooler crashes on machines without Forcepoint are still not listed as a known issue by Microsoft (Neowin, Nov 17; Microsoft Q&amp;A threads).</p>
+          <p class="do"><strong>What to do:</strong> if your machines run Forcepoint DLP Endpoint Agent, Forcepoint has a temporary workaround for its customers through its support portal (sign in required). Otherwise, hold KB5132043 on machines that print, or uninstall it temporarily if printing already broke, then install the standard November cumulative update KB5132061 and restart, which admins report restores printing. No permanent fix yet. This is separate from the zero size image printing issue above, which hits documents rather than the spooler itself.</p>
         </article>
 
         <article class="brief-card status-open">
@@ -631,7 +631,7 @@
     <footer>
       <div class="wrap">
         <p class="sources"><strong>Data sources:</strong> Microsoft Security Update Guide and release health pages · CISA Known Exploited Vulnerabilities (KEV) catalog · Zero Day Initiative, The November 2026 Security Update Review · Adobe security bulletins</p>
-        <p>Prepared November 10, 2026; breakage watch updated November 21, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+        <p>Prepared November 10, 2026; breakage watch updated November 23, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
       </div>
     </footer>
     <script>
