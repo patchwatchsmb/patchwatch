@@ -354,10 +354,10 @@
         </p>
         <h1>What got hacked this week</h1>
         <p class="tagline">Breaches and malware campaigns that hit small businesses and the tools they rely on, in plain English.</p>
-        <p class="updated">Week of November 9, 2026 · Updated November 23, 2026</p>
+        <p class="updated">Week of November 9, 2026 · Updated November 24, 2026</p>
         <div class="stats">
           <div class="stat">
-            <span class="num">22</span>
+            <span class="num">25</span>
             <span class="lbl">stories small businesses should know about this week</span>
           </div>
           <div class="stat">
@@ -378,6 +378,27 @@
           <h2 id="hacked-h">This week</h2>
           <p>Week of November 9, 2026. Details change fast, so check the source link on any story before you act on it.</p>
         </div>
+
+        <article class="brief-card status-open">
+          <h3>Two billion stolen passwords and session tokens sat in an open database anyone could read</h3>
+          <p>Security researcher Jeremiah Fowler found a publicly accessible database holding about two billion login credentials, with no password and no encryption on it. The records include email addresses, usernames, passwords, cookies, session tokens and device details, gathered into 8,471 folders. Fowler says the data looks like it came from infostealer malware, which steals every login saved on an infected computer, and about 400,000 documents profile individual victims in detail, enough to take over their digital lives. The most common accounts in the trove are Gmail, with 608 million records, and other Google services. No single company was breached to build the collection. Fowler reported it to the hosting company, which has since restricted access, but nobody knows how many people read it first.</p>
+          <p class="do"><strong>Why it matters:</strong> small business owners and staff reuse passwords across work and personal accounts, and session tokens in a leak like this can let an attacker straight into an account without a password at all. Run a malware scan on any computer that feels off, then change passwords from a clean device, starting with email and banking, and turn on MFA everywhere it is offered. A password manager makes the rotation far less painful.</p>
+          <p>Sources: <a href="https://www.expressvpn.com/research/2billion-credentials-exposed">ExpressVPN (Fowler report)</a> · <a href="https://cybernews.com/security/supersized-dataset-2-billion-records-exposed/">Cybernews</a></p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>Attackers exploited a Microsoft Azure flaw to steal customers' API credentials</h3>
+          <p>Microsoft is warning customers that attackers exploited a flaw in Azure API Management, the service that publishes and guards APIs, and used it to steal credentials stored in customer instances. The flaw affected the Classic tiers (Developer, Basic, Standard and Premium) that were not configured to Microsoft's recommended security settings. Attackers could reach secrets stored as Named Values, client secrets for identity and OpenID Connect providers, subscription keys and tokens used to call management APIs. Microsoft found the flaw on November 18 and closed the access path on November 19, and says the newer APIM v2 tiers were not affected. Norway's National Security Authority linked the flaw to attacks on energy companies Equinor and Skagerak Energi, and says organizations in other countries and sectors were hit too. Microsoft's fix stops further access, but it does not invalidate credentials that were already stolen.</p>
+          <p class="do"><strong>Why it matters:</strong> small dev shops and businesses that run APIs on Azure often store keys and secrets in API Management, and a stolen key can open the backend systems behind the API. If your shop uses Azure API Management Classic, rotate every secret stored in it, plus the downstream credentials those secrets unlock, and check logs for unusual management activity since mid-November.</p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/microsoft-azure-flaw-exploited-to-steal-customers-api-credentials/">BleepingComputer</a> · <a href="https://www.networkworld.com/article/4252523/attackers-exploited-an-azure-api-management-flaw-to-steal-secrets-microsoft-warns-2.html">Network World</a></p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>Hackers planted a backdoor in six WordPress plugins, but the poisoned updates never reached a site</h3>
+          <p>Attackers used a compromised WordPress.org account belonging to plugin maker WP connect to push backdoored releases of six WordPress plugins on November 22, including Air WP Sync, WP Sync for Notion, add-ons for Contact Form 7 and Gravity Forms, and an Airtable sync for WooCommerce. The releases added a file that phones home to an attacker server and runs whatever PHP code the server sends back, with no login needed. It can run shell commands, read and change files, dump the site's user table including password hashes, and plant webshells. Wordfence, which found the backdoor, rates it CVE-2026-135202 at CVSS 9.8. The good news is that WordPress.org's release safeguards flagged and blocked the malicious versions before they were distributed, so no site received them through updates, and no exploitation of live sites has been reported. All six plugins were closed on WordPress.org the same evening, and there is no patched version, since the code was added on purpose rather than by mistake.</p>
+          <p class="do"><strong>Why it matters:</strong> small business WordPress sites use these sync plugins to connect forms and shops to Airtable and Notion, and the six plugins together have more than 3,600 active installations. If your site runs any WP connect plugin, check for the file includes/airwp-online.php and for outbound traffic to tascredit-pay.com, then remove the plugin and run a full malware scan.</p>
+          <p>Sources: <a href="https://www.wordfence.com/threat-intel/vulnerabilities/detail/wp-connect-plugins-various-versions-unauthenticated-remote-code-execution-via-backdoored-software">Wordfence</a> · <a href="https://cybersecuritynews.com/backdoors-in-6-wordpress-plugins/">Cyber Security News</a></p>
+        </article>
 
         <article class="brief-card status-open">
           <h3>A critical flaw in a long-dead ASP.NET library is being exploited, and there will never be a patch</h3>
