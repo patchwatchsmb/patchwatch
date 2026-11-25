@@ -372,10 +372,10 @@
         </p>
         <h1>What got hacked this week</h1>
         <p class="tagline">Breaches and malware campaigns that hit small businesses and the tools they rely on, in plain English.</p>
-        <p class="updated">Week of November 9, 2026 · Updated November 24, 2026</p>
+        <p class="updated">Week of November 9, 2026 · Updated November 25, 2026</p>
         <div class="stats">
           <div class="stat">
-            <span class="num">25</span>
+            <span class="num">28</span>
             <span class="lbl">stories small businesses should know about this week</span>
           </div>
           <div class="stat">
@@ -396,6 +396,27 @@
           <h2 id="hacked-h">This week</h2>
           <p>Week of November 9, 2026. Details change fast, so check the source link on any story before you act on it.</p>
         </div>
+
+        <article class="brief-card status-open">
+          <h3>Hackers are exploiting a critical Drupal flaw to take over websites</h3>
+          <p>Drupal's security team has confirmed that attackers are exploiting a critical flaw in Drupal core on live sites, with attacks reported as early as November 19. The flaw, CVE-2026-132165, sits in the installer file that ships with Drupal core. Under certain conditions, an anonymous attacker can use the installer to try to reinstall an existing site, which can lead to a full site takeover or remote code execution, with no login needed. Drupal rated the flaw highly critical, 20 out of 25, and released fixes on November 18 in Drupal 10.6.22, 11.3.22 and 11.4.13. On November 24, CISA added the flaw to its Known Exploited Vulnerabilities catalog and gave federal agencies until November 27 to fix it. Sites on Drupal 11.2 and older, or 10.5 and older, get no fix at all, and about 29 percent of sites reporting usage data were running those end-of-life branches.</p>
+          <p class="do"><strong>Why it matters:</strong> Drupal powers a lot of small business, nonprofit and community websites, often set up years ago by a contractor who has since moved on. If your site runs Drupal, ask your web provider which version it is on and update to 10.6.22, 11.3.22 or 11.4.13 right away. If you cannot update today, block access to /core/install.php in the web server configuration or the .htaccess file, and if your site is on an end-of-life branch, plan the upgrade now because no patch is coming for it.</p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/hackers-now-exploit-critical-drupal-rce-flaw-to-hijack-sites/">BleepingComputer</a> · <a href="https://www.drupal.org/sa-core-2026-017">Drupal security advisory</a></p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>Attackers ran code on six servers of the Hex.pm package registry</h3>
+          <p>On November 23, an attacker exploited a critical flaw in Hex.pm, the package registry Elixir and Erlang developers use to fetch dependencies, and ran operating system commands on six of its production web servers. The flaw, CVE-2026-129514, scores a maximum 10.0 and needs no login. It sat in the code that reads request bodies since February 2016. Hex.pm's team blocked the attack and had every server on a patched build within about 15 minutes of the first malicious request, and found no evidence that packages were changed. But the team cannot rule out that the attacker read account data, because database reads are not logged. Email addresses, password hashes, API key hashes, two-factor secrets, sessions and audit logs may have been seen. Hex.pm rotated its credentials and signing keys, which logged everyone out, and told users to change passwords and reset two-factor authentication. Self-hosted copies of the registry software are affected until they deploy the patch.</p>
+          <p class="do"><strong>Why it matters:</strong> small dev shops that build with Elixir or Erlang pull their dependencies from Hex.pm, and a compromised registry is how poisoned packages reach a build. If your team uses Hex.pm, change the account password, reset two-factor authentication, rotate API keys, and fetch packages only from repo.hex.pm until Hex ships clients with its new signing system.</p>
+          <p>Sources: <a href="https://thehackernews.com/2026/11/hackers-exploited-cvss-100-hexpm-rce.html">The Hacker News</a> · <a href="https://cybersecuritynews.com/hackers-exploit-critical-hex-pm-vulnerability/">Cyber Security News</a></p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>Radware breach exposed some customers' cloud access keys</h3>
+          <p>Cybersecurity company Radware says attackers reached an internal Cloud WAF management API that was left exposed to the internet without authentication, and may have accessed customer contact details and the credentials some customers configured to export logs to their own cloud storage. The unauthorized access happened on November 19, and Radware detected it about ten hours later, blocked the source and revoked and replaced its internal credentials. The credentials at risk are AWS S3 access keys, Azure Blob Storage keys or shared access signatures, and SFTP logins used for log export. Radware says it found no evidence that attackers changed customer security policies or reached application traffic, certificates or end-user data, and it is still investigating whether the exposed credentials were used. It has already received reports from customers about AWS alerts for an unfamiliar IP address trying to access their log-export buckets. Radware has not said how many customers were affected, and it has not yet issued a public statement or filed a breach report with the US Securities and Exchange Commission.</p>
+          <p class="do"><strong>Why it matters:</strong> small businesses that use a cloud web application firewall often send their logs to their own AWS or Azure storage, and the keys for that storage were the thing exposed here. If your shop uses Radware Cloud WAF, rotate the log-export credentials right away and review your cloud storage access logs back to November 19 for activity from unfamiliar addresses.</p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/radware-discloses-breach-exposing-customer-cloud-access-keys/">BleepingComputer</a></p>
+        </article>
 
         <article class="brief-card status-open">
           <h3>Two billion stolen passwords and session tokens sat in an open database anyone could read</h3>
@@ -420,7 +441,8 @@
 
         <article class="brief-card status-open">
           <h3>A critical flaw in a long-dead ASP.NET library is being exploited, and there will never be a patch</h3>
-          <p>Mandiant disclosed on November 18 that a legacy ASP.NET anti-CSRF library called Idunno.AntiCsrf has a critical deserialization flaw, CVE-2026-131914, scored CVSS 9.3. A remote attacker can run code on the web server with a single unauthenticated web request, no login needed, and Mandiant says active exploitation in the wild has been observed. The library was last released in December 2008 and the project is defunct, so no fix exists and none is coming. The only remediation is to remove the library from every application that loads it and replace it with a supported anti-CSRF mechanism. The flaw is not in CISA's actively exploited list.</p>
+          <p>Mandiant disclosed on November 18 that a legacy ASP.NET anti-CSRF library called Idunno.AntiCsrf has a critical deserialization flaw, CVE-2026-131914, scored CVSS 9.3. A remote attacker can run code on the web server with a single unauthenticated web request, no login needed, and Mandiant says active exploitation in the wild has been observed. The library was last released in December 2008 and the project is defunct, so no fix exists and none is coming. The only remediation is to remove the library from every application that loads it and replace it with a supported anti-CSRF mechanism.</p>
+          <p>Update, November 24: CISA has added CVE-2026-131914 to its Known Exploited Vulnerabilities catalog, with a federal remediation deadline of November 27. Mandiant also advises rotating machineKey and other Web.config secrets if exploitation is suspected.</p>
           <p class="do"><strong>Why it matters:</strong> small businesses running older ASP.NET websites may still load this library without knowing it, since it sits quietly in the site's configuration. If your site runs on ASP.NET WebForms, check its Web.config files and application folders for Idunno.AntiCsrf and remove it. An unpatched flaw that can never be patched, and that attackers are already using, is exactly the kind of thing a routine scan will find.</p>
           <p>Sources: <a href="https://thehackernews.com/2026/11/hackers-exploit-critical-aspnet-anti.html">The Hacker News</a> · <a href="https://github.com/mandiant/Vulnerability-Disclosures/blob/master/2026/MNDT-2026-0048.md">Mandiant advisory</a></p>
         </article>
@@ -525,6 +547,7 @@
           <h3>Optimizely supply chain attack put card-stealing code on 178 organizations' websites</h3>
           <p>On Monday, November 16, attackers exploited a flaw in Optimizely's Web Experimentation account signup flow and injected malicious JavaScript into customer projects. The poisoned scripts loaded on the websites of 178 organizations, including Zoom, CNN, BBC, Fox News, Salesforce and GitLab, and served visitors code that stole payment card details entered in forms, swapped cryptocurrency wallet addresses, and tried to load exploit kits on iPhones and iPads. Security researcher Scott Helme of Report URI found 188 infected scripts after checking 1,611. Optimizely confirmed the attack, removed the injected code, blocked the vulnerable path and notified affected customers, and by late Monday nearly all infected scripts were clean.</p>
           <p>Update, November 18: Optimizely has published an initial findings report on the attack. Helme found the injected payload was rebuilt 26 times during the day, and the code also stole cookies and browser screenshots, not just card details and crypto wallet addresses.</p>
+          <p>Update, November 24: CISA has added the flaw behind this attack, CVE-2026-132224, to its Known Exploited Vulnerabilities catalog, confirming it was exploited in the wild, with a federal remediation deadline of November 27.</p>
           <p class="do"><strong>Why it matters:</strong> small businesses load third-party scripts on their own websites too, for analytics, chat, booking and A/B testing, and a compromise at the script provider hits every site that loads it. If your site uses Optimizely or any third-party script, ask your web provider whether your scripts were affected, and check card statements and any crypto payments made on Monday.</p>
           <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/optimizely-supply-chain-attack-delivers-malware-to-cnn-fox-news-bbc-salesforce-sites/">BleepingComputer</a></p>
         </article>
