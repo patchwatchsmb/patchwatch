@@ -354,7 +354,7 @@
         </p>
         <h1>November 2026 Security Updates</h1>
         <p class="tagline">What Microsoft and Adobe actually released on November 10, the handful of fixes that matter, and what the updates are known to break.</p>
-        <p class="updated">Brief published November 10, 2026 · Breakage watch updated November 23, 2026</p>
+        <p class="updated">Brief published November 10, 2026 · Breakage watch updated November 25, 2026</p>
         <div class="stats">
           <div class="stat">
             <span class="num">1,094</span>
@@ -582,6 +582,12 @@
         </article>
 
         <article class="brief-card status-open">
+          <h3>November updates can break sign in through some NTLM proxies and single sign on tools</h3>
+          <p><strong>Affects:</strong> Windows 11 23H2, 24H2, 25H2, 26H1, and 26H2, Windows 10 Enterprise LTSC 2021, and Windows Server 2016 through 2025 after the November 10, 2026 security updates. Sign in can fail through third party authentication proxies, single sign on (SSO) products, and application packaging tools that use NTLM. Microsoft confirmed it on November 25 in support article KB5135557 (BleepingComputer, Nov 25). The November updates are the first phase of tighter NTLM message signing, a fix for the RPC Runtime flaw CVE-2026-118737, and some third party products do not implement NTLM correctly, so Windows now rejects their sign in attempts. Fortinet has already confirmed its Single Sign On Mobility Agent with FortiAuthenticator is affected. This is separate from the October NTLMv1 enforcement change that can break office Wi-Fi, listed below.</p>
+          <p class="do"><strong>What to do:</strong> no permanent fix yet. As a temporary workaround, Microsoft says to set the ClientAllowUnsignedNtlm registry value to 1 under HKLM\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0 on affected clients, but that weakens the relay protection the update added and Microsoft says the setting may be removed in a future update. The long term fix is to switch the affected product to Kerberos where possible, or ask the vendor for an update that meets the new NTLM signing requirements. Deploy with this in mind if you use a third party proxy or SSO product in the sign in path.</p>
+        </article>
+
+        <article class="brief-card status-open">
           <h3>October updates can break office Wi-Fi and wired network logins</h3>
           <p><strong>Affects:</strong> Windows 11 24H2, 25H2, and 26H2 after KB5127648. The October update turned on a stricter sign in rule (NTLMv1 enforcement). Networks that log users in with the older MS-CHAPv2 method, common for office Wi-Fi, can start refusing connections. Home Wi-Fi with a plain password is not affected. Microsoft confirms the change is intentional hardening, so no fix is coming.</p>
           <p class="do"><strong>What to do:</strong> if office Wi-Fi breaks after the October update, your IT provider can roll the setting back to audit mode, or better, move the network to certificate based sign in (EAP-TLS).</p>
@@ -611,7 +617,7 @@
           <p class="do"><strong>What to do:</strong> install the November update. No workaround needed after that.</p>
         </article>
 
-        <p class="table-note">Watch item, not confirmed breakage: KB5132061 tightens PowerShell script signature validation, so signed scripts with invalid UTF-8 may now fail validation. The November cycle now has eight confirmed breakage issues above.</p>
+        <p class="table-note">Watch item, not confirmed breakage: KB5132061 tightens PowerShell script signature validation, so signed scripts with invalid UTF-8 may now fail validation. The November cycle now has nine confirmed breakage issues above.</p>
       </section>
 
       <section aria-labelledby="know-h">
@@ -631,7 +637,7 @@
     <footer>
       <div class="wrap">
         <p class="sources"><strong>Data sources:</strong> Microsoft Security Update Guide and release health pages · CISA Known Exploited Vulnerabilities (KEV) catalog · Zero Day Initiative, The November 2026 Security Update Review · Adobe security bulletins</p>
-        <p>Prepared November 10, 2026; breakage watch updated November 23, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
+        <p>Prepared November 10, 2026; breakage watch updated November 25, 2026. PatchWatch is informational only, not security advice for your specific business. When in doubt, ask your IT provider what applies to your setup.</p>
       </div>
     </footer>
     <script>
