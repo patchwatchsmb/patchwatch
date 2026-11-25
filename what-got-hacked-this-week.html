@@ -297,12 +297,6 @@
       footer .sources strong { color: var(--ink); font-weight: 600; }
 
       /* ---------- Brief page additions ---------- */
-      .draft-banner {
-        position: sticky; top: 0; z-index: 50;
-        background: #b3261e; color: #ffffff;
-        text-align: center; font-size: 13px; font-weight: 600;
-        padding: 8px 14px; letter-spacing: 0.02em;
-      }
       .brief-card {
         background: var(--surface); border: 1px solid var(--line);
         border-radius: var(--radius-lg); padding: 20px 22px; margin-bottom: 14px;
@@ -326,6 +320,30 @@
       .site-nav a { color: var(--navy-ink-2); text-decoration: none; font-size: 14.5px; font-weight: 500; letter-spacing: 0.01em; padding: 2px 0; }
       .site-nav a.nav-home { display: inline-flex; align-items: center; gap: 6px; }
       .site-nav a:hover, .site-nav a:focus-visible { color: #3fae82; }
+
+      /* ---------- Click-to-read pattern ---------- */
+      #story-index { margin-bottom: 8px; }
+      .idx-head { font-size: 13.5px; color: var(--ink-3); margin: 0 0 12px; }
+      .idx-row {
+        display: block; background: var(--surface); border: 1px solid var(--line);
+        border-radius: var(--radius-lg); padding: 16px 20px; margin-bottom: 10px;
+        text-decoration: none;
+      }
+      .idx-row:hover { border-color: var(--accent); }
+      .idx-title { display: block; font-size: 16.5px; font-weight: 700; color: var(--ink); line-height: 1.35; margin-bottom: 4px; }
+      .idx-ex { display: block; font-size: 14px; color: var(--ink-2); line-height: 1.5; }
+      .idx-more { display: inline-block; margin-top: 8px; font-size: 13.5px; font-weight: 600; color: var(--accent); }
+      body[data-view="index"] article.brief-card { display: none; }
+      body[data-view="article"] #story-index { display: none; }
+      body[data-view="article"] article.brief-card { display: none; }
+      body[data-view="article"] article.brief-card.active { display: block; padding: 26px 28px; }
+      body[data-view="article"] article.brief-card.active h3 { font-size: 25px; line-height: 1.25; margin-bottom: 12px; }
+      body[data-view="article"] article.brief-card.active p { font-size: 15.5px; }
+      .art-nav { margin: 0 0 14px; font-size: 14px; }
+      .art-nav-bottom { margin: 16px 0 0; display: flex; justify-content: space-between; gap: 12px; }
+      .art-nav a { font-weight: 600; text-decoration: none; }
+      .art-nav a:hover { text-decoration: underline; }
+      .art-next { margin-left: auto; }
     </style>
   </head>
   <body>
@@ -578,5 +596,99 @@
       window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
+
+    <script>
+      (function () {
+        var articles = Array.prototype.slice.call(document.querySelectorAll("article.brief-card"));
+        if (!articles.length) return;
+        function slugify(t, i) {
+          var s = t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60).replace(/-+$/, "");
+          return s || ("story-" + (i + 1));
+        }
+        var slugs = [];
+        articles.forEach(function (a, i) {
+          var h = a.querySelector("h3");
+          var s = slugify(h ? h.textContent : "", i);
+          while (slugs.indexOf(s) !== -1) s = s + "-" + (i + 1);
+          slugs.push(s);
+          a.id = s;
+        });
+        var idx = document.createElement("div");
+        idx.id = "story-index";
+        var head = document.createElement("p");
+        head.className = "idx-head";
+        head.textContent = "Latest stories \u00B7 " + articles.length + " stories \u00B7 newest first. Click a story to read it.";
+        idx.appendChild(head);
+        articles.forEach(function (a, i) {
+          var h = a.querySelector("h3");
+          var p = a.querySelector("p");
+          var row = document.createElement("a");
+          row.className = "idx-row";
+          row.href = "#" + slugs[i];
+          var t = document.createElement("span");
+          t.className = "idx-title";
+          t.textContent = h ? h.textContent : "";
+          var e = document.createElement("span");
+          e.className = "idx-ex";
+          var txt = p ? p.textContent.trim() : "";
+          e.textContent = txt.length > 150 ? txt.slice(0, 150).trim() + "\u2026" : txt;
+          var m = document.createElement("span");
+          m.className = "idx-more";
+          m.textContent = "Read more \u2192";
+          row.appendChild(t);
+          row.appendChild(e);
+          row.appendChild(m);
+          idx.appendChild(row);
+        });
+        articles[0].parentNode.insertBefore(idx, articles[0]);
+        articles.forEach(function (a, i) {
+          var top = document.createElement("p");
+          top.className = "art-nav";
+          var back = document.createElement("a");
+          back.href = "#";
+          back.className = "back-link";
+          back.textContent = "\u2190 All stories";
+          back.addEventListener("click", function (ev) {
+            ev.preventDefault();
+            show(null);
+            history.pushState(null, "", location.pathname + location.search);
+          });
+          top.appendChild(back);
+          a.insertBefore(top, a.firstChild);
+          var bot = document.createElement("p");
+          bot.className = "art-nav art-nav-bottom";
+          if (i > 0) {
+            var prev = document.createElement("a");
+            prev.href = "#" + slugs[i - 1];
+            prev.textContent = "\u2190 Newer story";
+            bot.appendChild(prev);
+          }
+          if (i < articles.length - 1) {
+            var next = document.createElement("a");
+            next.href = "#" + slugs[i + 1];
+            next.className = "art-next";
+            next.textContent = "Older story \u2192";
+            bot.appendChild(next);
+          }
+          a.appendChild(bot);
+        });
+        function show(slug) {
+          var found = false;
+          articles.forEach(function (a) {
+            var on = a.id === slug;
+            a.classList.toggle("active", on);
+            if (on) found = true;
+          });
+          document.body.setAttribute("data-view", found ? "article" : "index");
+          if (found) window.scrollTo(0, 0);
+        }
+        function fromHash() {
+          var s = location.hash.replace(/^#/, "");
+          show(slugs.indexOf(s) !== -1 ? s : null);
+        }
+        window.addEventListener("hashchange", fromHash);
+        fromHash();
+      })();
+    </script>
   </body>
 </html>
