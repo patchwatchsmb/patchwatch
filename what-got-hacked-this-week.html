@@ -602,7 +602,12 @@
         var articles = Array.prototype.slice.call(document.querySelectorAll("article.brief-card"));
         if (!articles.length) return;
         function slugify(t, i) {
-          var s = t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60).replace(/-+$/, "");
+          var s = t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+          if (s.length > 60) {
+            s = s.slice(0, 60);
+            var cut = s.lastIndexOf("-");
+            if (cut > 20) s = s.slice(0, cut);
+          }
           return s || ("story-" + (i + 1));
         }
         var slugs = [];
