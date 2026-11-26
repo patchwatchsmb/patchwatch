@@ -372,10 +372,10 @@
         </p>
         <h1>What got hacked this week</h1>
         <p class="tagline">Breaches and malware campaigns that hit small businesses and the tools they rely on, in plain English.</p>
-        <p class="updated">Week of November 9, 2026 · Updated November 25, 2026</p>
+        <p class="updated">Week of November 9, 2026 · Updated November 26, 2026</p>
         <div class="stats">
           <div class="stat">
-            <span class="num">28</span>
+            <span class="num">29</span>
             <span class="lbl">stories small businesses should know about this week</span>
           </div>
           <div class="stat">
@@ -398,10 +398,18 @@
         </div>
 
         <article class="brief-card status-open">
+          <h3>1Password breach exposed customer names and emails, but vaults were not touched</h3>
+          <p>On November 25, password manager 1Password disclosed that an attacker broke into some of its backend systems and copied account records for a subset of customers. The attacker got in through an employee's corporate GitHub account, which 1Password began investigating on November 19. From there the attacker reached private source code, pushed malicious code into backend services, and downloaded customer records: names, sign-in email addresses, account and user identifiers, account creation and last sign-in times, public keys, Secure Remote Password parameters, and tokens from some invitation, provisioning and account recovery email links. The attacker also copied private source code and got into 1Password's CI/CD system, which holds infrastructure secrets. 1Password says customer vaults, the items in them, the keys that protect them, and account recovery keys were never accessed or available to the attacker, and it does not store account passwords or Secret Keys. It has disabled the compromised GitHub account, revoked the stolen token, rotated internal credentials, and lengthened the codes in invitation and recovery emails from six digits to ten alphanumeric characters. It says it found no evidence of account takeovers using the exposed tokens, and users with outstanding invitations or recovery links were notified individually.</p>
+          <p class="do"><strong>Why it matters:</strong> a lot of small businesses keep every work password in 1Password, so a breach at the password manager itself gets attention fast. The good news is the vaults were not reached, and 1Password says no action is needed in your account. The real risk is phishing: the stolen names and sign-in emails are exactly what a convincing fake 1Password email needs. Never enter your account password or Secret Key from an email link, and use the official app or website instead.</p>
+          <p>Sources: <a href="https://1password.com/blog/update-on-nov-2026-security-incident">1Password security incident update</a> · <a href="https://thehackernews.com/2026/11/1password-hacked-customer-data-and.html">The Hacker News</a></p>
+        </article>
+
+        <article class="brief-card status-open">
           <h3>Hackers are exploiting a critical Drupal flaw to take over websites</h3>
           <p>Drupal's security team has confirmed that attackers are exploiting a critical flaw in Drupal core on live sites, with attacks reported as early as November 19. The flaw, CVE-2026-132165, sits in the installer file that ships with Drupal core. Under certain conditions, an anonymous attacker can use the installer to try to reinstall an existing site, which can lead to a full site takeover or remote code execution, with no login needed. Drupal rated the flaw highly critical, 20 out of 25, and released fixes on November 18 in Drupal 10.6.22, 11.3.22 and 11.4.13. On November 24, CISA added the flaw to its Known Exploited Vulnerabilities catalog and gave federal agencies until November 27 to fix it. Sites on Drupal 11.2 and older, or 10.5 and older, get no fix at all, and about 29 percent of sites reporting usage data were running those end-of-life branches.</p>
+          <p>Update, November 25: Drupal has disclosed a second flaw, CVE-2026-136716, rated highly critical at 21 out of 25. The November 18 fix did not protect sites in unusual or incomplete install states, and those sites can still be taken over through the installer, including production sites. Drupal says this flaw is also being exploited in the wild, and any site that left its installer remotely accessible after the first fix may already be compromised, even though the vulnerable state does not show in the admin interface. The fix is in Drupal 10.6.23, 11.3.23 and 11.4.14, and after updating, sites must run update.php to complete the repair. Sites that already blocked /core/install.php are not affected.</p>
           <p class="do"><strong>Why it matters:</strong> Drupal powers a lot of small business, nonprofit and community websites, often set up years ago by a contractor who has since moved on. If your site runs Drupal, ask your web provider which version it is on and update to 10.6.22, 11.3.22 or 11.4.13 right away. If you cannot update today, block access to /core/install.php in the web server configuration or the .htaccess file, and if your site is on an end-of-life branch, plan the upgrade now because no patch is coming for it.</p>
-          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/hackers-now-exploit-critical-drupal-rce-flaw-to-hijack-sites/">BleepingComputer</a> · <a href="https://www.drupal.org/sa-core-2026-017">Drupal security advisory</a></p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/hackers-now-exploit-critical-drupal-rce-flaw-to-hijack-sites/">BleepingComputer</a> · <a href="https://www.drupal.org/sa-core-2026-017">Drupal security advisory</a> · <a href="https://thehackernews.com/2026/11/drupal-warns-of-new-highly-critical.html">The Hacker News (CVE-2026-136716)</a></p>
         </article>
 
         <article class="brief-card status-open">
@@ -471,8 +479,9 @@
 <article class="brief-card status-open">
           <h3>Rackspace cloud breach let hackers read customer Kubernetes secrets</h3>
           <p>Rackspace warned customers on November 21 that hackers breached its Rackspace Spot cloud platform on November 17 using leaked credentials. The attackers acted as legitimate users in some customer organizations, created unauthorized pods in Kubernetes clusters, read Kubernetes Secrets and listed nodes and volumes. Kubernetes Secrets can hold passwords, tokens and API keys for databases and cloud services. Rackspace says it revoked affected tokens and sessions, removed the unauthorized pods and rotated keys, and told affected customers to reissue API tokens, replace refresh tokens and rotate every credential stored in their cluster Secrets. Service was fully restored on November 21 after an extended outage of the admin console.</p>
+          <p>Update, November 24: Rackspace has decided to shut down the Spot platform entirely. The service will be permanently discontinued on December 8, 2026, and Rackspace is telling all Spot customers to move their workloads and download their data before then. Rackspace now says every Spot customer should treat API tokens, refresh tokens, kubeconfigs and Kubernetes Secrets as potentially compromised, whether or not they received a breach notice, and review access logs back to November 16.</p>
           <p class="do"><strong>Why it matters:</strong> small dev shops and businesses that run containerized apps on a cloud platform trust the provider to guard their secrets. If your shop runs anything on Rackspace Spot, rotate the credentials the breach could have reached and check logs back to November 17.</p>
-          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/rackspace-spot-breach-let-hackers-access-customer-kubernetes-secrets/">BleepingComputer</a></p>
+          <p>Sources: <a href="https://www.bleepingcomputer.com/news/security/rackspace-spot-breach-let-hackers-access-customer-kubernetes-secrets/">BleepingComputer</a> · <a href="https://www.bleepingcomputer.com/news/security/rackspace-shuts-down-spot-cloud-platform-after-security-breach/">BleepingComputer (Spot shutdown)</a></p>
         </article>
 
 <article class="brief-card status-open">
