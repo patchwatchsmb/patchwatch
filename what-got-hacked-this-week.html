@@ -372,10 +372,10 @@
         </p>
         <h1>What got hacked this week</h1>
         <p class="tagline">Breaches and malware campaigns that hit small businesses and the tools they rely on, in plain English.</p>
-        <p class="updated">Week of November 9, 2026 · Updated November 26, 2026</p>
+        <p class="updated">Week of November 9, 2026 · Updated November 27, 2026</p>
         <div class="stats">
           <div class="stat">
-            <span class="num">29</span>
+            <span class="num">31</span>
             <span class="lbl">stories small businesses should know about this week</span>
           </div>
           <div class="stat">
@@ -396,6 +396,20 @@
           <h2 id="hacked-h">This week</h2>
           <p>Week of November 9, 2026. Details change fast, so check the source link on any story before you act on it.</p>
         </div>
+
+        <article class="brief-card status-open">
+          <h3>Hackers slipped a remote control trojan into official downloads of two popular Windows utilities</h3>
+          <p>Researchers at AhnLab's Security Intelligence Center found that installers for Q-Dir and DesktopOK distributed from the official SoftwareOK website had been tampered with. The confirmed poisoned versions are Q-Dir 12.83.0.0, 12.84.0.0 and 12.85.0.0, and DesktopOK 12.82.0.0 and 12.85.0.0. The malicious files arrived both in direct downloads and through the update process of already installed legitimate programs. The installer runs the genuine program so nothing looks wrong, while in the background it downloads a Python-based remote access trojan from an external server, using a legitimate 7-Zip tool to unpack it. Once installed, the trojan can run shell commands and Python code, transfer files, capture screenshots and collect system details, and it sets up persistence with a scheduled task that impersonates Microsoft Edge. AhnLab has not determined how the installers were replaced, and cautions that the confirmed versions may not cover everyone exposed while the tampered files were being served.</p>
+          <p class="do"><strong>Why it matters:</strong> Q-Dir and DesktopOK are free Windows utilities found on a lot of small business PCs, and this attack came through the official download page, not a shady mirror. If anyone on your team downloaded or updated either program recently, uninstall it, reinstall the latest release, and check the installer SHA-256 hash against the one posted on the download page. Also look for the scheduled task impersonating Microsoft Edge and for unexpected files under ProgramData, and treat any machine that ran a tampered installer as compromised until it has been checked.</p>
+          <p>Sources: <a href="https://thehackernews.com/2026/11/hackers-trojanize-official-q-dir-and.html">The Hacker News</a> · <a href="https://cybersecuritynews.com/hackers-turn-trusted-windows-software/">Cyber Security News</a></p>
+        </article>
+
+        <article class="brief-card status-open">
+          <h3>North Korea-linked hackers hid malware in 7,600 GitHub projects, and opening one in VS Code can run it</h3>
+          <p>Researchers say a North Korea-linked campaign called PolinRider has planted a small Python loader in more than 7,600 GitHub repositories owned by about 2,330 accounts, most of them developers. The loader hides in ordinary project files such as a small utils package or conftest.py, and in some cases in a hidden VS Code task, so simply opening the project folder in VS Code can be enough to trigger it. When it runs, it fetches JavaScript stored in an Ethereum transaction, which points it to the attacker's server and delivers a second stage. That stage scans the machine for developer tools such as GitHub Desktop, Cursor and VS Code, tampers with the most used ones, and steals credentials. The loader was pushed to about 2,040 repositories between October 27 and November 6. The same loader was also force-pushed into open pull requests at AsyncAPI Generator, CircuitVerse, Open Food Facts and Jaeger in October, and CircuitVerse's release workflow actually ran it. SafeDep found the loader in 375 public repositories on November 24, and Apiiro counts at least 7,609 affected repositories in total.</p>
+          <p class="do"><strong>Why it matters:</strong> small dev teams and shops that build on open source software pull code from GitHub every day, and this campaign turns a routine clone, or a project folder opened in VS Code, into an infection. Do not run or import a project you did not expect to change, check your own repositories for unexpected commits and new files, and rotate any credentials that were on a machine that ran a suspicious project.</p>
+          <p>Sources: <a href="https://thehackernews.com/2026/11/north-korea-linked-polinrider-poisons.html">The Hacker News</a> · <a href="https://www.stepsecurity.io/blog/polinrider-malware-open-source-pull-requests">StepSecurity</a></p>
+        </article>
 
         <article class="brief-card status-open">
           <h3>1Password breach exposed customer names and emails, but vaults were not touched</h3>
