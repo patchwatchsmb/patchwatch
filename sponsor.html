@@ -4,19 +4,27 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="color-scheme" content="light dark" />
+<script>(function(){try{var t=window.localStorage.getItem("pw-theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t);}}catch(e){}})();</script>
 <link rel="icon" href="data:," />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"
+  rel="stylesheet"
+/>
 <title>Sponsor PatchWatch</title>
 <style>
   :root{
-    --navy:#0f2742;
-    --navy-2:#1a3658;
-    --muted:#52667d;
-    --line:#dde6ef;
-    --bg:#f7f9fc;
+    --navy:#013968;
+    --navy-2:#0a4472;
+    --muted:#42566b;
+    --line:#d9e3ec;
+    --bg:#f4f7fa;
     --card:#ffffff;
-    --accent:#1d6fe0;
-    --accent-dark:#1559b8;
-    --accent-soft:#eaf2ff;
+    --accent:#1a5a9c;
+    --accent-dark:#0a4472;
+    --accent-soft:#e8f0f8;
+    --navy-deep:#012740;
     --radius:14px;
   }
   *{box-sizing:border-box}
@@ -25,10 +33,11 @@
     margin:0;
     background:var(--bg);
     color:var(--navy);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
   }
+  h1, h2, h3{font-family:"Archivo", "Public Sans", -apple-system, sans-serif}
   a{color:var(--accent); text-decoration:underline; text-underline-offset:3px}
   a:hover{color:var(--accent-dark)}
   .mockup-banner{
@@ -125,7 +134,7 @@
   }
   .progress-box{
     margin-top:20px;
-    background:#f2f6fb;
+    background:#e8f0f8;
     border:1px solid var(--line);
     border-radius:10px;
     padding:16px 18px;
@@ -154,7 +163,7 @@
   .progress-track{
     margin-top:12px;
     height:8px;
-    background:#dbe6f2;
+    background:#d9e3ec;
     border-radius:999px;
     overflow:hidden;
   }
@@ -185,7 +194,7 @@
   }
   .card.featured{
     border-color:var(--accent);
-    box-shadow:0 8px 28px rgba(29,111,224,0.12);
+    box-shadow:0 8px 28px rgba(1,57,104,0.14);
     position:relative;
   }
   .pill{
@@ -252,7 +261,7 @@
   .btn.secondary{
     background:#fff;
     color:var(--navy) !important;
-    border-color:#cbd8e6;
+    border-color:#b9cbdc;
   }
   .btn.secondary:hover{
     border-color:var(--accent);
@@ -322,7 +331,7 @@
     display:flex;
     gap:14px;
     padding:12px 0;
-    border-top:1px solid #edf2f7;
+    border-top:1px solid #d9e3ec;
     color:var(--navy-2);
     font-size:15px;
     line-height:1.6;
@@ -382,39 +391,72 @@
   }
 
   @media (prefers-color-scheme: dark){
-    :root{
-      --navy:#e8efe9;
-      --navy-2:#c3d2c7;
-      --muted:#93a89a;
-      --line:#2c3a31;
-      --bg:#0e1411;
-      --card:#18211c;
-      --accent:#3fae82;
-      --accent-dark:#5cc79c;
-      --accent-soft:#173527;
+    :root:not([data-theme="light"]){
+      --navy:#eaf1f8;
+      --navy-2:#b9cbdd;
+      --muted:#8aa0b5;
+      --line:#223a52;
+      --bg:#0a1826;
+      --card:#0f2338;
+      --accent:#6ea8dc;
+      --accent-dark:#a9c4de;
+      --accent-soft:#122c47;
+      color-scheme:dark;
     }
-    .progress-box{background:#101713}
-    .progress-track{background:#2c3a31}
-    .badge-pending{background:#3fae82; color:#0c1712}
-    .num{background:#3fae82; color:#0c1712}
-    .btn.secondary{background:transparent; border-color:#3a4a3f}
-    .steps li{border-top-color:#223028}
-    .card.featured{box-shadow:0 8px 28px rgba(0,0,0,0.45)}
+    :root:not([data-theme="light"]) .progress-box{background:#122c47}
+    :root:not([data-theme="light"]) .progress-track{background:#223a52}
+    :root:not([data-theme="light"]) .badge-pending{background:#6ea8dc; color:#0a1826}
+    :root:not([data-theme="light"]) .num{background:#6ea8dc; color:#0a1826}
+    :root:not([data-theme="light"]) .btn{color:#0a1826 !important}
+    :root:not([data-theme="light"]) .card.featured .pill{color:#0a1826}
+    :root:not([data-theme="light"]) .btn.secondary{background:transparent; border-color:#33506e; color:#eaf1f8 !important}
+    :root:not([data-theme="light"]) .steps li{border-top-color:#223a52}
+    :root:not([data-theme="light"]) .card.featured{box-shadow:0 8px 28px rgba(0,0,0,0.45)}
   }
+  :root[data-theme="dark"]{
+      --navy:#eaf1f8;
+      --navy-2:#b9cbdd;
+      --muted:#8aa0b5;
+      --line:#223a52;
+      --bg:#0a1826;
+      --card:#0f2338;
+      --accent:#6ea8dc;
+      --accent-dark:#a9c4de;
+      --accent-soft:#122c47;
+      color-scheme:dark;
+    }
+  :root[data-theme="dark"] .progress-box{background:#122c47}
+  :root[data-theme="dark"] .progress-track{background:#223a52}
+  :root[data-theme="dark"] .badge-pending{background:#6ea8dc; color:#0a1826}
+  :root[data-theme="dark"] .num{background:#6ea8dc; color:#0a1826}
+  :root[data-theme="dark"] .btn{color:#0a1826 !important}
+  :root[data-theme="dark"] .card.featured .pill{color:#0a1826}
+  :root[data-theme="dark"] .btn.secondary{background:transparent; border-color:#33506e; color:#eaf1f8 !important}
+  :root[data-theme="dark"] .steps li{border-top-color:#223a52}
+  :root[data-theme="dark"] .card.featured{box-shadow:0 8px 28px rgba(0,0,0,0.45)}
+  :root[data-theme="light"]{color-scheme:light}
+
+  /* ---------- Theme picker ---------- */
+  .theme-band { background: #013968; }
+  .theme-band .hero-top { max-width: 1280px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; }
+  .theme-switch { display: inline-flex; align-items: center; gap: 1px; border: 1px solid rgba(255,255,255,0.45); border-radius: 999px; padding: 1px; background: rgba(255,255,255,0.08); }
+  .theme-switch button { appearance: none; border: 0; background: transparent; color: #cfe2f2; font: inherit; font-size: 9px; font-weight: 700; line-height: 1.2; padding: 1px 5px; border-radius: 999px; cursor: pointer; min-height: 16px; }
+  .theme-switch button[aria-pressed="true"] { background: #ffffff; color: #013968; }
+  .theme-switch button:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }
 
       /* ===== Site nav ===== */
-      .site-nav { background: #0a121a; border-bottom: 1px solid rgba(238, 243, 241, 0.10); }
+      .site-nav { background: var(--navy-deep); border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
       .site-nav .wrap { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px 28px; padding-top: 10px; padding-bottom: 10px; }
-      .site-nav a { color: #b8c6c0; text-decoration: none; font-size: 14.5px; font-weight: 500; letter-spacing: 0.01em; padding: 2px 0; }
+      .site-nav a { color: #a9c4de; text-decoration: none; font-size: 14.5px; font-weight: 500; letter-spacing: 0.01em; padding: 2px 0; }
       .site-nav a.nav-home { display: inline-flex; align-items: center; gap: 6px; }
-      .site-nav a:hover, .site-nav a:focus-visible { color: #3fae82; }
+      .site-nav a:hover, .site-nav a:focus-visible { color: #ffffff; }
   </style>
 </head>
 <body>
   <!-- ================= SITE NAV ================= -->
   <nav class="site-nav" aria-label="Site">
     <div class="wrap">
-      <a class="nav-home" href="index.html"><svg width="15" height="15" viewBox="0 0 16 16" fill="#3fae82" aria-hidden="true"><path d="M8 1.2 15 7.6h-2.1V14a.9.9 0 0 1-.9.9h-2.8V10.6H6.8v4.3H4A.9.9 0 0 1 3.1 14V7.6H1Z"/></svg>Home</a>
+      <a class="nav-home" href="index.html"><svg width="15" height="15" viewBox="0 0 16 16" fill="#7fb3e0" aria-hidden="true"><path d="M8 1.2 15 7.6h-2.1V14a.9.9 0 0 1-.9.9h-2.8V10.6H6.8v4.3H4A.9.9 0 0 1 3.1 14V7.6H1Z"/></svg>Home</a>
       <a href="patch-tuesday-nov-2026-brief.html">Patch Tuesday Brief</a>
       <a href="patch-tuesday-nov-2026-cve-list.html">Full CVE List</a>
         <a href="what-got-hacked-this-week.html">What Got Hacked</a>
@@ -424,6 +466,37 @@
       <a href="sponsor.html">Sponsor</a>
     </div>
   </nav>
+  <div class="theme-band">
+      <div class="hero-top">
+        <div class="theme-switch" role="group" aria-label="Color mode">
+          <button type="button" data-theme-btn="system" aria-pressed="true">System</button>
+          <button type="button" data-theme-btn="light" aria-pressed="false">Light</button>
+          <button type="button" data-theme-btn="dark" aria-pressed="false">Dark</button>
+        </div>
+      </div>
+      <script>
+        (function () {
+          var btns = document.querySelectorAll("[data-theme-btn]");
+          if (!btns.length) return;
+          var stored = "system";
+          try { stored = window.localStorage.getItem("pw-theme") || "system"; } catch (e) {}
+          if (stored !== "light" && stored !== "dark") stored = "system";
+          function apply(mode) {
+            if (mode === "system") { document.documentElement.removeAttribute("data-theme"); }
+            else { document.documentElement.setAttribute("data-theme", mode); }
+            btns.forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-theme-btn") === mode ? "true" : "false"); });
+          }
+          apply(stored);
+          btns.forEach(function (b) {
+            b.addEventListener("click", function () {
+              var mode = b.getAttribute("data-theme-btn");
+              try { window.localStorage.setItem("pw-theme", mode); } catch (e) {}
+              apply(mode);
+            });
+          });
+        })();
+      </script>
+  </div>
   <div class="wrap">
     <div class="site-line">
       <a class="brand" href="/">Patch<b>Watch</b> SMB</a>
